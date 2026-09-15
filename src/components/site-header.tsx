@@ -23,12 +23,6 @@ export function SiteHeader() {
             alt="The Purple Global Mission"
             className="h-8 w-auto"
           />
-          <span className="leading-none">
-            <span className="block font-display text-sm font-bold tracking-tight">
-              Care Conference 2026
-            </span>
-            <span className="eyebrow mt-1 block text-muted-foreground">{EVENT.theme}</span>
-          </span>
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
