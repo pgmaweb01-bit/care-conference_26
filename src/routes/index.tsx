@@ -458,6 +458,65 @@ function HomePage() {
         </div>
       </section>
 
+      {/* VENUE */}
+      <section className="section-pad">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <SectionHeading
+            index="13"
+            eyebrow="The Venue"
+            title="IALA Hub at The Chair Centre, Lagos"
+            lede="A serious civic setting for shaping Nigeria's national position on home care in one focused day."
+          />
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            <div>
+              <img
+                src="/The Venue.jfif"
+                alt="IALA Hub at The Chair Centre, Lagos"
+                className="w-full rounded-lg object-cover shadow-md"
+              />
+            </div>
+            <div className="flex flex-col justify-center">
+              <dl className="space-y-6">
+                <div>
+                  <dt className="eyebrow text-primary">Address</dt>
+                  <dd className="mt-2 font-display text-lg font-bold">
+                    IALA Hub, The Chair Centre
+                  </dd>
+                  <dd className="text-muted-foreground">Lagos, Nigeria</dd>
+                </div>
+                <div>
+                  <dt className="eyebrow text-primary">Date</dt>
+                  <dd className="mt-2 font-display text-lg font-bold">{EVENT.date}</dd>
+                </div>
+                <div>
+                  <dt className="eyebrow text-primary">Time</dt>
+                  <dd className="mt-2 font-display text-lg font-bold">{EVENT.time}</dd>
+                </div>
+                <div>
+                  <dt className="eyebrow text-primary">Capacity</dt>
+                  <dd className="mt-2 text-muted-foreground">
+                    Seats are assigned first come first served against room capacity and confirmed by
+                    email before the day.
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+          <div className="mt-10 overflow-hidden rounded-lg border border-border">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.5314!2d3.3796!3d6.5244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sIALA%20Hub%2C%20The%20Chair%20Centre%2C%20Lagos!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="IALA Hub, The Chair Centre, Lagos"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* WHY NOW */}
       <section className="section-pad">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-12">
