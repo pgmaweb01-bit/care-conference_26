@@ -91,33 +91,33 @@ function Countdown() {
 /* ─── THEME BANNER ─── */
 function ThemeBanner() {
   return (
-    <section className="relative overflow-hidden border-y border-border bg-primary py-20 sm:py-28">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute -right-20 -top-20 h-[400px] w-[400px] rounded-full bg-white/20 blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 h-[300px] w-[300px] rounded-full bg-white/15 blur-3xl" />
+    <section className="relative overflow-hidden border-y border-purple-950 bg-[#1a0a2e] py-20 sm:py-28">
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute -right-20 -top-20 h-[400px] w-[400px] rounded-full bg-purple-500/30 blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 h-[300px] w-[300px] rounded-full bg-purple-600/25 blur-3xl" />
       </div>
       <div className="relative mx-auto max-w-7xl px-5 text-center sm:px-8">
-        <p className="font-display text-sm font-bold uppercase tracking-[0.2em] text-primary-foreground/60">
+        <p className="font-display text-sm font-bold uppercase tracking-[0.2em] text-purple-300/60">
           {EVENT.edition} — Theme
         </p>
-        <h2 className="mt-6 font-display text-[clamp(2.5rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-tight text-primary-foreground">
+        <h2 className="mt-6 font-display text-[clamp(2.5rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-tight text-white">
           Care as
           <br />
           Infrastructure
         </h2>
-        <p className="mx-auto mt-8 max-w-[50ch] text-lg leading-relaxed text-primary-foreground/80">
+        <p className="mx-auto mt-8 max-w-[50ch] text-lg leading-relaxed text-purple-200/80">
           {EVENT.subtitle}
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <Link
             to="/about"
-            className="inline-flex items-center gap-2 rounded-md bg-white px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary transition-colors hover:bg-white/90"
+            className="inline-flex items-center gap-2 rounded-md bg-white px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-[#1a0a2e] transition-colors hover:bg-white/90"
           >
             Learn More <ArrowRight className="size-4" />
           </Link>
           <Link
             to="/register"
-            className="inline-flex items-center gap-2 rounded-md border border-primary-foreground/30 px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary-foreground/10"
+            className="inline-flex items-center gap-2 rounded-md border border-white/30 px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-white transition-colors hover:bg-white/10"
           >
             Register Now
           </Link>
