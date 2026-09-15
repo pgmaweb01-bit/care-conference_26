@@ -359,45 +359,4 @@ export const PARTNER_TIERS = [
   },
 ];
 
-export const REGISTRATION_TYPES = [
-  {
-    type: "Standard Delegate",
-    price: "₦25,000",
-    includes: [
-      "Full conference access",
-      "CareSouk entry",
-      "Conference materials",
-      "Lunch & refreshments",
-    ],
-  },
-  {
-    type: "Professional",
-    price: "₦50,000",
-    includes: [
-      "All Standard benefits",
-      "Priority seating",
-      "VIP networking session",
-      "Digital certificate of participation",
-    ],
-  },
-  {
-    type: "Institutional",
-    price: "₦150,000",
-    includes: [
-      "All Professional benefits",
-      "Team table (up to 5 delegates)",
-      "Roundtable access",
-      "Speaker meet & greet",
-    ],
-  },
-  {
-    type: "Student / Researcher",
-    price: "₦10,000",
-    includes: [
-      "Full conference access",
-      "CareSouk entry",
-      "Conference materials",
-      "Valid student ID required",
-    ],
-  },
-];
+
