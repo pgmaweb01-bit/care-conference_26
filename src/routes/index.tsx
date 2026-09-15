@@ -92,26 +92,31 @@ function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="border-b border-border bg-linen">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:py-24">
+      <section className="relative border-b border-border bg-ink text-ink-foreground">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
+          style={{ backgroundImage: "url('/Hero Image.jpg')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/70 to-ink/50" />
+        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:py-24">
           <div className="lg:col-span-7">
             <div className="animate-rise flex flex-wrap items-center gap-3">
-              <span className="rounded-full bg-ink px-3 py-1 font-display text-[11px] font-bold uppercase tracking-[0.16em] text-ink-foreground">
+              <span className="rounded-full bg-primary px-3 py-1 font-display text-[11px] font-bold uppercase tracking-[0.16em] text-primary-foreground">
                 {EVENT.edition}
               </span>
-              <span className="eyebrow text-muted-foreground">Organised by {EVENT.organiser}</span>
+              <span className="eyebrow text-ink-foreground/60">Organised by {EVENT.organiser}</span>
             </div>
 
             <h1 className="animate-rise mt-8 font-display text-[clamp(2.5rem,6vw,4.75rem)] font-extrabold leading-[0.95]">
               Care Is Not an Afterthought.{" "}
-              <span className="text-primary">It Is Infrastructure.</span>
+              <span className="text-accent">It Is Infrastructure.</span>
             </h1>
 
-            <p className="mt-7 max-w-[60ch] text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-7 max-w-[60ch] text-lg leading-relaxed text-ink-foreground/80">
               Nigeria's health system cannot achieve lasting impact without recognising the systems,
               people, policies and resources that make care possible beyond the hospital.
             </p>
-            <p className="mt-4 max-w-[60ch] leading-relaxed text-muted-foreground">
+            <p className="mt-4 max-w-[60ch] leading-relaxed text-ink-foreground/70">
               The Care Conference 2026 brings together policymakers, healthcare leaders, clinicians,
               caregivers, innovators, researchers, investors and community advocates to shape a
               national position on home care and establish care as a critical part of Nigeria's
@@ -127,37 +132,30 @@ function HomePage() {
               </Link>
               <Link
                 to="/programme"
-                className="inline-flex items-center gap-2 rounded-md border border-input px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] transition-colors hover:bg-secondary"
+                className="inline-flex items-center gap-2 rounded-md border border-ink-foreground/20 px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] transition-colors hover:bg-ink-foreground/10"
               >
                 View Programme
               </Link>
             </div>
           </div>
 
-          <div className="lg:col-span-5">
-            <img
-              src={heroImage}
-              alt="A professional caregiver supporting an older woman at home in Lagos"
-              width={1600}
-              height={1200}
-              className="aspect-[4/3] w-full rounded-lg object-cover"
-            />
-            <div className="mt-5 rounded-lg border border-border bg-card p-6">
-              <p className="eyebrow text-primary">The 2026 Question</p>
+          <div className="flex flex-col justify-end lg:col-span-5">
+            <div className="rounded-lg border border-ink-foreground/15 bg-ink/50 p-6 backdrop-blur-sm">
+              <p className="eyebrow text-accent">The 2026 Question</p>
               <p className="mt-3 font-display text-2xl font-bold leading-tight">
                 How do we build a care system that works for everyone?
               </p>
-              <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-border pt-5 text-sm">
+              <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-ink-foreground/15 pt-5 text-sm">
                 <div>
-                  <dt className="eyebrow text-muted-foreground">Date</dt>
+                  <dt className="eyebrow text-ink-foreground/50">Date</dt>
                   <dd className="mt-1 font-display font-semibold">{EVENT.date}</dd>
                 </div>
                 <div>
-                  <dt className="eyebrow text-muted-foreground">Time</dt>
+                  <dt className="eyebrow text-ink-foreground/50">Time</dt>
                   <dd className="mt-1 font-display font-semibold">{EVENT.time}</dd>
                 </div>
                 <div className="col-span-2">
-                  <dt className="eyebrow text-muted-foreground">Venue</dt>
+                  <dt className="eyebrow text-ink-foreground/50">Venue</dt>
                   <dd className="mt-1 font-display font-semibold">{EVENT.venue}</dd>
                 </div>
               </dl>
