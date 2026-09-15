@@ -19,7 +19,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <img
-            src="/cropped-3-768x242.webp"
+            src="/Logo Header.webp"
             alt="The Purple Global Mission"
             className="h-8 w-auto"
           />

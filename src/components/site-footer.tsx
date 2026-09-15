@@ -21,7 +21,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <img
-            src="/cropped-3-768x242.webp"
+            src="/Logo Footer.webp"
             alt="The Purple Global Mission"
             className="h-10 w-auto"
           />
