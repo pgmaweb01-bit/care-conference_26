@@ -238,6 +238,9 @@ function AttendeeForm() {
     profession: "",
     specialty: "",
     position: "",
+    sideRoom1: "",
+    sideRoom2: "",
+    sector: "",
     firstTime: "yes",
     specialNeeds: "",
   });
@@ -405,6 +408,64 @@ function AttendeeForm() {
         <SectionCard>
           <SectionHeading>Conference Information</SectionHeading>
           <div className="mt-5 space-y-5">
+            <Field label="Side room, first choice" required>
+              <select
+                name="sideRoom1"
+                required
+                className={inputClass}
+                value={formData.sideRoom1}
+                onChange={(e) => update("sideRoom1", e.target.value)}
+              >
+                <option value="" disabled>
+                  Select a room
+                </option>
+                <option>Room A: Who Cares for Nigeria? (Workforce)</option>
+                <option>Room B: The Journey Between (Coordination)</option>
+                <option>Room C: You Cannot Finance What You Cannot Count (Digital)</option>
+                <option>Room D: Paying for the Load Bearing Layer (Financing)</option>
+              </select>
+            </Field>
+            <Field label="Side room, second choice" required>
+              <select
+                name="sideRoom2"
+                required
+                className={inputClass}
+                value={formData.sideRoom2}
+                onChange={(e) => update("sideRoom2", e.target.value)}
+              >
+                <option value="" disabled>
+                  Select a room
+                </option>
+                <option>Room A: Who Cares for Nigeria? (Workforce)</option>
+                <option>Room B: The Journey Between (Coordination)</option>
+                <option>Room C: You Cannot Finance What You Cannot Count (Digital)</option>
+                <option>Room D: Paying for the Load Bearing Layer (Financing)</option>
+              </select>
+            </Field>
+            <Field label="Sector" required>
+              <select
+                name="sector"
+                required
+                className={inputClass}
+                value={formData.sector}
+                onChange={(e) => update("sector", e.target.value)}
+              >
+                <option value="" disabled>
+                  Select your sector
+                </option>
+                <option>Government or regulator</option>
+                <option>Health facility or clinical practice</option>
+                <option>Home or community based care provider</option>
+                <option>Insurance, HMO or financing</option>
+                <option>Development partner or multilateral</option>
+                <option>Academia or research</option>
+                <option>Technology</option>
+                <option>Media</option>
+                <option>Civil society or advocacy</option>
+                <option>Family caregiver or individual</option>
+                <option>Other</option>
+              </select>
+            </Field>
             <fieldset>
               <legend className="mb-2 text-sm font-medium text-foreground">
                 First-time attendee?
