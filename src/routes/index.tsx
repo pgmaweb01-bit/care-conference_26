@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useMemo, useState, useEffect } from "react";
 import { ArrowRight, Calendar, Users, Store, Handshake } from "lucide-react";
 import heroImage from "@/assets/hero-care.jpg";
 import { SectionHeading } from "@/components/section";
@@ -34,6 +35,58 @@ export const Route = createFileRoute("/")({
   }),
   component: HomePage,
 });
+
+function Countdown() {
+  const target = useMemo(() => new Date("2026-11-19T08:00:00+01:00").getTime(), []);
+  const [now, setNow] = useState(() => Date.now());
+
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const diff = Math.max(0, target - now);
+  const days = Math.floor(diff / 86_400_000);
+  const hours = Math.floor((diff % 86_400_000) / 3_600_000);
+  const mins = Math.floor((diff % 3_600_000) / 60_000);
+  const secs = Math.floor((diff % 60_000) / 1000);
+
+  const units = [
+    { label: "Days", value: days },
+    { label: "Hours", value: hours },
+    { label: "Min", value: mins },
+    { label: "Sec", value: secs },
+  ];
+
+  return (
+    <section className="border-y border-border bg-primary text-primary-foreground">
+      <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8">
+        <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
+          <div>
+            <p className="font-display text-sm font-bold uppercase tracking-[0.16em] text-primary-foreground/70">
+              Counting Down
+            </p>
+            <p className="mt-1 font-display text-xl font-extrabold">
+              {EVENT.date} · Lagos
+            </p>
+          </div>
+          <div className="flex gap-4 sm:gap-6">
+            {units.map((u) => (
+              <div key={u.label} className="text-center">
+                <span className="block font-display text-3xl font-extrabold tabular-nums sm:text-4xl">
+                  {String(u.value).padStart(2, "0")}
+                </span>
+                <span className="mt-1 block text-xs font-semibold uppercase tracking-wider text-primary-foreground/60">
+                  {u.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function HomePage() {
   return (
@@ -112,6 +165,9 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* COUNTDOWN */}
+      <Countdown />
 
       {/* AT A GLANCE */}
       <section className="border-b border-border bg-background">
