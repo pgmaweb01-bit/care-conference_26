@@ -174,11 +174,11 @@ function RotatingText() {
   }, []);
 
   return (
-    <div className="relative h-[1.2em] overflow-hidden">
+    <div className="relative min-h-[1.4em] overflow-hidden">
       {phrases.map((phrase, i) => (
         <span
           key={i}
-          className={`absolute inset-0 flex items-center font-display text-[clamp(2.5rem,6vw,4.75rem)] font-extrabold leading-[0.95] transition-all duration-700 ease-in-out ${
+          className={`absolute inset-0 flex items-center font-display text-[clamp(2.5rem,6vw,4.75rem)] font-extrabold leading-[1.1] transition-all duration-700 ease-in-out ${
             i === index
               ? "translate-y-0 opacity-100"
               : i < index
