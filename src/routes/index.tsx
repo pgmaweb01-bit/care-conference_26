@@ -178,7 +178,7 @@ function RotatingText() {
       {phrases.map((phrase, i) => (
         <span
           key={i}
-          className={`block transition-all duration-500 ease-in-out ${
+          className={`block font-display text-[clamp(3rem,7vw,5.5rem)] font-extrabold leading-[1] tracking-tight transition-all duration-500 ease-in-out ${
             i === index ? "h-auto opacity-100" : "absolute inset-x-0 top-0 h-0 overflow-hidden opacity-0"
           }`}
         >
@@ -206,7 +206,7 @@ function HomePage() {
           style={{ backgroundImage: "url('/Hero Image.jpg')" }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/70 to-ink/50" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:py-24">
+        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:py-28">
           <div className="lg:col-span-7">
             <div className="animate-rise flex flex-wrap items-center gap-3">
               <span className="rounded-full bg-primary px-3 py-1 font-display text-[11px] font-bold uppercase tracking-[0.16em] text-primary-foreground">
@@ -219,11 +219,11 @@ function HomePage() {
               <RotatingText />
             </h1>
 
-            <p className="mt-7 max-w-[60ch] text-lg leading-relaxed text-ink-foreground/80">
+            <p className="mt-7 max-w-[60ch] text-base leading-relaxed text-ink-foreground/80">
               Nigeria's health system cannot achieve lasting impact without recognising the systems,
               people, policies and resources that make care possible beyond the hospital.
             </p>
-            <p className="mt-4 max-w-[60ch] leading-relaxed text-ink-foreground/70">
+            <p className="mt-4 max-w-[60ch] text-sm leading-relaxed text-ink-foreground/70">
               The Care Conference 2026 brings together policymakers, healthcare leaders, clinicians,
               caregivers, innovators, researchers, investors and community advocates to shape a
               national position on home care and establish care as a critical part of Nigeria's
