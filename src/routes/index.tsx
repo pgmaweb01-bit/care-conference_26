@@ -159,9 +159,9 @@ function ThemeBanner() {
 /* ─── ROTATING TEXT ─── */
 function RotatingText() {
   const phrases = [
-    { text: "Care Conference 2026", highlight: "" },
-    { text: "Care Is Not an Afterthought.", highlight: "It Is Infrastructure." },
-    { text: "Care as Infrastructure", highlight: "" },
+    "Care Conference 2026",
+    "Care Is Not an Afterthought. It Is Infrastructure.",
+    "Care as Infrastructure",
   ];
 
   const [index, setIndex] = useState(0);
@@ -174,23 +174,25 @@ function RotatingText() {
   }, []);
 
   return (
-    <div className="relative min-h-[1.4em] overflow-hidden">
+    <span className="relative inline-block">
       {phrases.map((phrase, i) => (
         <span
           key={i}
-          className={`absolute inset-0 flex items-center font-display text-[clamp(2.5rem,6vw,4.75rem)] font-extrabold leading-[1.1] transition-all duration-700 ease-in-out ${
-            i === index
-              ? "translate-y-0 opacity-100"
-              : i < index
-                ? "-translate-y-full opacity-0"
-                : "translate-y-full opacity-0"
+          className={`block transition-all duration-500 ease-in-out ${
+            i === index ? "h-auto opacity-100" : "absolute inset-x-0 top-0 h-0 overflow-hidden opacity-0"
           }`}
         >
-          {phrase.text}{" "}
-          {phrase.highlight && <span className="text-accent">{phrase.highlight}</span>}
+          {i === 1 ? (
+            <>
+              Care Is Not an Afterthought.{" "}
+              <span className="text-accent">It Is Infrastructure.</span>
+            </>
+          ) : (
+            phrase
+          )}
         </span>
       ))}
-    </div>
+    </span>
   );
 }
 
