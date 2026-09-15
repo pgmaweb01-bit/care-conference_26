@@ -156,6 +156,44 @@ function ThemeBanner() {
   );
 }
 
+/* ─── ROTATING TEXT ─── */
+function RotatingText() {
+  const phrases = [
+    { text: "Care Conference 2026", highlight: "" },
+    { text: "Care Is Not an Afterthought.", highlight: "It Is Infrastructure." },
+    { text: "Care as Infrastructure", highlight: "" },
+  ];
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % phrases.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="relative h-[1.2em] overflow-hidden">
+      {phrases.map((phrase, i) => (
+        <span
+          key={i}
+          className={`absolute inset-0 flex items-center font-display text-[clamp(2.5rem,6vw,4.75rem)] font-extrabold leading-[0.95] transition-all duration-700 ease-in-out ${
+            i === index
+              ? "translate-y-0 opacity-100"
+              : i < index
+                ? "-translate-y-full opacity-0"
+                : "translate-y-full opacity-0"
+          }`}
+        >
+          {phrase.text}{" "}
+          {phrase.highlight && <span className="text-accent">{phrase.highlight}</span>}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function HomePage() {
   return (
     <>
@@ -175,9 +213,8 @@ function HomePage() {
               <span className="eyebrow text-ink-foreground/60">Organised by {EVENT.organiser}</span>
             </div>
 
-            <h1 className="animate-rise mt-8 font-display text-[clamp(2.5rem,6vw,4.75rem)] font-extrabold leading-[0.95]">
-              Care Is Not an Afterthought.{" "}
-              <span className="text-accent">It Is Infrastructure.</span>
+            <h1 className="animate-rise mt-8">
+              <RotatingText />
             </h1>
 
             <p className="mt-7 max-w-[60ch] text-lg leading-relaxed text-ink-foreground/80">
