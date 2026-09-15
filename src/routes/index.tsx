@@ -91,35 +91,64 @@ function Countdown() {
 /* ─── THEME BANNER ─── */
 function ThemeBanner() {
   return (
-    <section className="relative overflow-hidden border-y border-purple-950 bg-[#1a0a2e] py-20 sm:py-28">
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute -right-20 -top-20 h-[400px] w-[400px] rounded-full bg-purple-500/30 blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 h-[300px] w-[300px] rounded-full bg-purple-600/25 blur-3xl" />
+    <section className="relative overflow-hidden border-y border-purple-950 bg-[#1a0a2e] py-24 sm:py-32">
+      {/* Animated floating orbs */}
+      <div className="absolute inset-0">
+        <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] animate-pulse rounded-full bg-purple-600/20 blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] animate-pulse rounded-full bg-violet-500/15 blur-[100px] [animation-delay:1s]" />
+        <div className="absolute bottom-0 left-1/2 h-[300px] w-[300px] animate-pulse rounded-full bg-fuchsia-500/10 blur-[80px] [animation-delay:2s]" />
       </div>
+
+      {/* Grid pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+
       <div className="relative mx-auto max-w-7xl px-5 text-center sm:px-8">
-        <p className="font-display text-sm font-bold uppercase tracking-[0.2em] text-purple-300/60">
+        <p className="animate-fade-in-up font-display text-sm font-bold uppercase tracking-[0.3em] text-purple-400/70">
           {EVENT.edition} — Theme
         </p>
-        <h2 className="mt-6 font-display text-[clamp(2.5rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-tight text-white">
-          Care as
+
+        <h2 className="mt-8 font-display text-[clamp(2.5rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-tight">
+          <span className="animate-fade-in-up bg-gradient-to-r from-purple-200 via-white to-violet-200 bg-clip-text text-transparent [animation-delay:0.1s]">
+            Care as
+          </span>
           <br />
-          Infrastructure
+          <span className="animate-fade-in-up bg-gradient-to-r from-violet-300 via-purple-100 to-fuchsia-200 bg-clip-text text-transparent [animation-delay:0.2s]">
+            Infrastructure
+          </span>
         </h2>
-        <p className="mx-auto mt-8 max-w-[50ch] text-lg leading-relaxed text-purple-200/80">
+
+        <p className="animate-fade-in-up mx-auto mt-8 max-w-[50ch] text-lg leading-relaxed text-purple-300/70 [animation-delay:0.3s]">
           {EVENT.subtitle}
         </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
+
+        {/* Decorative line */}
+        <div className="animate-fade-in-up mx-auto mt-10 flex items-center justify-center gap-3 [animation-delay:0.4s]">
+          <div className="h-px w-16 bg-gradient-to-r from-transparent to-purple-500/50" />
+          <div className="h-2 w-2 animate-pulse rounded-full bg-purple-400" />
+          <div className="h-px w-16 bg-gradient-to-l from-transparent to-purple-500/50" />
+        </div>
+
+        <div className="animate-fade-in-up mt-8 flex flex-wrap justify-center gap-4 [animation-delay:0.5s]">
           <Link
             to="/about"
-            className="inline-flex items-center gap-2 rounded-md bg-white px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-[#1a0a2e] transition-colors hover:bg-white/90"
+            className="group inline-flex items-center gap-2 rounded-full bg-white/10 px-8 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]"
           >
-            Learn More <ArrowRight className="size-4" />
+            Learn More
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
             to="/register"
-            className="inline-flex items-center gap-2 rounded-md border border-white/30 px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-white transition-colors hover:bg-white/10"
+            className="group inline-flex items-center gap-2 rounded-full border border-purple-400/30 bg-purple-500/10 px-8 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-purple-200 backdrop-blur-sm transition-all hover:border-purple-400/50 hover:bg-purple-500/20 hover:shadow-[0_0_30px_rgba(168,85,247,0.2)]"
           >
             Register Now
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>
