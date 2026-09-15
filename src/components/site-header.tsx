@@ -18,9 +18,11 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <span className="grid size-8 place-items-center rounded-sm bg-primary">
-            <span className="eyebrow text-primary-foreground">CC</span>
-          </span>
+          <img
+            src="/cropped-3-768x242.webp"
+            alt="The Purple Global Mission"
+            className="h-8 w-auto"
+          />
           <span className="leading-none">
             <span className="block font-display text-sm font-bold tracking-tight">
               Care Conference 2026

@@ -20,8 +20,12 @@ export function SiteFooter() {
     <footer className="bg-ink text-ink-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <p className="eyebrow text-accent">{EVENT.edition}</p>
-          <h2 className="mt-3 font-display text-2xl font-extrabold">The Care Conference 2026</h2>
+          <img
+            src="/cropped-3-768x242.webp"
+            alt="The Purple Global Mission"
+            className="h-10 w-auto"
+          />
+          <p className="mt-3 font-display text-2xl font-extrabold">The Care Conference 2026</p>
           <p className="mt-2 font-display text-sm font-semibold text-ink-foreground/70">
             {EVENT.theme}
           </p>

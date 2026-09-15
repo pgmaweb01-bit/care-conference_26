@@ -428,8 +428,13 @@ function HomePage() {
       </section>
 
       {/* CARESOUK */}
-      <section className="bg-ink text-ink-foreground">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:py-24">
+      <section className="relative overflow-hidden bg-ink text-ink-foreground">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+          style={{ backgroundImage: "url('/Why this conference matters.webp')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/80 to-ink/60" />
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:py-24">
           <div className="lg:col-span-7">
             <SectionHeading
               index="12"

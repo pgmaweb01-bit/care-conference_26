@@ -29,11 +29,25 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <>
-      <PageHero
-        eyebrow="02 — About the Conference"
-        title="Building the Future of Care in Nigeria"
-        lede="The Care Conference is a national platform for dialogue, collaboration and action around the future of care in Nigeria. The 2026 edition focuses on one critical idea: Care as Infrastructure."
-      />
+      {/* ABOUT HERO */}
+      <section className="relative border-b border-border bg-ink text-ink-foreground">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
+          style={{ backgroundImage: "url('/Conference Image.webp')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/70 to-ink/50" />
+        <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
+          <p className="eyebrow text-accent">02 — About the Conference</p>
+          <h1 className="mt-4 max-w-[20ch] font-display text-4xl font-extrabold leading-[0.98] text-ink-foreground lg:text-6xl">
+            Building the Future of Care in Nigeria
+          </h1>
+          <p className="mt-6 max-w-[58ch] text-lg leading-relaxed text-ink-foreground/75">
+            The Care Conference is a national platform for dialogue, collaboration and action around
+            the future of care in Nigeria. The 2026 edition focuses on one critical idea: Care as
+            Infrastructure.
+          </p>
+        </div>
+      </section>
 
       <section className="section-pad">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-12">
