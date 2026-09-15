@@ -1,0 +1,463 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Calendar, Users, Store, Handshake } from "lucide-react";
+import heroImage from "@/assets/hero-care.jpg";
+import { SectionHeading } from "@/components/section";
+import {
+  AUDIENCE,
+  EVENT,
+  POLICY_LAYERS,
+  PROGRAMME,
+  RECOGNITIONS,
+  SPEAKERS,
+  TAKEAWAYS,
+} from "@/data/conference";
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "The Care Conference 2026 — Care as Infrastructure | Lagos" },
+      {
+        name: "description",
+        content:
+          "Care is not an afterthought. It is infrastructure. Join policymakers, clinicians, caregivers and innovators in Lagos on 19 November 2026 to build a national position on home care for Nigeria.",
+      },
+      { property: "og:title", content: "The Care Conference 2026 — Care as Infrastructure" },
+      {
+        property: "og:description",
+        content:
+          "Building a national position on home care for Nigeria. 19 November 2026, IALA Hub, The Chair Centre, Lagos.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+  }),
+  component: HomePage,
+});
+
+function HomePage() {
+  return (
+    <>
+      {/* HERO */}
+      <section className="border-b border-border bg-linen">
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:py-24">
+          <div className="lg:col-span-7">
+            <div className="animate-rise flex flex-wrap items-center gap-3">
+              <span className="rounded-full bg-ink px-3 py-1 font-display text-[11px] font-bold uppercase tracking-[0.16em] text-ink-foreground">
+                {EVENT.edition}
+              </span>
+              <span className="eyebrow text-muted-foreground">Organised by {EVENT.organiser}</span>
+            </div>
+
+            <h1 className="animate-rise mt-8 font-display text-[clamp(2.5rem,6vw,4.75rem)] font-extrabold leading-[0.95]">
+              Care Is Not an Afterthought.{" "}
+              <span className="text-primary">It Is Infrastructure.</span>
+            </h1>
+
+            <p className="mt-7 max-w-[60ch] text-lg leading-relaxed text-muted-foreground">
+              Nigeria's health system cannot achieve lasting impact without recognising the systems,
+              people, policies and resources that make care possible beyond the hospital.
+            </p>
+            <p className="mt-4 max-w-[60ch] leading-relaxed text-muted-foreground">
+              The Care Conference 2026 brings together policymakers, healthcare leaders, clinicians,
+              caregivers, innovators, researchers, investors and community advocates to shape a
+              national position on home care and establish care as a critical part of Nigeria's
+              health infrastructure.
+            </p>
+
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link
+                to="/register"
+                className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                Register for the Conference <ArrowRight className="size-4" />
+              </Link>
+              <Link
+                to="/programme"
+                className="inline-flex items-center gap-2 rounded-md border border-input px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] transition-colors hover:bg-secondary"
+              >
+                View Programme
+              </Link>
+            </div>
+          </div>
+
+          <div className="lg:col-span-5">
+            <img
+              src={heroImage}
+              alt="A professional caregiver supporting an older woman at home in Lagos"
+              width={1600}
+              height={1200}
+              className="aspect-[4/3] w-full rounded-lg object-cover"
+            />
+            <div className="mt-5 rounded-lg border border-border bg-card p-6">
+              <p className="eyebrow text-primary">The 2026 Question</p>
+              <p className="mt-3 font-display text-2xl font-bold leading-tight">
+                How do we build a care system that works for everyone?
+              </p>
+              <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-border pt-5 text-sm">
+                <div>
+                  <dt className="eyebrow text-muted-foreground">Date</dt>
+                  <dd className="mt-1 font-display font-semibold">{EVENT.date}</dd>
+                </div>
+                <div>
+                  <dt className="eyebrow text-muted-foreground">Time</dt>
+                  <dd className="mt-1 font-display font-semibold">{EVENT.time}</dd>
+                </div>
+                <div className="col-span-2">
+                  <dt className="eyebrow text-muted-foreground">Venue</dt>
+                  <dd className="mt-1 font-display font-semibold">{EVENT.venue}</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AT A GLANCE */}
+      <section className="border-b border-border bg-background">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
+          <div className="text-center">
+            <p className="eyebrow text-primary">At a Glance</p>
+            <h2 className="mt-3 font-display text-3xl font-extrabold lg:text-4xl">
+              Everything You Need to Know
+            </h2>
+            <p className="mx-auto mt-4 max-w-[50ch] text-muted-foreground">
+              A quick overview of the Care Conference 2026. Dive deeper into each section for the
+              full picture.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Programme Teaser */}
+            <Link
+              to="/programme"
+              className="group rounded-lg border border-border bg-card p-6 transition-all hover:border-primary/30 hover:shadow-md"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary/10">
+                <Calendar className="size-5 text-primary" />
+              </div>
+              <h3 className="mt-4 font-display text-lg font-bold">Programme</h3>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {EVENT.date} · {EVENT.time}
+              </p>
+              <ul className="mt-4 space-y-2">
+                {PROGRAMME.filter((p) => p.highlight || p.kicker)
+                  .slice(0, 3)
+                  .map((item) => (
+                    <li key={item.time} className="text-sm">
+                      <span className="font-display font-semibold text-primary">{item.time}</span>
+                      <span className="ml-2 text-muted-foreground">{item.title}</span>
+                    </li>
+                  ))}
+              </ul>
+              <span className="mt-5 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-primary group-hover:gap-2.5">
+                See full programme <ArrowRight className="size-3.5" />
+              </span>
+            </Link>
+
+            {/* Speakers Teaser */}
+            <Link
+              to="/speakers"
+              className="group rounded-lg border border-border bg-card p-6 transition-all hover:border-primary/30 hover:shadow-md"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary/10">
+                <Users className="size-5 text-primary" />
+              </div>
+              <h3 className="mt-4 font-display text-lg font-bold">Speakers</h3>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {SPEAKERS.length} confirmed speakers
+              </p>
+              <div className="mt-4 space-y-3">
+                {SPEAKERS.slice(0, 3).map((speaker) => (
+                  <div key={speaker.name} className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 font-display text-xs font-bold text-primary">
+                      {speaker.initials}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-semibold">{speaker.name}</p>
+                      <p className="truncate text-xs text-muted-foreground">{speaker.role}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <span className="mt-5 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-primary group-hover:gap-2.5">
+                Meet all speakers <ArrowRight className="size-3.5" />
+              </span>
+            </Link>
+
+            {/* CareSouk Teaser */}
+            <Link
+              to="/caresouk"
+              className="group rounded-lg border border-border bg-card p-6 transition-all hover:border-primary/30 hover:shadow-md"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-accent/10">
+                <Store className="size-5 text-accent" />
+              </div>
+              <h3 className="mt-4 font-display text-lg font-bold">CareSouk</h3>
+              <p className="mt-1 text-xs text-muted-foreground">The care exhibition</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Explore innovations, products and solutions from organisations building the future
+                of care in Nigeria.
+              </p>
+              <span className="mt-5 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-primary group-hover:gap-2.5">
+                Explore CareSouk <ArrowRight className="size-3.5" />
+              </span>
+            </Link>
+
+            {/* Partners Teaser */}
+            <Link
+              to="/partners"
+              className="group rounded-lg border border-border bg-card p-6 transition-all hover:border-primary/30 hover:shadow-md"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary/10">
+                <Handshake className="size-5 text-primary" />
+              </div>
+              <h3 className="mt-4 font-display text-lg font-bold">Partners</h3>
+              <p className="mt-1 text-xs text-muted-foreground">4 partnership tiers</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Join leading organisations shaping the national conversation on care as
+                infrastructure.
+              </p>
+              <span className="mt-5 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-primary group-hover:gap-2.5">
+                View partnership tiers <ArrowRight className="size-3.5" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section className="section-pad">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <SectionHeading
+              index="02"
+              eyebrow="About the Conference"
+              title="Building the Future of Care in Nigeria"
+            />
+          </div>
+          <div className="lg:col-span-7">
+            <p className="text-lg leading-relaxed">
+              The Care Conference is a national platform for dialogue, collaboration and action
+              around the future of care in Nigeria. The 2026 edition focuses on one critical idea:{" "}
+              <strong className="font-display font-bold">Care as Infrastructure.</strong>
+            </p>
+            <p className="mt-5 leading-relaxed text-muted-foreground">
+              Care is often treated as an informal responsibility carried by families, communities
+              and individual healthcare workers. Yet it is fundamental to how health systems
+              function. From supporting older people and people living with disabilities to helping
+              patients transition from hospital to home, care affects health outcomes, families,
+              productivity and the wider economy.
+            </p>
+            <p className="mt-5 leading-relaxed text-muted-foreground">
+              This year's conference will bring diverse stakeholders together to examine the systems
+              required to make care visible, measurable, fundable and sustainable.
+            </p>
+            <div className="mt-8 rounded-lg bg-primary p-7 text-primary-foreground">
+              <p className="eyebrow text-primary-foreground/70">Our 2026 Objective</p>
+              <p className="mt-3 font-display text-xl font-bold leading-tight lg:text-2xl">
+                To develop a Nigerian National Position on Care as Infrastructure, which will be
+                refined through the conference and advanced through engagement with national
+                policymakers and the National Assembly.
+              </p>
+            </div>
+            <Link
+              to="/about"
+              className="mt-6 inline-flex items-center gap-2 font-display text-sm font-semibold text-primary hover:gap-3"
+            >
+              Read more about the conference <ArrowRight className="size-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* BIG IDEA */}
+      <section className="bg-ink text-ink-foreground">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+          <SectionHeading
+            index="03"
+            eyebrow="The Big Idea"
+            tone="dark"
+            title="You Cannot Finance Care You Cannot Count."
+            lede="Care happens everywhere. At home. In communities. In hospitals. In workplaces. Within families. Yet much of this work remains invisible in national systems, data and financing structures."
+          />
+          <p className="mt-10 max-w-[48ch] font-display text-2xl font-bold leading-snug text-accent">
+            What would change if Nigeria recognised care as essential infrastructure?
+          </p>
+          <ul className="mt-10 grid gap-px overflow-hidden rounded-lg bg-white/15 sm:grid-cols-2 lg:grid-cols-3">
+            {RECOGNITIONS.map((item, i) => (
+              <li key={item} className="flex gap-4 bg-ink p-6">
+                <span className="font-display text-sm font-bold text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-ink-foreground/85">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* SEVEN POLICY LAYERS */}
+      <section className="section-pad">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <SectionHeading
+            index="04"
+            eyebrow="The Seven Policy Layers"
+            title="A National Framework for Care"
+            lede="The conference explores seven interconnected areas that must work together to build a sustainable care ecosystem."
+          />
+          <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+            {POLICY_LAYERS.map((layer) => (
+              <article key={layer.no} className="bg-card p-7 transition-colors hover:bg-linen">
+                <p className="font-display text-4xl font-extrabold text-primary/25">{layer.no}</p>
+                <h3 className="mt-4 font-display text-lg font-bold">{layer.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{layer.body}</p>
+              </article>
+            ))}
+            <div className="flex flex-col justify-between bg-accent p-7 text-accent-foreground">
+              <p className="eyebrow">The Load-Bearing Layer</p>
+              <div>
+                <p className="mt-6 font-display text-xl font-bold leading-tight">
+                  Every layer depends on the one beneath it.
+                </p>
+                <Link
+                  to="/policy-sessions"
+                  className="mt-4 inline-flex items-center gap-2 font-display text-sm font-bold"
+                >
+                  Explore the policy sessions <ArrowRight className="size-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHO SHOULD ATTEND */}
+      <section className="border-y border-border bg-linen section-pad">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <SectionHeading
+            index="05"
+            eyebrow="Who Should Attend"
+            title="One Room. Many Perspectives. One National Conversation."
+            lede="The Care Conference brings together the people shaping healthcare, policy, technology and communities."
+          />
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {AUDIENCE.map((a) => (
+              <article key={a.title} className="rounded-lg border border-border bg-card p-6">
+                <span className="block h-1 w-8 rounded-full bg-primary" />
+                <h3 className="mt-4 font-display text-base font-bold">{a.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TAKEAWAYS */}
+      <section className="section-pad">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <SectionHeading
+            index="11"
+            eyebrow="What You Will Take Away"
+            title="More Than a Conference"
+            lede="Your participation gives you an opportunity to:"
+          />
+          <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+            {TAKEAWAYS.map((t) => (
+              <article key={t.title} className="bg-card p-7">
+                <h3 className="font-display text-lg font-bold text-primary">{t.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CARESOUK */}
+      <section className="bg-ink text-ink-foreground">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:py-24">
+          <div className="lg:col-span-7">
+            <SectionHeading
+              index="12"
+              eyebrow="CareSouk"
+              tone="dark"
+              title="Discover the Care Ecosystem"
+              lede="CareSouk provides a space for organisations, innovators and solution providers to showcase products, services and ideas contributing to the future of care."
+            />
+          </div>
+          <div className="flex flex-col justify-end lg:col-span-5">
+            <p className="font-display text-2xl font-extrabold text-accent">
+              Discover. Connect. Collaborate.
+            </p>
+            <Link
+              to="/caresouk"
+              className="mt-6 inline-flex w-fit items-center gap-2 rounded-md bg-accent px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-accent-foreground"
+            >
+              Explore CareSouk <ArrowRight className="size-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* WHY NOW */}
+      <section className="section-pad">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <SectionHeading
+              index="13"
+              eyebrow="Why Care, Why Now?"
+              title="The Future of Healthcare Is Also the Future of Care."
+            />
+          </div>
+          <div className="lg:col-span-7">
+            <p className="text-lg leading-relaxed">
+              Nigeria's healthcare challenges cannot be solved by hospitals alone.
+            </p>
+            <p className="mt-5 leading-relaxed text-muted-foreground">
+              People need support before they reach hospitals, after they leave hospitals and
+              throughout the long periods when they live with chronic conditions, disability, ageing
+              and recovery. Care connects all of these moments.
+            </p>
+            <p className="mt-8 border-l-2 border-primary pl-6 font-display text-xl font-bold leading-snug">
+              The question is no longer whether care is essential. The question is whether we are
+              ready to build the infrastructure to support it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="border-t border-border bg-linen">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+          <p className="eyebrow text-primary">14 — Call to Action</p>
+          <h2 className="mt-4 max-w-[20ch] font-display text-4xl font-extrabold leading-[1] lg:text-6xl">
+            Be Part of the National Conversation
+          </h2>
+          <p className="mt-6 max-w-[60ch] text-lg leading-relaxed text-muted-foreground">
+            The future of care in Nigeria will be shaped by the people willing to participate in the
+            conversation today. Join policymakers, healthcare professionals, caregivers, innovators,
+            researchers, investors and community leaders at the Care Conference 2026.
+          </p>
+          <p className="mt-8 font-display text-sm font-bold uppercase tracking-[0.16em] text-primary">
+            Care as Infrastructure. Building a National Position on Home Care for Nigeria.
+          </p>
+          <p className="mt-2 font-display text-sm text-muted-foreground">{EVENT.date} | Lagos</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              to="/register"
+              className="inline-flex items-center gap-2 rounded-md bg-primary px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Register Now <ArrowRight className="size-4" />
+            </Link>
+            <Link
+              to="/partners"
+              className="inline-flex items-center gap-2 rounded-md border border-input px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] transition-colors hover:bg-secondary"
+            >
+              Partner With Us
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
