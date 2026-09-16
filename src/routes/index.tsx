@@ -138,28 +138,48 @@ function HomePage() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
           style={{ backgroundImage: "url('/Hero Image.jpg')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/80 to-ink" />
-        <div className="relative mx-auto max-w-7xl px-5 py-28 sm:px-8 lg:py-40">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="animate-rise">
-              <span className="rounded-full bg-primary px-4 py-1.5 font-display text-[11px] font-bold uppercase tracking-[0.16em] text-primary-foreground">
-                {EVENT.edition}
-              </span>
-            </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/75 to-ink" />
+        <div className="relative mx-auto max-w-7xl px-5 py-32 sm:px-8 lg:py-48">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="animate-rise font-display text-sm font-bold uppercase tracking-[0.3em] text-primary">
+              19 November 2026 · Lagos, Nigeria
+            </p>
 
-            <h1 className="animate-rise mt-8 font-display text-[clamp(3rem,8vw,7rem)] font-extrabold leading-[0.9] tracking-tight">
-              <span className="block">Care</span>
-              <span className="block">Conference</span>
-              <span className="block text-primary">2026</span>
+            <h1 className="animate-rise mt-8 font-display text-[clamp(3.5rem,10vw,8rem)] font-extrabold leading-[0.85] tracking-[-0.03em]">
+              <span className="block text-ink-foreground">Care</span>
+              <span className="block text-ink-foreground">Conference</span>
+              <span className="block bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
+                2026
+              </span>
             </h1>
 
-            <p className="animate-rise mt-6 font-display text-[clamp(1.25rem,3vw,2rem)] font-bold text-accent">
-              Care as Infrastructure
-            </p>
+            <div className="animate-rise mx-auto mt-10 flex items-center justify-center gap-4">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary/50" />
+              <p className="font-display text-[clamp(1rem,2.5vw,1.5rem)] font-bold tracking-wide text-accent">
+                Care as Infrastructure
+              </p>
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary/50" />
+            </div>
 
-            <p className="animate-rise mt-6 mx-auto max-w-[48ch] text-lg leading-relaxed text-ink-foreground/70">
+            <p className="animate-rise mt-8 mx-auto max-w-[50ch] text-lg leading-relaxed text-ink-foreground/60">
               {EVENT.subtitle}
             </p>
+
+            <div className="animate-rise mt-10 flex flex-wrap justify-center gap-4">
+              <Link
+                to="/register"
+                className="group inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25"
+              >
+                Register Now
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link
+                to="/programme"
+                className="inline-flex items-center gap-2 rounded-full border border-ink-foreground/20 px-8 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-ink-foreground/80 transition-all hover:border-ink-foreground/40 hover:bg-ink-foreground/5"
+              >
+                View Programme
+              </Link>
+            </div>
           </div>
         </div>
       </section>
