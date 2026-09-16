@@ -87,110 +87,43 @@ function Countdown() {
   );
 }
 
-/* ─── ANIMATED IMAGE GALLERY ─── */
+/* ─── CONTINUOUS SCROLL GALLERY ─── */
 const GALLERY_IMAGES = [
-  { src: "/Gallery/BLQ09213.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09223.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09246.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09272.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09293.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09331.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09338.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09344.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09354.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09361.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09374.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09377.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09384.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09386.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09388.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09389.webp", alt: "Care Conference gallery" },
-  { src: "/Gallery/BLQ09408.webp", alt: "Care Conference gallery" },
+  "/Gallery/BLQ09213.webp",
+  "/Gallery/BLQ09223.webp",
+  "/Gallery/BLQ09246.webp",
+  "/Gallery/BLQ09272.webp",
+  "/Gallery/BLQ09293.webp",
+  "/Gallery/BLQ09331.webp",
+  "/Gallery/BLQ09338.webp",
+  "/Gallery/BLQ09344.webp",
+  "/Gallery/BLQ09354.webp",
+  "/Gallery/BLQ09361.webp",
+  "/Gallery/BLQ09374.webp",
+  "/Gallery/BLQ09377.webp",
+  "/Gallery/BLQ09384.webp",
+  "/Gallery/BLQ09386.webp",
+  "/Gallery/BLQ09388.webp",
+  "/Gallery/BLQ09389.webp",
+  "/Gallery/BLQ09408.webp",
 ];
 
-function AnimatedGallery() {
-  const [currentPair, setCurrentPair] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  const totalPairs = Math.ceil(GALLERY_IMAGES.length / 2);
-
-  useEffect(() => {
-    if (isPaused) return;
-    const timer = setInterval(() => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentPair((prev) => (prev + 1) % totalPairs);
-        setIsTransitioning(false);
-      }, 800);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [isPaused, totalPairs]);
-
-  const pairStart = currentPair * 2;
-  const visibleImages = GALLERY_IMAGES.slice(pairStart, pairStart + 2);
-
+function ScrollingGallery() {
   return (
-    <section className="mt-12 sm:mt-16 lg:mt-20">
-      <div className="grid grid-cols-1 sm:grid-cols-2">
-        {visibleImages.map((img, i) => (
-          <div
-            key={`${currentPair}-${i}`}
-            className="relative aspect-[16/10] overflow-hidden"
-          >
-            <img
-              src={img.src}
-              alt={img.alt}
-              className={`h-full w-full object-cover transition-all duration-[1200ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
-                isTransitioning
-                  ? "scale-105 opacity-0"
-                  : "scale-100 opacity-100"
-              }`}
-              loading={i === 0 ? "eager" : "lazy"}
-              style={{ transitionDelay: `${i * 150}ms` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent" />
+    <section className="border-y border-border bg-ink py-4 overflow-hidden">
+      <div className="flex animate-marquee hover:[animation-play-state:paused]">
+        {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((src, i) => (
+          <div key={i} className="relative w-64 shrink-0 sm:w-80 md:w-96">
+            <div className="aspect-[3/2] overflow-hidden">
+              <img
+                src={src}
+                alt="Care Conference gallery"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
           </div>
         ))}
-      </div>
-      {/* Controls */}
-      <div className="relative flex items-center justify-center gap-3 py-5">
-        {Array.from({ length: totalPairs }).map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => {
-              setIsTransitioning(true);
-              setTimeout(() => {
-                setCurrentPair(i);
-                setIsTransitioning(false);
-              }, 400);
-            }}
-            className={`h-1.5 rounded-full transition-all duration-500 ${
-              i === currentPair
-                ? "w-8 bg-primary"
-                : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-            }`}
-            aria-label={`Go to image pair ${i + 1}`}
-          />
-        ))}
-        <button
-          type="button"
-          onClick={() => setIsPaused(!isPaused)}
-          className="ml-4 rounded-full p-1.5 text-muted-foreground/50 transition-colors hover:text-muted-foreground"
-          aria-label={isPaused ? "Resume slideshow" : "Pause slideshow"}
-        >
-          {isPaused ? (
-            <svg className="size-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          ) : (
-            <svg className="size-4" viewBox="0 0 24 24" fill="currentColor">
-              <rect x="6" y="4" width="4" height="16" />
-              <rect x="14" y="4" width="4" height="16" />
-            </svg>
-          )}
-        </button>
       </div>
     </section>
   );
@@ -230,9 +163,6 @@ function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* IMAGE GALLERY */}
-      <AnimatedGallery />
 
       {/* DISPLACED CONTENT BLOCK */}
       <section className="border-b border-border bg-background">
@@ -293,6 +223,9 @@ function HomePage() {
 
       {/* COUNTDOWN */}
       <Countdown />
+
+      {/* SCROLLING GALLERY */}
+      <ScrollingGallery />
 
       {/* AT A GLANCE */}
       <section className="border-b border-border bg-background">
