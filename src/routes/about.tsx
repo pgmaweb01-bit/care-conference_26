@@ -78,6 +78,27 @@ function AboutPage() {
         </div>
       </section>
 
+      <section className="border-y border-border">
+        <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="overflow-hidden rounded-lg">
+              <img
+                src="/Gallery/BLQ09331.webp"
+                alt="Care Conference session"
+                className="w-full object-cover"
+              />
+            </div>
+            <div className="overflow-hidden rounded-lg">
+              <img
+                src="/Gallery/BLQ09354.webp"
+                alt="Care Conference workshop"
+                className="w-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-ink text-ink-foreground">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <SectionHeading

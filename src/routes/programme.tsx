@@ -86,28 +86,6 @@ function ProgrammePage() {
                       </p>
                     ) : null}
                   </div>
-                  {i === 2 ? (
-                    <div className="hidden lg:block">
-                      <div className="sticky top-24 overflow-hidden rounded-lg">
-                        <img
-                          src="/Gallery/BLQ09331.webp"
-                          alt="Care Conference session"
-                          className="w-full object-cover"
-                        />
-                      </div>
-                    </div>
-                  ) : null}
-                  {i === 7 ? (
-                    <div className="hidden lg:block">
-                      <div className="sticky top-24 overflow-hidden rounded-lg">
-                        <img
-                          src="/Gallery/BLQ09354.webp"
-                          alt="Care Conference workshop"
-                          className="w-full object-cover"
-                        />
-                      </div>
-                    </div>
-                  ) : null}
                 </div>
               </li>
             ))}
