@@ -111,9 +111,9 @@ const GALLERY_IMAGES = [
 function ScrollingGallery() {
   return (
     <section className="border-y border-border bg-ink py-4 overflow-hidden">
-      <div className="flex animate-marquee hover:[animation-play-state:paused]">
+      <div className="flex animate-marquee">
         {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((src, i) => (
-          <div key={i} className="relative w-52 shrink-0 sm:w-64 md:w-80 lg:w-96">
+          <div key={i} className="relative w-40 shrink-0 sm:w-52 md:w-64 lg:w-80">
             <div className="aspect-[3/2] overflow-hidden">
               <img
                 src={src}
@@ -436,7 +436,7 @@ function HomePage() {
                 </li>
               ))}
             </ul>
-            <div className="hidden overflow-hidden rounded-lg lg:block">
+            <div className="overflow-hidden rounded-lg sm:block">
               <img
                 src="/Gallery/BLQ09293.webp"
                 alt="Care in action"
@@ -492,7 +492,7 @@ function HomePage() {
               title="One Room. Many Perspectives. One National Conversation."
               lede="The Care Conference brings together the people shaping healthcare, policy, technology and communities."
             />
-            <div className="hidden overflow-hidden rounded-lg lg:block">
+            <div className="overflow-hidden rounded-lg sm:block">
               <img
                 src="/Gallery/BLQ09388.webp"
                 alt="Care Conference attendees"
@@ -717,7 +717,7 @@ function HomePage() {
                   ready to build the infrastructure to support it.
                 </p>
               </div>
-              <div className="hidden overflow-hidden rounded-lg lg:block">
+              <div className="overflow-hidden rounded-lg sm:block">
                 <img
                   src="/Gallery/BLQ09361.webp"
                   alt="Care in action"
