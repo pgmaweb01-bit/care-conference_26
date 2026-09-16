@@ -110,10 +110,11 @@ const GALLERY_IMAGES = [
 ];
 
 function ScrollingGallery() {
+  const images = [...GALLERY_IMAGES, ...GALLERY_IMAGES];
   return (
     <section className="border-y border-border bg-ink py-4 overflow-hidden">
-      <div className="flex animate-marquee">
-        {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((src, i) => (
+      <div className="flex animate-marquee w-max">
+        {images.map((src, i) => (
           <div key={i} className="relative w-40 shrink-0 sm:w-52 md:w-64 lg:w-80">
             <div className="aspect-[3/2] overflow-hidden">
               <img
