@@ -37,6 +37,13 @@ function SpeakersPage() {
 
       <section className="section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="mb-12 overflow-hidden rounded-lg">
+            <img
+              src="/Gallery/BLQ09374.webp"
+              alt="Care Conference speakers"
+              className="w-full object-cover"
+            />
+          </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {SPEAKERS.map((speaker) => (
               <article

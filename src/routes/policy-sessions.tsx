@@ -78,21 +78,32 @@ function PolicySessionsPage() {
 
       <section className="section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <p className="eyebrow text-primary">09 — Closing Plenary · 5:15 PM</p>
-          <h2 className="mt-4 max-w-[18ch] font-display text-3xl font-extrabold lg:text-5xl">
-            The National Position
-          </h2>
-          <p className="mt-6 max-w-[58ch] text-lg leading-relaxed text-muted-foreground">
-            The conference closes with a readout of key discussions, proposed actions and next
-            steps. The goal is not simply to have a conversation about care. It is to define what
-            comes next.
-          </p>
-          <Link
-            to="/register"
-            className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground"
-          >
-            Register Now <ArrowRight className="size-4" />
-          </Link>
+          <div className="mb-12 grid gap-8 lg:grid-cols-2">
+            <div className="overflow-hidden rounded-lg">
+              <img
+                src="/Plenary photo.webp"
+                alt="Care Conference plenary session"
+                className="w-full object-cover"
+              />
+            </div>
+            <div className="flex flex-col justify-center">
+              <p className="eyebrow text-primary">09 — Closing Plenary · 5:15 PM</p>
+              <h2 className="mt-4 max-w-[18ch] font-display text-3xl font-extrabold lg:text-5xl">
+                The National Position
+              </h2>
+              <p className="mt-6 max-w-[58ch] text-lg leading-relaxed text-muted-foreground">
+                The conference closes with a readout of key discussions, proposed actions and next
+                steps. The goal is not simply to have a conversation about care. It is to define what
+                comes next.
+              </p>
+              <Link
+                to="/register"
+                className="mt-8 inline-flex w-fit items-center gap-2 rounded-md bg-primary px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground"
+              >
+                Register Now <ArrowRight className="size-4" />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </>

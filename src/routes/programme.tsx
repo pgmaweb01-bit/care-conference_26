@@ -56,6 +56,13 @@ function ProgrammePage() {
 
       <section className="section-pad">
         <div className="mx-auto max-w-5xl px-5 sm:px-8">
+          <div className="mb-12 overflow-hidden rounded-lg">
+            <img
+              src="/Gallery/BLQ09338.webp"
+              alt="Care Conference session"
+              className="w-full object-cover"
+            />
+          </div>
           <ol className="relative border-l border-border">
             {PROGRAMME.map((item) => (
               <li key={item.time + item.title} className="relative pb-12 pl-8 last:pb-0">

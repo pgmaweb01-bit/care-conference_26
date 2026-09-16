@@ -375,6 +375,13 @@ function HomePage() {
                 policymakers and the National Assembly.
               </p>
             </div>
+            <div className="mt-8 overflow-hidden rounded-lg">
+              <img
+                src="/Gallery/BLQ09384.webp"
+                alt="Care Conference discussion"
+                className="w-full object-cover"
+              />
+            </div>
             <Link
               to="/about"
               className="mt-6 inline-flex items-center gap-2 font-display text-sm font-semibold text-primary hover:gap-3"
@@ -600,6 +607,13 @@ function HomePage() {
               The question is no longer whether care is essential. The question is whether we are
               ready to build the infrastructure to support it.
             </p>
+            <div className="mt-10 overflow-hidden rounded-lg">
+              <img
+                src="/Gallery/BLQ09361.webp"
+                alt="Care in action"
+                className="w-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
