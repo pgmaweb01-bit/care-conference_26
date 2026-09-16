@@ -247,6 +247,75 @@ function HomePage() {
       {/* SCROLLING GALLERY */}
       <ScrollingGallery />
 
+      {/* SPEAKERS MARQUEE */}
+      <section className="border-b border-border bg-background py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <p className="eyebrow text-primary">Featured Speakers</p>
+              <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight lg:text-4xl">
+                Meet the Voices Shaping Care
+              </h2>
+            </div>
+            <Link
+              to="/speakers"
+              className="group inline-flex items-center gap-2 text-sm font-bold text-primary transition-colors hover:text-primary/80"
+            >
+              See All Speakers
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-10 overflow-hidden">
+          <div className="flex animate-marquee hover:[animation-play-state:paused]">
+            {[...SPEAKERS, ...SPEAKERS].map((speaker, i) => (
+              <div
+                key={i}
+                className="group relative w-56 shrink-0 sm:w-64 md:w-72"
+              >
+                <div className="aspect-[3/4] overflow-hidden rounded-xl">
+                  <div className="relative flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20">
+                    <span className="font-display text-5xl font-bold text-primary/40 sm:text-6xl">
+                      {speaker.initials}
+                    </span>
+                    <div className="absolute inset-0 flex items-end bg-gradient-to-t from-ink via-ink/60 to-transparent p-5 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
+                      <div>
+                        <p className="font-display text-sm font-bold text-primary">
+                          {speaker.role}
+                        </p>
+                        <p className="mt-1 text-base font-bold text-ink-foreground">
+                          {speaker.name}
+                        </p>
+                        <p className="mt-2 hidden text-xs leading-relaxed text-ink-foreground/60 sm:block">
+                          {speaker.bio}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p className="mt-3 text-center text-sm font-bold text-foreground sm:hidden">
+                  {speaker.name}
+                </p>
+                <p className="text-center text-xs text-muted-foreground sm:hidden">
+                  {speaker.role}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10 text-center">
+          <Link
+            to="/speakers"
+            className="group inline-flex items-center gap-2 rounded-full border border-border px-8 py-3.5 text-sm font-bold uppercase tracking-[0.1em] text-foreground transition-all hover:border-primary/40 hover:bg-primary/5"
+          >
+            View Full Speaker Lineup
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </section>
+
       {/* AT A GLANCE */}
       <section className="border-b border-border bg-background">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
