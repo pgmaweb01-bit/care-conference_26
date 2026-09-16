@@ -1,51 +1,77 @@
 export const EVENT = {
   name: "The Care Conference 2026",
-  edition: "The Third Edition",
+  edition: "Third Edition",
   theme: "Care as Infrastructure",
-  subtitle: "Building a National Position on Home Care for Nigeria",
-  date: "19 November 2026",
-  time: "8:00 AM – 5:45 PM",
+  subtitle: "Building a National Position on Home Healthcare in Nigeria",
+  date: "Thursday 19 November 2026",
+  time: "08:00 – 17:45",
   venue: "IALA Hub, The Chair Centre, Lagos",
   organiser: "The Purple Global Mission",
+  organiserDescription:
+    "A Nigerian not for profit healthcare professional development and advocacy organisation, established 2018.",
+  thesis: "You cannot finance care you cannot count.",
+  type: "An independent, non partisan national convening",
 };
+
+export const STATS = [
+  {
+    n: "~71%",
+    t: "of Nigeria's health spending is out of pocket",
+    src: "WHO Global Health Expenditure Database, 2023",
+  },
+  {
+    n: "10 to 13%",
+    t: "of the population is covered by health insurance",
+    src: "FMOH&SW, February 2026",
+  },
+  {
+    n: "~29%",
+    t: "of deaths in Nigeria are from noncommunicable diseases, the conditions that most demand continuing care at home",
+    src: "WHO NCD Country Profile, Nigeria",
+  },
+  {
+    n: "6m to 16m",
+    t: "Nigerians aged 65 and above, approximately, between 2020 and 2050",
+    src: "UN World Population Prospects",
+  },
+];
+
+export const GAPS = [
+  "No publicly accessible national home care dataset.",
+  "No consolidated public register of home care providers.",
+  "Telemedicine operating without a dedicated regulatory framework.",
+];
 
 export const POLICY_LAYERS = [
   {
-    no: "01",
-    title: "Policy & Governance",
-    body: "Creating the policies, institutions and regulatory structures required to recognise and strengthen care.",
+    no: "1",
+    title: "Care Workforce Development and Protection",
+    body: "Recognition, certification, training, and labour protection for the people who deliver care.",
   },
   {
-    no: "02",
-    title: "Infrastructure & Systems Design",
-    body: "Designing systems that connect healthcare facilities, homes, communities and care providers.",
+    no: "2",
+    title: "Clinical Governance and Quality Assurance",
+    body: "What safe care at home requires: standards, oversight, and accountability beyond the facility walls.",
   },
   {
-    no: "03",
-    title: "Digital Health & Technology",
-    body: "Using technology, data and digital systems to make care visible, connected and measurable.",
+    no: "3",
+    title: "Care Coordination and Continuity of Care",
+    body: "The managed journey from hospital bed to home, and the continuity that reduces avoidable readmissions.",
   },
   {
-    no: "04",
-    title: "Workforce & Care Economy",
-    body: "Building, training, recognising and protecting the people who provide care.",
+    no: "4",
+    title: "Digital Health Infrastructure and Care Data Systems",
+    body: "The data layer beneath every financing decision: national datasets, care records, and interoperability.",
   },
   {
-    no: "05",
-    title: "Community & Cultural Competence",
-    body: "Developing care models that understand Nigeria's communities, families, cultures and lived realities.",
-  },
-  {
-    no: "06",
-    title: "Non-Communicable Disease Management",
-    body: "Strengthening long-term care for people living with chronic and non-communicable conditions.",
-  },
-  {
-    no: "07",
-    title: "Maternal & Child Health",
-    body: "Building stronger systems of care for mothers, children and families across the continuum of care.",
+    no: "5",
+    title: "Care Financing, Policy and Regulatory Architecture",
+    body: "Benefit design, pooled financing, and the legislative pathway from out of pocket spending to structured financing.",
   },
 ];
+
+export const SPINE_NOTE =
+  "Layer 4 is the spine of the convening. Counting comes before financing, which is why the thesis of the conference is: you cannot finance care you cannot count.";
 
 export const AUDIENCE = [
   {
@@ -94,67 +120,58 @@ export type ProgrammeItem = {
   focus?: string;
   question?: string;
   highlight?: boolean;
+  tag?: string;
+  tagType?: "default" | "closed";
 };
 
 export const PROGRAMME: ProgrammeItem[] = [
   {
-    time: "8:00 AM",
-    title: "Registration & CareSouk Opens",
-    body: "Delegate check-in begins alongside the opening of CareSouk, providing an opportunity to explore solutions, organisations and innovations within the care ecosystem.",
+    time: "08:00",
+    title: "Registration and CareSouk opens",
+    body: "Delegate check in. The CareSouk, the conference's fully digital exhibition, runs on venue screens throughout the day.",
   },
   {
-    time: "9:00 AM",
-    title: "Opening Ceremony",
-    body: "The conference officially begins with welcome remarks, keynote reflections, national-position framing, a ministerial address and goodwill messages.",
-    focus: "Why care must become part of Nigeria's infrastructure.",
+    time: "09:00",
+    title: "Opening ceremony",
+    body: "Convener welcome, opening keynote framing the National Position, ministerial address, and goodwill messages from institutional partners.",
   },
   {
-    time: "10:15 AM",
-    kicker: "Plenary 1",
-    title: "The First Caregivers",
-    body: "Families are often the first and most consistent caregivers. This session brings lived experiences to the centre of the conversation, exploring the realities of dementia care, stroke recovery, disability care and long-term caregiving.",
-    question: "What happens when families become the primary care system?",
+    time: "Morning",
+    title: "Keynotes and panels across the five layers",
+    body: "Three keynotes and three panels carry the framework: digital health with financing, care coordination with the care workforce and family caregivers, and clinical governance and quality assurance. Exact running order is published with the final programme.",
+    tag: "Main stage, all delegates",
+    tagType: "default",
   },
   {
-    time: "11:30 AM",
-    kicker: "Plenary 2",
-    title: "Safe at Home",
-    body: "As healthcare increasingly extends into homes and communities, clinical governance and quality assurance become critical. This session examines what is required to make home-based care safe, effective, accountable and connected to the wider health system.",
+    time: "Midday",
+    title: "Showcase: The Homecare Framework, then lunch and CareSouk",
+    body: "A showcase of The Homecare Framework: Care as Infrastructure for Everyday Life, flowing into lunch, structured networking, and the digital exhibition.",
   },
   {
-    time: "12:45 PM",
-    kicker: "Book Launch",
-    title: "The Homecare Framework",
-    body: "A special launch introducing a framework for understanding home care as a fundamental component of everyday health and social infrastructure.",
-    highlight: true,
+    time: "14:15",
+    title: "Side rooms: five parallel sessions",
+    body: "Every delegate attends one of five rooms: the care workforce, the hospital to home journey, counting and financing care, the pitch and demo showcase, or the conference on ageing. Seats are assigned in advance from your selection below.",
+    tag: "Choose one of five, advance selection",
+    tagType: "default",
   },
   {
-    time: "1:15 PM",
-    title: "Lunch, CareSouk & Networking",
-    body: "Connect with fellow delegates, explore care innovations and continue conversations from the morning sessions.",
+    time: "15:45",
+    title: "Closed institutional roundtable",
+    body: "Twenty to thirty principals from government, regulation, financing, and practice contest and refine the National Position text. General delegates continue with the CareSouk, exhibitor spotlights, and networking.",
+    tag: "Invitation only",
+    tagType: "closed",
   },
   {
-    time: "2:15 PM",
-    title: "Parallel Policy Sessions",
-    body: "Four focused rooms. Four critical questions about the future of care.",
+    time: "17:15",
+    title: "Closing plenary",
+    body: "Roundtable readout, unveiling of next steps for the National Position, and closing remarks from the convener.",
+    tag: "Main stage, all delegates",
+    tagType: "default",
   },
   {
-    time: "3:45 PM",
-    kicker: "Closed Institutional Roundtable",
-    title: "From Conversation to Commitment",
-    body: "An institutional roundtable bringing together government, regulatory, financing and practice leaders, focused on refining the emerging National Position on Care as Infrastructure and identifying practical pathways for implementation.",
-  },
-  {
-    time: "5:15 PM",
-    kicker: "Closing Plenary",
-    title: "The National Position",
-    body: "The conference closes with a readout of key discussions, proposed actions and next steps. The goal is not simply to have a conversation about care. It is to define what comes next.",
-    highlight: true,
-  },
-  {
-    time: "5:45 PM",
-    title: "Conference Close",
-    body: "Delegates depart with the emerging national position and next steps.",
+    time: "17:45",
+    title: "Close",
+    body: "",
   },
 ];
 
@@ -162,28 +179,32 @@ export const ROOMS = [
   {
     room: "Room A",
     title: "Who Cares for Nigeria?",
-    subtitle: "The Care Workforce",
-    body: "Who provides care, and what does Nigeria need to do to support them? This session explores workforce development, recognition, certification, training, labour protection and the future of professional care work.",
+    subtitle: "Care Workforce Development and Protection",
+    body: "Recognition, certification, training, and labour protection for the people who deliver care, with regulators, nursing academics, training institutions, and practising care workers in the room.",
   },
   {
     room: "Room B",
     title: "The Journey Between",
-    subtitle: "From Hospital to Home",
-    body: "A patient's care does not end at hospital discharge. This session examines care coordination and continuity between hospitals, homes, community providers and families.",
-    focus:
-      "Building systems that ensure people do not fall through the gaps between healthcare settings.",
+    subtitle: "Care Coordination and Continuity of Care",
+    body: "The path from hospital discharge to home. Hospital leaders, insurers, rehabilitation specialists, and coordination leads on making continuity of care reimbursable and routine.",
   },
   {
     room: "Room C",
     title: "You Cannot Finance What You Cannot Count",
-    subtitle: "Data, Digital Health & Care Infrastructure",
-    body: "What we cannot see in the data is difficult to plan for, measure or finance. This session explores digital health infrastructure, care data systems, national digital architecture, claims data and interoperability.",
+    subtitle: "Digital Health, Care Data, and Financing",
+    body: "The merged data and financing room: the national data layer beneath every financing decision, benefit design, pooled financing, and the legislative pathway that moves home healthcare into structured financing.",
   },
   {
     room: "Room D",
-    title: "Paying for the Load-Bearing Layer",
-    subtitle: "Financing & Regulation",
-    body: "Care requires sustainable financing. This session examines benefit design, pooled financing, policy and regulatory architecture and the legislative pathway required to strengthen home care in Nigeria.",
+    title: "Pitch and Demo",
+    subtitle: "Innovation Showcase",
+    body: "Live pitches and demonstrations from innovators building for care, presented in the cinema room before delegates, institutions, and funders. Pitching is free for selected startups.",
+  },
+  {
+    room: "Room E",
+    title: "Conference on Ageing",
+    subtitle: "Healthy Ageing and Care of Older Persons",
+    body: "A dedicated session on ageing in Nigeria: what growing older at home requires of families, communities, and the health system. Delivered in partnership with Kaleyewa House, a non profit that has supported elderly Nigerians for more than two decades under the promise of Ageing with Dignity.",
   },
 ];
 
@@ -316,47 +337,27 @@ export const CARESOUK_EXHIBITORS = [
 
 export const PARTNER_TIERS = [
   {
-    tier: "Platinum",
+    tier: "CareSouk Exhibition",
     benefits: [
-      "Premier branding on all conference materials",
-      "Keynote speaking opportunity",
-      "Exclusive exhibition space at CareSouk",
-      "Full-page feature in conference programme",
-      "VIP access to institutional roundtable",
-      "Dedicated media coverage",
+      "The conference's fully digital exhibition, carried on venue screens through the day",
+      "Two packages: Dedicated Screen and Showcase Loop",
+      "The venue is fully cladded, so exhibition is screen based, with no physical booths to build or staff",
     ],
-    price: "₦10,000,000",
   },
   {
-    tier: "Gold",
+    tier: "Pitch and Innovation Partner",
     benefits: [
-      "Prominent branding on conference materials",
-      "Panel speaking opportunity",
-      "Premium exhibition space at CareSouk",
-      "Half-page feature in conference programme",
-      "VIP access to closing plenary",
+      "Power the Pitch and Demo room",
+      "The partner underwrites the showcase so that pitching stays free for selected startups",
+      "Stands before the room where care innovation meets institutions and funders",
     ],
-    price: "₦5,000,000",
   },
   {
-    tier: "Silver",
+    tier: "Session and Room Partnership",
     benefits: [
-      "Branding on conference website and signage",
-      "Exhibition space at CareSouk",
-      "Quarter-page feature in conference programme",
-      "Access to networking sessions",
+      "Partner a plenary, a side room, or a framework layer",
+      "The way Kaleyewa House partners the Conference on Ageing",
+      "Session partnership pairs your institution with the policy conversation closest to your mandate",
     ],
-    price: "₦2,500,000",
-  },
-  {
-    tier: "Bronze",
-    benefits: [
-      "Logo on conference website",
-      "Shared exhibition space at CareSouk",
-      "Listing in conference programme",
-    ],
-    price: "₦1,000,000",
   },
 ];
-
-
