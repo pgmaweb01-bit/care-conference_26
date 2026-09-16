@@ -178,7 +178,7 @@ function RotatingText() {
       {phrases.map((phrase, i) => (
         <span
           key={i}
-          className={`block font-display text-[clamp(3rem,7vw,5.5rem)] font-extrabold leading-[1] tracking-tight transition-all duration-500 ease-in-out ${
+          className={`block font-display text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.05] tracking-tight transition-all duration-500 ease-in-out ${
             i === index ? "h-auto opacity-100" : "absolute inset-x-0 top-0 h-0 overflow-hidden opacity-0"
           }`}
         >
