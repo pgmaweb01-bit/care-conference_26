@@ -584,7 +584,7 @@ function HomePage() {
         </div>
 
         <div className="mt-10 overflow-hidden">
-          <div className="flex animate-marquee hover:[animation-play-state:paused]">
+          <div className="flex animate-marquee">
             {[...SPEAKERS, ...SPEAKERS].map((speaker, i) => (
               <div
                 key={i}

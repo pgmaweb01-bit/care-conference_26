@@ -235,14 +235,20 @@
 }
 
 .animate-marquee {
-  animation: marquee 20s linear infinite;
+  animation: marquee 12s linear infinite;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-rise,
-  .animate-fade-in-up,
-  .animate-marquee {
+  .animate-fade-in-up {
     animation: none;
+  }
+
+  .animate-marquee {
+    animation-duration: 20s;
   }
 
   *,
