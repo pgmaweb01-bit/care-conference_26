@@ -141,16 +141,16 @@ function HomePage() {
             <h1 className="animate-rise font-display text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[0.85] tracking-[-0.03em]">
               <span className="block text-ink-foreground">Care</span>
               <span className="block text-ink-foreground">Conference</span>
-              <span className="block bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
+              <span className="block text-accent">
                 2026
               </span>
             </h1>
 
             <div className="animate-rise mt-6">
-              <p className="font-display text-[clamp(0.875rem,2vw,1.25rem)] font-extrabold uppercase tracking-[0.2em] text-primary">
+              <p className="font-display text-[clamp(0.875rem,2vw,1.25rem)] font-extrabold uppercase tracking-[0.2em] text-accent">
                 {EVENT.theme}
               </p>
-              <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-gradient-to-r from-primary to-accent" />
+              <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-accent" />
             </div>
 
             <p className="animate-rise mt-6 mx-auto max-w-[50ch] text-base leading-relaxed text-ink-foreground/60">
