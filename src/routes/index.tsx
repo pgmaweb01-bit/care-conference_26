@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState, useEffect } from "react";
 import { ArrowRight, Calendar, Users, Store, Handshake } from "lucide-react";
-import heroImage from "@/assets/hero-care.jpg";
 import { SectionHeading } from "@/components/section";
 import {
   AUDIENCE,
@@ -156,43 +155,83 @@ function ThemeBanner() {
   );
 }
 
-/* ─── ROTATING TEXT ─── */
-function RotatingText() {
-  const phrases = [
-    "Care Conference 2026",
-    "Care Is Not an Afterthought. It Is Infrastructure.",
-    "Care as Infrastructure",
-  ];
+/* ─── ANIMATED IMAGE GALLERY ─── */
+const GALLERY_IMAGES = [
+  { src: "/Gallery/BLQ09213.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09223.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09246.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09272.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09293.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09331.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09338.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09344.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09354.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09361.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09374.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09377.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09384.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09386.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09388.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09389.webp", alt: "Care Conference gallery" },
+  { src: "/Gallery/BLQ09408.webp", alt: "Care Conference gallery" },
+];
 
-  const [index, setIndex] = useState(0);
+function AnimatedGallery() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % phrases.length);
+      setCurrentIndex((prev) => (prev + 2) % GALLERY_IMAGES.length);
     }, 4000);
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
+
+  const getVisibleImages = () => {
+    const imgs = [];
+    imgs.push(GALLERY_IMAGES[currentIndex]);
+    const nextIndex = (currentIndex + 1) % GALLERY_IMAGES.length;
+    imgs.push(GALLERY_IMAGES[nextIndex]);
+    return imgs;
+  };
 
   return (
-    <span className="relative inline-block">
-      {phrases.map((phrase, i) => (
-        <span
-          key={i}
-          className={`block font-display text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.05] tracking-tight transition-all duration-500 ease-in-out ${
-            i === index ? "h-auto opacity-100" : "absolute inset-x-0 top-0 h-0 overflow-hidden opacity-0"
-          }`}
-        >
-          {i === 1 ? (
-            <>
-              Care Is Not an Afterthought.{" "}
-              <span className="text-accent">It Is Infrastructure.</span>
-            </>
-          ) : (
-            phrase
-          )}
-        </span>
-      ))}
-    </span>
+    <section className="relative overflow-hidden border-b border-border bg-ink">
+      <div className="mx-auto max-w-7xl px-5 py-6 sm:px-8 lg:py-10">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {getVisibleImages().map((img, i) => (
+            <div key={`${currentIndex}-${i}`} className="relative aspect-[4/3] overflow-hidden rounded-lg">
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="h-full w-full object-cover transition-opacity duration-700 ease-in-out"
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Pause indicator */}
+      <button
+        type="button"
+        onClick={() => setIsPaused(!isPaused)}
+        className="absolute bottom-4 right-4 z-10 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-colors hover:bg-white/30"
+        aria-label={isPaused ? "Resume slideshow" : "Pause slideshow"}
+      >
+        {isPaused ? (
+          <svg className="size-4 text-white" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        ) : (
+          <svg className="size-4 text-white" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="6" y="4" width="4" height="16" />
+            <rect x="14" y="4" width="4" height="16" />
+          </svg>
+        )}
+      </button>
+    </section>
   );
 }
 
@@ -205,67 +244,87 @@ function HomePage() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
           style={{ backgroundImage: "url('/Hero Image.jpg')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/70 to-ink/50" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:py-28">
-          <div className="lg:col-span-7">
-            <div className="animate-rise flex flex-wrap items-center gap-3">
-              <span className="rounded-full bg-primary px-3 py-1 font-display text-[11px] font-bold uppercase tracking-[0.16em] text-primary-foreground">
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/80 to-ink" />
+        <div className="relative mx-auto max-w-7xl px-5 py-28 sm:px-8 lg:py-40">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="animate-rise">
+              <span className="rounded-full bg-primary px-4 py-1.5 font-display text-[11px] font-bold uppercase tracking-[0.16em] text-primary-foreground">
                 {EVENT.edition}
               </span>
-              <span className="eyebrow text-ink-foreground/60">Organised by {EVENT.organiser}</span>
             </div>
 
-            <h1 className="animate-rise mt-8">
-              <RotatingText />
+            <h1 className="animate-rise mt-8 font-display text-[clamp(3rem,8vw,7rem)] font-extrabold leading-[0.9] tracking-tight">
+              <span className="block">Care</span>
+              <span className="block">Conference</span>
+              <span className="block text-primary">2026</span>
             </h1>
 
-            <p className="mt-7 max-w-[60ch] text-base leading-relaxed text-ink-foreground/80">
-              Nigeria's health system cannot achieve lasting impact without recognising the systems,
-              people, policies and resources that make care possible beyond the hospital.
-            </p>
-            <p className="mt-4 max-w-[60ch] text-sm leading-relaxed text-ink-foreground/70">
-              The Care Conference 2026 brings together policymakers, healthcare leaders, clinicians,
-              caregivers, innovators, researchers, investors and community advocates to shape a
-              national position on home care and establish care as a critical part of Nigeria's
-              health infrastructure.
+            <p className="animate-rise mt-6 font-display text-[clamp(1.25rem,3vw,2rem)] font-bold text-accent">
+              Care as Infrastructure
             </p>
 
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link
-                to="/register"
-                className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
-              >
-                Register for the Conference <ArrowRight className="size-4" />
-              </Link>
-              <Link
-                to="/programme"
-                className="inline-flex items-center gap-2 rounded-md border border-ink-foreground/20 px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] transition-colors hover:bg-ink-foreground/10"
-              >
-                View Programme
-              </Link>
-            </div>
+            <p className="animate-rise mt-6 mx-auto max-w-[48ch] text-lg leading-relaxed text-ink-foreground/70">
+              {EVENT.subtitle}
+            </p>
           </div>
+        </div>
+      </section>
 
-          <div className="flex flex-col justify-end lg:col-span-5">
-            <div className="rounded-lg border border-ink-foreground/15 bg-ink/50 p-6 backdrop-blur-sm">
-              <p className="eyebrow text-accent">The 2026 Question</p>
-              <p className="mt-3 font-display text-2xl font-bold leading-tight">
+      {/* IMAGE GALLERY */}
+      <AnimatedGallery />
+
+      {/* DISPLACED CONTENT BLOCK */}
+      <section className="border-b border-border bg-background">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
+          <div className="grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <p className="eyebrow text-primary">Organised by {EVENT.organiser}</p>
+              <h2 className="mt-4 max-w-[20ch] font-display text-3xl font-extrabold leading-[1.05] lg:text-5xl">
                 How do we build a care system that works for everyone?
+              </h2>
+              <p className="mt-6 max-w-[55ch] text-lg leading-relaxed text-muted-foreground">
+                Nigeria's health system cannot achieve lasting impact without recognising the systems,
+                people, policies and resources that make care possible beyond the hospital.
               </p>
-              <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-ink-foreground/15 pt-5 text-sm">
-                <div>
-                  <dt className="eyebrow text-ink-foreground/50">Date</dt>
-                  <dd className="mt-1 font-display font-semibold">{EVENT.date}</dd>
-                </div>
-                <div>
-                  <dt className="eyebrow text-ink-foreground/50">Time</dt>
-                  <dd className="mt-1 font-display font-semibold">{EVENT.time}</dd>
-                </div>
-                <div className="col-span-2">
-                  <dt className="eyebrow text-ink-foreground/50">Venue</dt>
-                  <dd className="mt-1 font-display font-semibold">{EVENT.venue}</dd>
-                </div>
-              </dl>
+              <p className="mt-4 max-w-[55ch] text-muted-foreground">
+                The Care Conference 2026 brings together policymakers, healthcare leaders, clinicians,
+                caregivers, innovators, researchers, investors and community advocates to shape a
+                national position on home care and establish care as a critical part of Nigeria's
+                health infrastructure.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  to="/register"
+                  className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  Register for the Conference <ArrowRight className="size-4" />
+                </Link>
+                <Link
+                  to="/programme"
+                  className="inline-flex items-center gap-2 rounded-md border border-input px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] transition-colors hover:bg-secondary"
+                >
+                  View Programme
+                </Link>
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-center lg:col-span-5">
+              <div className="rounded-lg border border-border bg-card p-7">
+                <dl className="space-y-6">
+                  <div>
+                    <dt className="eyebrow text-primary">Date</dt>
+                    <dd className="mt-2 font-display text-lg font-bold">{EVENT.date}</dd>
+                  </div>
+                  <div>
+                    <dt className="eyebrow text-primary">Time</dt>
+                    <dd className="mt-2 font-display text-lg font-bold">{EVENT.time}</dd>
+                  </div>
+                  <div>
+                    <dt className="eyebrow text-primary">Venue</dt>
+                    <dd className="mt-2 font-display text-lg font-bold">{EVENT.venue}</dd>
+                  </div>
+                </dl>
+              </div>
             </div>
           </div>
         </div>
