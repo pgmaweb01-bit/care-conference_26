@@ -12,38 +12,28 @@ export const EVENT = {
 export const POLICY_LAYERS = [
   {
     no: "01",
-    title: "Policy & Governance",
-    body: "Creating the policies, institutions and regulatory structures required to recognise and strengthen care.",
+    title: "Care Workforce Development and Protection",
+    body: "Recognition, certification, training, and labour protection for the people who deliver care.",
   },
   {
     no: "02",
-    title: "Infrastructure & Systems Design",
-    body: "Designing systems that connect healthcare facilities, homes, communities and care providers.",
+    title: "Clinical Governance and Quality Assurance",
+    body: "What safe care at home requires: standards, oversight, and accountability beyond the facility walls.",
   },
   {
     no: "03",
-    title: "Digital Health & Technology",
-    body: "Using technology, data and digital systems to make care visible, connected and measurable.",
+    title: "Care Coordination and Continuity of Care",
+    body: "The managed journey from hospital bed to home, and the continuity that reduces avoidable readmissions.",
   },
   {
     no: "04",
-    title: "Workforce & Care Economy",
-    body: "Building, training, recognising and protecting the people who provide care.",
+    title: "Digital Health Infrastructure and Care Data Systems",
+    body: "The data layer beneath every financing decision: national datasets, care records, and interoperability.",
   },
   {
     no: "05",
-    title: "Community & Cultural Competence",
-    body: "Developing care models that understand Nigeria's communities, families, cultures and lived realities.",
-  },
-  {
-    no: "06",
-    title: "Non-Communicable Disease Management",
-    body: "Strengthening long-term care for people living with chronic and non-communicable conditions.",
-  },
-  {
-    no: "07",
-    title: "Maternal & Child Health",
-    body: "Building stronger systems of care for mothers, children and families across the continuum of care.",
+    title: "Care Financing, Policy and Regulatory Architecture",
+    body: "Benefit design, pooled financing, and the legislative pathway from out of pocket spending to structured financing.",
   },
 ];
 
@@ -136,7 +126,7 @@ export const PROGRAMME: ProgrammeItem[] = [
   {
     time: "2:15 PM",
     title: "Parallel Policy Sessions",
-    body: "Four focused rooms. Four critical questions about the future of care.",
+    body: "Five focused rooms. Five critical questions about the future of care.",
   },
   {
     time: "3:45 PM",
@@ -162,28 +152,32 @@ export const ROOMS = [
   {
     room: "Room A",
     title: "Who Cares for Nigeria?",
-    subtitle: "The Care Workforce",
-    body: "Who provides care, and what does Nigeria need to do to support them? This session explores workforce development, recognition, certification, training, labour protection and the future of professional care work.",
+    subtitle: "Care Workforce Development and Protection",
+    body: "Recognition, certification, training, and labour protection for the people who deliver care, with regulators, nursing academics, training institutions, and practising care workers in the room.",
   },
   {
     room: "Room B",
     title: "The Journey Between",
-    subtitle: "From Hospital to Home",
-    body: "A patient's care does not end at hospital discharge. This session examines care coordination and continuity between hospitals, homes, community providers and families.",
-    focus:
-      "Building systems that ensure people do not fall through the gaps between healthcare settings.",
+    subtitle: "Care Coordination and Continuity of Care",
+    body: "The path from hospital discharge to home. Hospital leaders, insurers, rehabilitation specialists, and coordination leads on making continuity of care reimbursable and routine.",
   },
   {
     room: "Room C",
     title: "You Cannot Finance What You Cannot Count",
-    subtitle: "Data, Digital Health & Care Infrastructure",
-    body: "What we cannot see in the data is difficult to plan for, measure or finance. This session explores digital health infrastructure, care data systems, national digital architecture, claims data and interoperability.",
+    subtitle: "Digital Health, Care Data, and Financing",
+    body: "The merged data and financing room: the national data layer beneath every financing decision, benefit design, pooled financing, and the legislative pathway that moves home healthcare into structured financing.",
   },
   {
     room: "Room D",
-    title: "Paying for the Load-Bearing Layer",
-    subtitle: "Financing & Regulation",
-    body: "Care requires sustainable financing. This session examines benefit design, pooled financing, policy and regulatory architecture and the legislative pathway required to strengthen home care in Nigeria.",
+    title: "Pitch and Demo",
+    subtitle: "Innovation Showcase",
+    body: "Live pitches and demonstrations from innovators building for care, presented in the cinema room before delegates, institutions, and funders. Pitching is free for selected startups.",
+  },
+  {
+    room: "Room E",
+    title: "Conference on Ageing",
+    subtitle: "Healthy Ageing and Care of Older Persons",
+    body: "A dedicated session on ageing in Nigeria: what growing older at home requires of families, communities, and the health system. Delivered in partnership with Kaleyewa House, a non profit that has supported elderly Nigerians for more than two decades under the promise of Ageing with Dignity.",
   },
 ];
 
@@ -357,6 +351,35 @@ export const PARTNER_TIERS = [
     ],
     price: "₦1,000,000",
   },
+];
+
+export const CASE_STATS = [
+  {
+    number: "~71%",
+    text: "of Nigeria's health spending is out of pocket",
+    source: "WHO Global Health Expenditure Database, 2023",
+  },
+  {
+    number: "10 to 13%",
+    text: "of the population is covered by health insurance",
+    source: "FMOH&SW, February 2026",
+  },
+  {
+    number: "~29%",
+    text: "of deaths in Nigeria are from noncommunicable diseases, the conditions that most demand continuing care at home",
+    source: "WHO NCD Country Profile, Nigeria",
+  },
+  {
+    number: "6m to 16m",
+    text: "Nigerians aged 65 and above, approximately, between 2020 and 2050",
+    source: "UN World Population Prospects",
+  },
+];
+
+export const CASE_GAPS = [
+  "No publicly accessible national home care dataset.",
+  "No consolidated public register of home care providers.",
+  "Telemedicine operating without a dedicated regulatory framework.",
 ];
 
 

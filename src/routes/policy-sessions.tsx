@@ -31,7 +31,7 @@ function PolicySessionsPage() {
     <>
       <PageHero
         eyebrow="07 — Parallel Policy Sessions"
-        title="Four Rooms. Four Critical Questions About the Future of Care."
+        title="Five Rooms. Five Critical Questions About the Future of Care."
         lede="Beginning 2:15 PM. Each room examines one of the systems that must hold for care to work as national infrastructure."
       />
 

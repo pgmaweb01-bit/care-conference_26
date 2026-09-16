@@ -5,6 +5,8 @@ import { SectionHeading } from "@/components/section";
 import { KenBurnsHero } from "@/components/ken-burns-hero";
 import {
   AUDIENCE,
+  CASE_GAPS,
+  CASE_STATS,
   EVENT,
   POLICY_LAYERS,
   PROGRAMME,
@@ -239,6 +241,68 @@ function HomePage() {
 
       {/* SCROLLING GALLERY */}
       <ScrollingGallery />
+
+      {/* THE CASE */}
+      <section className="section-pad bg-card">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <SectionHeading
+            eyebrow="The Case"
+            title="What the numbers say, and what they cannot yet say"
+            lede="Recovery does not end at the hospital gate. Home healthcare, the managed transition from hospital to home, and the continuity that reduces avoidable readmissions are carried today by families, largely alone and largely uncounted."
+          />
+
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {CASE_STATS.map((stat) => (
+              <div
+                key={stat.number}
+                className="border-t-3 border-accent bg-background p-6"
+              >
+                <p className="font-display text-4xl font-extrabold text-ink">
+                  {stat.number}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {stat.text}
+                </p>
+                <p className="mt-4 text-xs text-muted-foreground/60">
+                  {stat.source}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 max-w-[720px] border-l-3 border-ink pl-8">
+            <h3 className="font-display text-xl font-bold text-ink">
+              The concept: care as infrastructure
+            </h3>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              Care as infrastructure is a health system position. It holds that home healthcare is a
+              load bearing layer of the health system, and that it must be built the way any national
+              infrastructure is built: with clinical, coordination, digital, workforce, and financing
+              systems that determine whether recognised, funded care is actually safe, continuous,
+              and accountable at national scale.
+            </p>
+            <p className="mt-4 font-display text-base font-semibold text-ink">
+              A register of who provides care is not a record of what care is delivered.
+            </p>
+          </div>
+
+          <div className="mt-12 max-w-[720px]">
+            <h3 className="font-display text-base font-bold text-ink">
+              Three documented gaps anchor the case
+            </h3>
+            <div className="mt-5 divide-y divide-border">
+              {CASE_GAPS.map((gap, i) => (
+                <div key={gap} className="flex gap-4 py-4">
+                  <span className="font-display text-sm font-bold text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-muted-foreground">{gap}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* AT A GLANCE */}
       <section className="border-b border-border bg-background">
