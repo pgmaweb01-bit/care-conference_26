@@ -408,35 +408,35 @@ function HomePage() {
       </section>
 
       {/* BIG IDEA */}
-      <section className="bg-ink text-ink-foreground">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-          <SectionHeading
-            index="03"
-            eyebrow="The Big Idea"
-            tone="dark"
-            title="You Cannot Finance Care You Cannot Count."
-            lede="Care happens everywhere. At home. In communities. In hospitals. In workplaces. Within families. Yet much of this work remains invisible in national systems, data and financing structures."
-          />
-          <p className="mt-10 max-w-[48ch] font-display text-2xl font-bold leading-snug text-accent">
-            What would change if Nigeria recognised care as essential infrastructure?
-          </p>
-          <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_320px]">
-            <ul className="grid gap-px overflow-hidden rounded-lg bg-white/15 sm:grid-cols-2">
-              {RECOGNITIONS.map((item, i) => (
-                <li key={item} className="flex gap-4 bg-ink p-6">
-                  <span className="font-display text-sm font-bold text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-ink-foreground/85">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="overflow-hidden rounded-lg sm:block">
-              <img
-                src="/Gallery/BLQ09293.webp"
-                alt="Care in action"
-                className="h-full w-full object-cover"
-              />
+      <section className="relative bg-ink text-ink-foreground">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/The big Idea.webp')" }}
+        />
+        <div className="absolute inset-0 bg-ink/85" />
+        <div className="sticky top-0">
+          <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+            <SectionHeading
+              index="03"
+              eyebrow="The Big Idea"
+              tone="dark"
+              title="You Cannot Finance Care You Cannot Count."
+              lede="Care happens everywhere. At home. In communities. In hospitals. In workplaces. Within families. Yet much of this work remains invisible in national systems, data and financing structures."
+            />
+            <p className="mt-10 max-w-[48ch] font-display text-2xl font-bold leading-snug text-accent">
+              What would change if Nigeria recognised care as essential infrastructure?
+            </p>
+            <div className="mt-10">
+              <ul className="grid gap-px overflow-hidden rounded-lg bg-white/15 sm:grid-cols-2">
+                {RECOGNITIONS.map((item, i) => (
+                  <li key={item} className="flex gap-4 bg-ink/60 backdrop-blur-sm p-6">
+                    <span className="font-display text-sm font-bold text-accent">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-ink-foreground/85">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -480,16 +480,16 @@ function HomePage() {
       {/* WHO SHOULD ATTEND */}
       <section className="border-y border-border bg-linen section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid gap-10 lg:grid-cols-[1fr_280px]">
+          <div className="grid gap-10 lg:grid-cols-[1fr_400px]">
             <SectionHeading
               index="05"
               eyebrow="Who Should Attend"
               title="One Room. Many Perspectives. One National Conversation."
               lede="The Care Conference brings together the people shaping healthcare, policy, technology and communities."
             />
-            <div className="overflow-hidden rounded-lg sm:block">
+            <div className="overflow-hidden rounded-lg">
               <img
-                src="/Gallery/BLQ09388.webp"
+                src="/Who should attend.webp"
                 alt="Care Conference attendees"
                 className="h-full w-full object-cover"
               />
