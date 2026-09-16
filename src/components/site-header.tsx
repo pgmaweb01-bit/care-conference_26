@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { EVENT } from "@/data/conference";
 
 const NAV = [
+  { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/programme", label: "Programme" },
   { to: "/speakers", label: "Speakers" },
