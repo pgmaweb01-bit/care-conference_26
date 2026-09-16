@@ -10,12 +10,12 @@ export const Route = createFileRoute("/programme")({
       {
         name: "description",
         content:
-          "One day in four movements: morning keynotes, midday showcase, afternoon side rooms, and a closed roundtable. Thursday 19 November 2026, IALA Hub, Lagos.",
+          "The full day programme for 19 November 2026: opening ceremony, plenaries, book launch, four parallel policy rooms, institutional roundtable and closing national position.",
       },
       { property: "og:title", content: "Programme — Care Conference 2026" },
       {
         property: "og:description",
-        content: "A day of dialogue, policy and action. 08:00 to 17:45 at IALA Hub, Lagos.",
+        content: "A day of dialogue, policy and action. 8:00 AM to 5:45 PM at IALA Hub, Lagos.",
       },
       { property: "og:type", content: "article" },
       { property: "og:url", content: "/programme" },
@@ -90,33 +90,32 @@ function ProgrammePage() {
 
       <section className="border-t border-border bg-linen section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <p className="eyebrow text-primary">The Side Rooms · 14:15</p>
+          <p className="eyebrow text-primary">07 — Parallel Policy Sessions · 2:15 PM</p>
           <h2 className="mt-4 font-display text-3xl font-extrabold lg:text-4xl">
-            Five Rooms, One Seat Each
+            Four Focused Rooms. Four Critical Questions.
           </h2>
-          <p className="mt-4 max-w-[60ch] text-muted-foreground">
-            At 14:15 the convening breaks into five parallel sessions: three policy rooms carrying the framework layers, a pitch and demo room, and a dedicated conference on ageing delivered in partnership with Kaleyewa House.
-          </p>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {ROOMS.map((room) => (
               <article key={room.room} className="rounded-lg border border-border bg-card p-7">
                 <p className="eyebrow text-accent">{room.room}</p>
                 <h3 className="mt-3 font-display text-xl font-bold">{room.title}</h3>
-                <p className="mt-1 font-display text-sm font-semibold text-primary">
+                <p className="mt-1 font-display text-sm font-semibold text-muted-foreground">
                   {room.subtitle}
                 </p>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{room.body}</p>
+                <p className="mt-4 leading-relaxed text-muted-foreground">{room.body}</p>
+                {room.focus ? (
+                  <p className="mt-3 font-display text-sm font-semibold text-primary">
+                    Focus: {room.focus}
+                  </p>
+                ) : null}
               </article>
             ))}
           </div>
-          <p className="mt-8 text-sm text-muted-foreground">
-            All five rooms run once, in parallel. Selections are honoured first come first served against room capacity, which is why early registration matters. Second choices apply only when a first choice room is full.
-          </p>
           <Link
             to="/register"
-            className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground"
+            className="mt-10 inline-flex items-center gap-2 rounded-md bg-primary px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground"
           >
-            Register and choose your side room <ArrowRight className="size-4" />
+            Register Now <ArrowRight className="size-4" />
           </Link>
         </div>
       </section>

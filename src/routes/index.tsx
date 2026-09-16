@@ -11,9 +11,6 @@ import {
   RECOGNITIONS,
   SPEAKERS,
   TAKEAWAYS,
-  STATS,
-  GAPS,
-  SPINE_NOTE,
 } from "@/data/conference";
 
 export const Route = createFileRoute("/")({
@@ -23,13 +20,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Care as Infrastructure: Building a National Position on Home Healthcare in Nigeria. Thursday 19 November 2026, IALA Hub, The Chair Centre, Lagos. An initiative of The Purple Global Mission.",
+          "Care is not an afterthought. It is infrastructure. Join policymakers, clinicians, caregivers and innovators in Lagos on 19 November 2026 to build a national position on home care for Nigeria.",
       },
       { property: "og:title", content: "The Care Conference 2026 — Care as Infrastructure" },
       {
         property: "og:description",
         content:
-          "Building a National Position on Home Healthcare in Nigeria. Thursday 19 November 2026, IALA Hub, The Chair Centre, Lagos.",
+          "Building a national position on home care for Nigeria. 19 November 2026, IALA Hub, The Chair Centre, Lagos.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
@@ -213,49 +210,47 @@ function HomePage() {
           <div className="lg:col-span-7">
             <div className="animate-rise flex flex-wrap items-center gap-3">
               <span className="rounded-full bg-primary px-3 py-1 font-display text-[11px] font-bold uppercase tracking-[0.16em] text-primary-foreground">
-                {EVENT.edition} · An independent, non partisan national convening
+                {EVENT.edition}
               </span>
+              <span className="eyebrow text-ink-foreground/60">Organised by {EVENT.organiser}</span>
             </div>
 
             <h1 className="animate-rise mt-8">
               <RotatingText />
             </h1>
 
-            <p className="mt-6 max-w-[50ch] font-display text-lg font-medium text-ink-foreground/90">
-              {EVENT.subtitle}
+            <p className="mt-7 max-w-[60ch] text-base leading-relaxed text-ink-foreground/80">
+              Nigeria's health system cannot achieve lasting impact without recognising the systems,
+              people, policies and resources that make care possible beyond the hospital.
+            </p>
+            <p className="mt-4 max-w-[60ch] text-sm leading-relaxed text-ink-foreground/70">
+              The Care Conference 2026 brings together policymakers, healthcare leaders, clinicians,
+              caregivers, innovators, researchers, investors and community advocates to shape a
+              national position on home care and establish care as a critical part of Nigeria's
+              health infrastructure.
             </p>
 
-            <p className="mt-6 max-w-[40ch] border-l-2 border-accent pl-5 font-display text-lg font-semibold text-accent">
-              {EVENT.thesis}
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2 text-sm text-ink-foreground/80">
-              <span><strong className="text-ink-foreground">{EVENT.date}</strong></span>
-              <span><strong className="text-ink-foreground">{EVENT.venue}</strong></span>
-              <span><strong className="text-ink-foreground">One day</strong></span>
-            </div>
-
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-9 flex flex-wrap gap-3">
               <Link
                 to="/register"
                 className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
               >
-                Register and choose your side room <ArrowRight className="size-4" />
+                Register for the Conference <ArrowRight className="size-4" />
               </Link>
               <Link
                 to="/programme"
                 className="inline-flex items-center gap-2 rounded-md border border-ink-foreground/20 px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] transition-colors hover:bg-ink-foreground/10"
               >
-                View the agenda
+                View Programme
               </Link>
             </div>
           </div>
 
           <div className="flex flex-col justify-end lg:col-span-5">
             <div className="rounded-lg border border-ink-foreground/15 bg-ink/50 p-6 backdrop-blur-sm">
-              <p className="eyebrow text-accent">About the Convener</p>
-              <p className="mt-3 text-sm leading-relaxed text-ink-foreground/80">
-                An initiative of <strong className="text-ink-foreground">{EVENT.organiser}</strong>, {EVENT.organiserDescription}
+              <p className="eyebrow text-accent">The 2026 Question</p>
+              <p className="mt-3 font-display text-2xl font-bold leading-tight">
+                How do we build a care system that works for everyone?
               </p>
               <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-ink-foreground/15 pt-5 text-sm">
                 <div>
@@ -382,13 +377,13 @@ function HomePage() {
                 <Handshake className="size-5 text-primary" />
               </div>
               <h3 className="mt-4 font-display text-lg font-bold">Partners</h3>
-              <p className="mt-1 text-xs text-muted-foreground">3 partnership categories</p>
+              <p className="mt-1 text-xs text-muted-foreground">4 partnership tiers</p>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 Join leading organisations shaping the national conversation on care as
                 infrastructure.
               </p>
               <span className="mt-5 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-primary group-hover:gap-2.5">
-                View partnership options <ArrowRight className="size-3.5" />
+                View partnership tiers <ArrowRight className="size-3.5" />
               </span>
             </Link>
           </div>
@@ -400,7 +395,7 @@ function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <SectionHeading
-              index="01"
+              index="02"
               eyebrow="About the Conference"
               title="Building the Future of Care in Nigeria"
             />
@@ -440,80 +435,63 @@ function HomePage() {
         </div>
       </section>
 
-      {/* THE CASE */}
-      <section className="section-pad bg-card">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      {/* BIG IDEA */}
+      <section className="bg-ink text-ink-foreground">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <SectionHeading
-            index="02"
-            eyebrow="The Case"
-            title="What the numbers say, and what they cannot yet say"
-            lede="Recovery does not end at the hospital gate. Home healthcare, the managed transition from hospital to home, and the continuity that reduces avoidable readmissions are carried today by families, largely alone and largely uncounted."
+            index="03"
+            eyebrow="The Big Idea"
+            tone="dark"
+            title="You Cannot Finance Care You Cannot Count."
+            lede="Care happens everywhere. At home. In communities. In hospitals. In workplaces. Within families. Yet much of this work remains invisible in national systems, data and financing structures."
           />
-
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {STATS.map((stat) => (
-              <div key={stat.n} className="border-t-3 border-accent bg-background p-6">
-                <p className="font-display text-4xl font-bold text-primary">{stat.n}</p>
-                <p className="mt-3 text-sm text-muted-foreground">{stat.t}</p>
-                <p className="mt-3 text-xs text-muted-foreground/70">{stat.src}</p>
-              </div>
+          <p className="mt-10 max-w-[48ch] font-display text-2xl font-bold leading-snug text-accent">
+            What would change if Nigeria recognised care as essential infrastructure?
+          </p>
+          <ul className="mt-10 grid gap-px overflow-hidden rounded-lg bg-white/15 sm:grid-cols-2 lg:grid-cols-3">
+            {RECOGNITIONS.map((item, i) => (
+              <li key={item} className="flex gap-4 bg-ink p-6">
+                <span className="font-display text-sm font-bold text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-ink-foreground/85">{item}</span>
+              </li>
             ))}
-          </div>
-
-          <div className="mt-16 max-w-[900px] border-l-3 border-primary pl-8">
-            <h3 className="font-display text-xl font-semibold text-primary">
-              The concept: care as infrastructure
-            </h3>
-            <p className="mt-4 leading-relaxed text-muted-foreground">
-              Care as infrastructure is a health system position. It holds that home healthcare is a load bearing layer of the health system, and that it must be built the way any national infrastructure is built: with clinical, coordination, digital, workforce, and financing systems that determine whether recognised, funded care is actually safe, continuous, and accountable at national scale.
-            </p>
-            <p className="mt-4 font-display text-lg font-medium text-primary">
-              A register of who provides care is not a record of what care is delivered.
-            </p>
-          </div>
-
-          <div className="mt-12 max-w-[900px]">
-            <h3 className="font-display text-lg font-semibold text-primary">
-              Three documented gaps anchor the case
-            </h3>
-            <div className="mt-6 divide-y divide-border border-y border-border">
-              {GAPS.map((gap, i) => (
-                <div key={i} className="flex gap-4 py-4">
-                  <span className="font-display text-sm font-bold text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-muted-foreground">{gap}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* FIVE POLICY LAYERS */}
+      {/* SEVEN POLICY LAYERS */}
       <section className="section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <SectionHeading
-            index="03"
-            eyebrow="The Framework"
-            title="Five policy layers, one National Position"
-            lede="The convening works through five layers of home healthcare policy. Together they produce a Nigerian National Position on Care as Infrastructure, refined in session and formally transmitted to the National Assembly."
+            index="04"
+            eyebrow="The Seven Policy Layers"
+            title="A National Framework for Care"
+            lede="The conference explores seven interconnected areas that must work together to build a sustainable care ecosystem."
           />
-          <div className="mt-12 max-w-[900px]">
+          <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {POLICY_LAYERS.map((layer) => (
-              <div key={layer.no} className="grid grid-cols-[64px_1fr] gap-6 border-b border-border py-6">
-                <p className="font-display text-3xl font-bold text-accent">{layer.no}</p>
-                <div>
-                  <h3 className="font-display text-lg font-semibold text-primary">{layer.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{layer.body}</p>
-                </div>
-              </div>
+              <article key={layer.no} className="bg-card p-7 transition-colors hover:bg-linen">
+                <p className="font-display text-4xl font-extrabold text-primary/25">{layer.no}</p>
+                <h3 className="mt-4 font-display text-lg font-bold">{layer.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{layer.body}</p>
+              </article>
             ))}
-          </div>
-          <div className="mt-8 max-w-[900px] rounded-lg bg-card border-l-3 border-accent p-6">
-            <p className="text-sm text-muted-foreground">
-              {SPINE_NOTE}
-            </p>
+            <div className="flex flex-col justify-between bg-accent p-7 text-accent-foreground">
+              <p className="eyebrow">The Load-Bearing Layer</p>
+              <div>
+                <p className="mt-6 font-display text-xl font-bold leading-tight">
+                  Every layer depends on the one beneath it.
+                </p>
+                <Link
+                  to="/policy-sessions"
+                  className="mt-4 inline-flex items-center gap-2 font-display text-sm font-bold"
+                >
+                  Explore the policy sessions <ArrowRight className="size-4" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -654,7 +632,7 @@ function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <SectionHeading
-              index="08"
+              index="13"
               eyebrow="Why Care, Why Now?"
               title="The Future of Healthcare Is Also the Future of Care."
             />
@@ -679,7 +657,7 @@ function HomePage() {
       {/* FINAL CTA */}
       <section className="border-t border-border bg-linen">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-          <p className="eyebrow text-primary">Call to Action</p>
+          <p className="eyebrow text-primary">14 — Call to Action</p>
           <h2 className="mt-4 max-w-[20ch] font-display text-4xl font-extrabold leading-[1] lg:text-6xl">
             Be Part of the National Conversation
           </h2>
@@ -689,7 +667,7 @@ function HomePage() {
             researchers, investors and community leaders at the Care Conference 2026.
           </p>
           <p className="mt-8 font-display text-sm font-bold uppercase tracking-[0.16em] text-primary">
-            {EVENT.theme}: {EVENT.subtitle}
+            Care as Infrastructure. Building a National Position on Home Care for Nigeria.
           </p>
           <p className="mt-2 font-display text-sm text-muted-foreground">{EVENT.date} | Lagos</p>
           <div className="mt-8 flex flex-wrap gap-3">
