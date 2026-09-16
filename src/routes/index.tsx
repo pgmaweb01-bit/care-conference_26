@@ -141,11 +141,7 @@ function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/75 to-ink" />
         <div className="relative mx-auto max-w-7xl px-5 py-32 sm:px-8 lg:py-48">
           <div className="mx-auto max-w-4xl text-center">
-            <p className="animate-rise font-display text-sm font-bold uppercase tracking-[0.3em] text-primary">
-              19 November 2026 · Lagos, Nigeria
-            </p>
-
-            <h1 className="animate-rise mt-8 font-display text-[clamp(3.5rem,10vw,8rem)] font-extrabold leading-[0.85] tracking-[-0.03em]">
+            <h1 className="animate-rise font-display text-[clamp(3.5rem,10vw,8rem)] font-extrabold leading-[0.85] tracking-[-0.03em]">
               <span className="block text-ink-foreground">Care</span>
               <span className="block text-ink-foreground">Conference</span>
               <span className="block bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
@@ -153,12 +149,11 @@ function HomePage() {
               </span>
             </h1>
 
-            <div className="animate-rise mx-auto mt-10 flex items-center justify-center gap-4">
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary/50" />
-              <p className="font-display text-[clamp(1rem,2.5vw,1.5rem)] font-bold tracking-wide text-accent">
-                Care as Infrastructure
+            <div className="animate-rise mt-10">
+              <p className="font-display text-[clamp(1.25rem,3vw,2rem)] font-extrabold uppercase tracking-[0.2em] text-primary">
+                {EVENT.theme}
               </p>
-              <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary/50" />
+              <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-primary to-accent" />
             </div>
 
             <p className="animate-rise mt-8 mx-auto max-w-[50ch] text-lg leading-relaxed text-ink-foreground/60">
