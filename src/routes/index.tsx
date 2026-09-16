@@ -136,9 +136,9 @@ function HomePage() {
       {/* HERO */}
       <section className="relative border-b border-border bg-ink text-ink-foreground">
         <KenBurnsHero />
-        <div className="relative mx-auto max-w-7xl px-5 py-32 sm:px-8 lg:py-48">
+        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <div className="mx-auto max-w-4xl text-center">
-            <h1 className="animate-rise font-display text-[clamp(3.5rem,10vw,8rem)] font-extrabold leading-[0.85] tracking-[-0.03em]">
+            <h1 className="animate-rise font-display text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[0.85] tracking-[-0.03em]">
               <span className="block text-ink-foreground">Care</span>
               <span className="block text-ink-foreground">Conference</span>
               <span className="block bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
@@ -146,28 +146,28 @@ function HomePage() {
               </span>
             </h1>
 
-            <div className="animate-rise mt-10">
-              <p className="font-display text-[clamp(1.25rem,3vw,2rem)] font-extrabold uppercase tracking-[0.2em] text-primary">
+            <div className="animate-rise mt-6">
+              <p className="font-display text-[clamp(0.875rem,2vw,1.25rem)] font-extrabold uppercase tracking-[0.2em] text-primary">
                 {EVENT.theme}
               </p>
-              <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-primary to-accent" />
+              <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-gradient-to-r from-primary to-accent" />
             </div>
 
-            <p className="animate-rise mt-8 mx-auto max-w-[50ch] text-lg leading-relaxed text-ink-foreground/60">
+            <p className="animate-rise mt-6 mx-auto max-w-[50ch] text-base leading-relaxed text-ink-foreground/60">
               {EVENT.subtitle}
             </p>
 
-            <div className="animate-rise mt-10 flex flex-wrap justify-center gap-4">
+            <div className="animate-rise mt-8 flex flex-wrap justify-center gap-4">
               <Link
                 to="/register"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25"
+                className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25"
               >
                 Register Now
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/programme"
-                className="inline-flex items-center gap-2 rounded-full border border-ink-foreground/20 px-8 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-ink-foreground/80 transition-all hover:border-ink-foreground/40 hover:bg-ink-foreground/5"
+                className="inline-flex items-center gap-2 rounded-full border border-ink-foreground/20 px-6 py-3 font-display text-sm font-bold uppercase tracking-[0.1em] text-ink-foreground/80 transition-all hover:border-ink-foreground/40 hover:bg-ink-foreground/5"
               >
                 View Programme
               </Link>
