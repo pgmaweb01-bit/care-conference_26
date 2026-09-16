@@ -23,7 +23,7 @@ export function SiteFooter() {
           <img
             src="/Logo Footer.webp"
             alt="The Purple Global Mission"
-            className="h-10 w-auto"
+            className="h-16 w-auto"
           />
           <p className="mt-3 font-display text-2xl font-extrabold">The Care Conference 2026</p>
           <p className="mt-2 font-display text-sm font-semibold text-ink-foreground/70">

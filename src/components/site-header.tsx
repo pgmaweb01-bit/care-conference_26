@@ -21,7 +21,7 @@ export function SiteHeader() {
           <img
             src="/Logo Header.webp"
             alt="The Purple Global Mission"
-            className="h-8 w-auto"
+            className="h-12 w-auto"
           />
         </Link>
 
