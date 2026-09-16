@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState, useEffect } from "react";
 import { ArrowRight, Calendar, Users, Store, Handshake } from "lucide-react";
 import { SectionHeading } from "@/components/section";
+import { KenBurnsHero } from "@/components/ken-burns-hero";
 import {
   AUDIENCE,
   EVENT,
@@ -134,11 +135,7 @@ function HomePage() {
     <>
       {/* HERO */}
       <section className="relative border-b border-border bg-ink text-ink-foreground">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
-          style={{ backgroundImage: "url('/Hero Image.jpg')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/75 to-ink" />
+        <KenBurnsHero />
         <div className="relative mx-auto max-w-7xl px-5 py-32 sm:px-8 lg:py-48">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="animate-rise font-display text-[clamp(3.5rem,10vw,8rem)] font-extrabold leading-[0.85] tracking-[-0.03em]">
