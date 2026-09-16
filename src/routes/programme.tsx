@@ -56,39 +56,58 @@ function ProgrammePage() {
 
       <section className="section-pad">
         <div className="mx-auto max-w-5xl px-5 sm:px-8">
-          <div className="mb-12 overflow-hidden rounded-lg">
-            <img
-              src="/Gallery/BLQ09338.webp"
-              alt="Care Conference session"
-              className="w-full object-cover"
-            />
-          </div>
           <ol className="relative border-l border-border">
-            {PROGRAMME.map((item) => (
-              <li key={item.time + item.title} className="relative pb-12 pl-8 last:pb-0">
-                <span
-                  className={`absolute -left-[7px] top-1.5 size-3.5 rounded-full ring-4 ring-background ${
-                    item.highlight ? "bg-accent" : "bg-primary"
-                  }`}
-                />
-                <p className="font-display text-sm font-bold uppercase tracking-[0.12em] text-muted-foreground">
-                  {item.time}
-                </p>
-                {item.kicker ? <p className="eyebrow mt-3 text-primary">{item.kicker}</p> : null}
-                <h2 className="mt-1 font-display text-2xl font-bold">{item.title}</h2>
-                <p className="mt-3 max-w-[62ch] leading-relaxed text-muted-foreground">
-                  {item.body}
-                </p>
-                {item.focus ? (
-                  <p className="mt-3 font-display text-sm font-semibold text-primary">
-                    Focus: {item.focus}
-                  </p>
-                ) : null}
-                {item.question ? (
-                  <p className="mt-3 border-l-2 border-accent pl-4 italic">
-                    Key question: {item.question}
-                  </p>
-                ) : null}
+            {PROGRAMME.map((item, i) => (
+              <li key={item.time + item.title} className="relative pb-12 last:pb-0">
+                <div className="grid gap-6 lg:grid-cols-[1fr_280px]">
+                  <div className="pl-8">
+                    <span
+                      className={`absolute -left-[7px] top-1.5 size-3.5 rounded-full ring-4 ring-background ${
+                        item.highlight ? "bg-accent" : "bg-primary"
+                      }`}
+                    />
+                    <p className="font-display text-sm font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                      {item.time}
+                    </p>
+                    {item.kicker ? <p className="eyebrow mt-3 text-primary">{item.kicker}</p> : null}
+                    <h2 className="mt-1 font-display text-2xl font-bold">{item.title}</h2>
+                    <p className="mt-3 max-w-[62ch] leading-relaxed text-muted-foreground">
+                      {item.body}
+                    </p>
+                    {item.focus ? (
+                      <p className="mt-3 font-display text-sm font-semibold text-primary">
+                        Focus: {item.focus}
+                      </p>
+                    ) : null}
+                    {item.question ? (
+                      <p className="mt-3 border-l-2 border-accent pl-4 italic">
+                        Key question: {item.question}
+                      </p>
+                    ) : null}
+                  </div>
+                  {i === 2 ? (
+                    <div className="hidden lg:block">
+                      <div className="sticky top-24 overflow-hidden rounded-lg">
+                        <img
+                          src="/Gallery/BLQ09331.webp"
+                          alt="Care Conference session"
+                          className="w-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  ) : null}
+                  {i === 7 ? (
+                    <div className="hidden lg:block">
+                      <div className="sticky top-24 overflow-hidden rounded-lg">
+                        <img
+                          src="/Gallery/BLQ09354.webp"
+                          alt="Care Conference workshop"
+                          className="w-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
               </li>
             ))}
           </ol>

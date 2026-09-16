@@ -37,13 +37,6 @@ function SpeakersPage() {
 
       <section className="section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="mb-12 overflow-hidden rounded-lg">
-            <img
-              src="/Gallery/BLQ09374.webp"
-              alt="Care Conference speakers"
-              className="w-full object-cover"
-            />
-          </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {SPEAKERS.map((speaker) => (
               <article
@@ -62,21 +55,30 @@ function SpeakersPage() {
             ))}
           </div>
 
-          <div className="mt-16 rounded-lg bg-linen p-8 text-center sm:p-12">
-            <p className="eyebrow text-primary">Interested in Speaking?</p>
-            <h2 className="mt-4 font-display text-2xl font-extrabold lg:text-3xl">
-              Join the National Conversation
-            </h2>
-            <p className="mt-4 max-w-[50ch] mx-auto text-muted-foreground">
-              We are inviting policymakers, healthcare leaders, caregivers, researchers and
-              innovators to contribute to the Care Conference 2026.
-            </p>
-            <Link
-              to="/contact"
-              className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              Get in Touch <ArrowRight className="size-4" />
-            </Link>
+          <div className="mt-16 grid gap-8 lg:grid-cols-2">
+            <div className="flex flex-col justify-center rounded-lg bg-linen p-8 sm:p-12">
+              <p className="eyebrow text-primary">Interested in Speaking?</p>
+              <h2 className="mt-4 font-display text-2xl font-extrabold lg:text-3xl">
+                Join the National Conversation
+              </h2>
+              <p className="mt-4 max-w-[50ch] text-muted-foreground">
+                We are inviting policymakers, healthcare leaders, caregivers, researchers and
+                innovators to contribute to the Care Conference 2026.
+              </p>
+              <Link
+                to="/contact"
+                className="mt-8 inline-flex w-fit items-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                Get in Touch <ArrowRight className="size-4" />
+              </Link>
+            </div>
+            <div className="overflow-hidden rounded-lg">
+              <img
+                src="/Gallery/BLQ09374.webp"
+                alt="Care Conference speakers"
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>

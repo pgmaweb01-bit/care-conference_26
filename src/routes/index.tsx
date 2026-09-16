@@ -349,6 +349,13 @@ function HomePage() {
               eyebrow="About the Conference"
               title="Building the Future of Care in Nigeria"
             />
+            <div className="mt-8 overflow-hidden rounded-lg">
+              <img
+                src="/Gallery/BLQ09384.webp"
+                alt="Care Conference discussion"
+                className="w-full object-cover"
+              />
+            </div>
           </div>
           <div className="lg:col-span-7">
             <p className="text-lg leading-relaxed">
@@ -375,13 +382,6 @@ function HomePage() {
                 policymakers and the National Assembly.
               </p>
             </div>
-            <div className="mt-8 overflow-hidden rounded-lg">
-              <img
-                src="/Gallery/BLQ09384.webp"
-                alt="Care Conference discussion"
-                className="w-full object-cover"
-              />
-            </div>
             <Link
               to="/about"
               className="mt-6 inline-flex items-center gap-2 font-display text-sm font-semibold text-primary hover:gap-3"
@@ -405,16 +405,25 @@ function HomePage() {
           <p className="mt-10 max-w-[48ch] font-display text-2xl font-bold leading-snug text-accent">
             What would change if Nigeria recognised care as essential infrastructure?
           </p>
-          <ul className="mt-10 grid gap-px overflow-hidden rounded-lg bg-white/15 sm:grid-cols-2 lg:grid-cols-3">
-            {RECOGNITIONS.map((item, i) => (
-              <li key={item} className="flex gap-4 bg-ink p-6">
-                <span className="font-display text-sm font-bold text-accent">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="text-ink-foreground/85">{item}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_320px]">
+            <ul className="grid gap-px overflow-hidden rounded-lg bg-white/15 sm:grid-cols-2">
+              {RECOGNITIONS.map((item, i) => (
+                <li key={item} className="flex gap-4 bg-ink p-6">
+                  <span className="font-display text-sm font-bold text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-ink-foreground/85">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="hidden overflow-hidden rounded-lg lg:block">
+              <img
+                src="/Gallery/BLQ09293.webp"
+                alt="Care in action"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -456,12 +465,21 @@ function HomePage() {
       {/* WHO SHOULD ATTEND */}
       <section className="border-y border-border bg-linen section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <SectionHeading
-            index="05"
-            eyebrow="Who Should Attend"
-            title="One Room. Many Perspectives. One National Conversation."
-            lede="The Care Conference brings together the people shaping healthcare, policy, technology and communities."
-          />
+          <div className="grid gap-10 lg:grid-cols-[1fr_280px]">
+            <SectionHeading
+              index="05"
+              eyebrow="Who Should Attend"
+              title="One Room. Many Perspectives. One National Conversation."
+              lede="The Care Conference brings together the people shaping healthcare, policy, technology and communities."
+            />
+            <div className="hidden overflow-hidden rounded-lg lg:block">
+              <img
+                src="/Gallery/BLQ09388.webp"
+                alt="Care Conference attendees"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {AUDIENCE.map((a) => (
               <article key={a.title} className="rounded-lg border border-border bg-card p-6">
@@ -595,24 +613,28 @@ function HomePage() {
             />
           </div>
           <div className="lg:col-span-7">
-            <p className="text-lg leading-relaxed">
-              Nigeria's healthcare challenges cannot be solved by hospitals alone.
-            </p>
-            <p className="mt-5 leading-relaxed text-muted-foreground">
-              People need support before they reach hospitals, after they leave hospitals and
-              throughout the long periods when they live with chronic conditions, disability, ageing
-              and recovery. Care connects all of these moments.
-            </p>
-            <p className="mt-8 border-l-2 border-primary pl-6 font-display text-xl font-bold leading-snug">
-              The question is no longer whether care is essential. The question is whether we are
-              ready to build the infrastructure to support it.
-            </p>
-            <div className="mt-10 overflow-hidden rounded-lg">
-              <img
-                src="/Gallery/BLQ09361.webp"
-                alt="Care in action"
-                className="w-full object-cover"
-              />
+            <div className="grid gap-8 lg:grid-cols-[1fr_240px]">
+              <div>
+                <p className="text-lg leading-relaxed">
+                  Nigeria's healthcare challenges cannot be solved by hospitals alone.
+                </p>
+                <p className="mt-5 leading-relaxed text-muted-foreground">
+                  People need support before they reach hospitals, after they leave hospitals and
+                  throughout the long periods when they live with chronic conditions, disability, ageing
+                  and recovery. Care connects all of these moments.
+                </p>
+                <p className="mt-8 border-l-2 border-primary pl-6 font-display text-xl font-bold leading-snug">
+                  The question is no longer whether care is essential. The question is whether we are
+                  ready to build the infrastructure to support it.
+                </p>
+              </div>
+              <div className="hidden overflow-hidden rounded-lg lg:block">
+                <img
+                  src="/Gallery/BLQ09361.webp"
+                  alt="Care in action"
+                  className="h-full w-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
