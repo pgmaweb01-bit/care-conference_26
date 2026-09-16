@@ -33,6 +33,7 @@ function SpeakersPage() {
         eyebrow="10 — Speakers"
         title="Voices Shaping the Conversation"
         lede="Meet the experts, leaders and practitioners contributing to the Care Conference 2026."
+        backgroundImage="/SpeakerHero.webp"
       />
 
       <section className="section-pad">
@@ -74,7 +75,7 @@ function SpeakersPage() {
             </div>
             <div className="overflow-hidden rounded-lg">
               <img
-                src="/Gallery/BLQ09374.webp"
+                src="/Speaker page.webp"
                 alt="Care Conference speakers"
                 className="h-full w-full object-cover"
               />

@@ -410,12 +410,12 @@ function HomePage() {
       {/* BIG IDEA */}
       <section className="relative bg-ink text-ink-foreground">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
           style={{ backgroundImage: "url('/The big Idea.webp')" }}
         />
         <div className="absolute inset-0 bg-ink/85" />
-        <div className="sticky top-0">
-          <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+        <div className="relative">
+          <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
             <SectionHeading
               index="03"
               eyebrow="The Big Idea"
@@ -697,7 +697,7 @@ function HomePage() {
             />
           </div>
           <div className="lg:col-span-7">
-            <div className="grid gap-8 lg:grid-cols-[1fr_240px]">
+            <div className="grid gap-8 lg:grid-cols-[1fr_280px]">
               <div>
                 <p className="text-lg leading-relaxed">
                   Nigeria's healthcare challenges cannot be solved by hospitals alone.
@@ -712,9 +712,9 @@ function HomePage() {
                   ready to build the infrastructure to support it.
                 </p>
               </div>
-              <div className="overflow-hidden rounded-lg sm:block">
+              <div className="overflow-hidden rounded-lg">
                 <img
-                  src="/Gallery/BLQ09361.webp"
+                  src="/why care, why Now.webp"
                   alt="Care in action"
                   className="h-full w-full object-cover"
                 />

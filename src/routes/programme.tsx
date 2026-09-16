@@ -52,6 +52,7 @@ function ProgrammePage() {
         eyebrow="06 — Programme"
         title="A Day of Dialogue, Policy and Action"
         lede={`${EVENT.date} · ${EVENT.time} · ${EVENT.venue}`}
+        backgroundImage="/Program hero.webp"
       />
 
       <section className="section-pad">

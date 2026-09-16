@@ -51,21 +51,34 @@ export function PageHero({
   title,
   lede,
   children,
+  backgroundImage,
 }: {
   eyebrow: string;
   title: string;
   lede?: string;
   children?: ReactNode;
+  backgroundImage?: string;
 }) {
   return (
-    <section className="border-b border-border bg-linen">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
-        <p className="eyebrow text-primary">{eyebrow}</p>
-        <h1 className="mt-4 max-w-[20ch] font-display text-4xl font-extrabold leading-[0.98] lg:text-6xl">
+    <section className="relative border-b border-border overflow-hidden">
+      {backgroundImage ? (
+        <>
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url('${backgroundImage}')` }}
+          />
+          <div className="absolute inset-0 bg-ink/75" />
+        </>
+      ) : (
+        <div className="absolute inset-0 bg-linen" />
+      )}
+      <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
+        <p className={`eyebrow ${backgroundImage ? "text-accent" : "text-primary"}`}>{eyebrow}</p>
+        <h1 className={`mt-4 max-w-[20ch] font-display text-4xl font-extrabold leading-[0.98] lg:text-6xl ${backgroundImage ? "text-ink-foreground" : "text-foreground"}`}>
           {title}
         </h1>
         {lede ? (
-          <p className="mt-6 max-w-[58ch] text-lg leading-relaxed text-muted-foreground">{lede}</p>
+          <p className={`mt-6 max-w-[58ch] text-lg leading-relaxed ${backgroundImage ? "text-ink-foreground/70" : "text-muted-foreground"}`}>{lede}</p>
         ) : null}
         {children}
       </div>
