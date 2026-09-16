@@ -87,74 +87,6 @@ function Countdown() {
   );
 }
 
-/* ─── THEME BANNER ─── */
-function ThemeBanner() {
-  return (
-    <section className="relative overflow-hidden border-y border-purple-950 bg-[#1a0a2e] py-24 sm:py-32">
-      {/* Animated floating orbs */}
-      <div className="absolute inset-0">
-        <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] animate-pulse rounded-full bg-purple-600/20 blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] animate-pulse rounded-full bg-violet-500/15 blur-[100px] [animation-delay:1s]" />
-        <div className="absolute bottom-0 left-1/2 h-[300px] w-[300px] animate-pulse rounded-full bg-fuchsia-500/10 blur-[80px] [animation-delay:2s]" />
-      </div>
-
-      {/* Grid pattern overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-7xl px-5 text-center sm:px-8">
-        <p className="animate-fade-in-up font-display text-sm font-bold uppercase tracking-[0.3em] text-purple-400/70">
-          {EVENT.edition} — Theme
-        </p>
-
-        <h2 className="mt-8 font-display text-[clamp(2.5rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-tight">
-          <span className="animate-fade-in-up bg-gradient-to-r from-purple-200 via-white to-violet-200 bg-clip-text text-transparent [animation-delay:0.1s]">
-            Care as
-          </span>
-          <br />
-          <span className="animate-fade-in-up bg-gradient-to-r from-violet-300 via-purple-100 to-fuchsia-200 bg-clip-text text-transparent [animation-delay:0.2s]">
-            Infrastructure
-          </span>
-        </h2>
-
-        <p className="animate-fade-in-up mx-auto mt-8 max-w-[50ch] text-lg leading-relaxed text-purple-300/70 [animation-delay:0.3s]">
-          {EVENT.subtitle}
-        </p>
-
-        {/* Decorative line */}
-        <div className="animate-fade-in-up mx-auto mt-10 flex items-center justify-center gap-3 [animation-delay:0.4s]">
-          <div className="h-px w-16 bg-gradient-to-r from-transparent to-purple-500/50" />
-          <div className="h-2 w-2 animate-pulse rounded-full bg-purple-400" />
-          <div className="h-px w-16 bg-gradient-to-l from-transparent to-purple-500/50" />
-        </div>
-
-        <div className="animate-fade-in-up mt-8 flex flex-wrap justify-center gap-4 [animation-delay:0.5s]">
-          <Link
-            to="/about"
-            className="group inline-flex items-center gap-2 rounded-full bg-white/10 px-8 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]"
-          >
-            Learn More
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-          <Link
-            to="/register"
-            className="group inline-flex items-center gap-2 rounded-full border border-purple-400/30 bg-purple-500/10 px-8 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-purple-200 backdrop-blur-sm transition-all hover:border-purple-400/50 hover:bg-purple-500/20 hover:shadow-[0_0_30px_rgba(168,85,247,0.2)]"
-          >
-            Register Now
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ─── ANIMATED IMAGE GALLERY ─── */
 const GALLERY_IMAGES = [
   { src: "/Gallery/BLQ09213.webp", alt: "Care Conference gallery" },
@@ -177,60 +109,89 @@ const GALLERY_IMAGES = [
 ];
 
 function AnimatedGallery() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentPair, setCurrentPair] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const totalPairs = Math.ceil(GALLERY_IMAGES.length / 2);
 
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 2) % GALLERY_IMAGES.length);
-    }, 4000);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentPair((prev) => (prev + 1) % totalPairs);
+        setIsTransitioning(false);
+      }, 800);
+    }, 5000);
     return () => clearInterval(timer);
-  }, [isPaused]);
+  }, [isPaused, totalPairs]);
 
-  const getVisibleImages = () => {
-    const imgs = [];
-    imgs.push(GALLERY_IMAGES[currentIndex]);
-    const nextIndex = (currentIndex + 1) % GALLERY_IMAGES.length;
-    imgs.push(GALLERY_IMAGES[nextIndex]);
-    return imgs;
-  };
+  const pairStart = currentPair * 2;
+  const visibleImages = GALLERY_IMAGES.slice(pairStart, pairStart + 2);
 
   return (
-    <section className="relative overflow-hidden border-b border-border bg-ink">
-      <div className="mx-auto max-w-7xl px-5 py-6 sm:px-8 lg:py-10">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {getVisibleImages().map((img, i) => (
-            <div key={`${currentIndex}-${i}`} className="relative aspect-[4/3] overflow-hidden rounded-lg">
-              <img
-                src={img.src}
-                alt={img.alt}
-                className="h-full w-full object-cover transition-opacity duration-700 ease-in-out"
-                loading={i === 0 ? "eager" : "lazy"}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-            </div>
-          ))}
-        </div>
+    <section className="mt-12 sm:mt-16 lg:mt-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2">
+        {visibleImages.map((img, i) => (
+          <div
+            key={`${currentPair}-${i}`}
+            className="relative aspect-[16/10] overflow-hidden"
+          >
+            <img
+              src={img.src}
+              alt={img.alt}
+              className={`h-full w-full object-cover transition-all duration-[1200ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+                isTransitioning
+                  ? "scale-105 opacity-0"
+                  : "scale-100 opacity-100"
+              }`}
+              loading={i === 0 ? "eager" : "lazy"}
+              style={{ transitionDelay: `${i * 150}ms` }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent" />
+          </div>
+        ))}
       </div>
-      {/* Pause indicator */}
-      <button
-        type="button"
-        onClick={() => setIsPaused(!isPaused)}
-        className="absolute bottom-4 right-4 z-10 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-colors hover:bg-white/30"
-        aria-label={isPaused ? "Resume slideshow" : "Pause slideshow"}
-      >
-        {isPaused ? (
-          <svg className="size-4 text-white" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8 5v14l11-7z" />
-          </svg>
-        ) : (
-          <svg className="size-4 text-white" viewBox="0 0 24 24" fill="currentColor">
-            <rect x="6" y="4" width="4" height="16" />
-            <rect x="14" y="4" width="4" height="16" />
-          </svg>
-        )}
-      </button>
+      {/* Controls */}
+      <div className="relative flex items-center justify-center gap-3 py-5">
+        {Array.from({ length: totalPairs }).map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => {
+              setIsTransitioning(true);
+              setTimeout(() => {
+                setCurrentPair(i);
+                setIsTransitioning(false);
+              }, 400);
+            }}
+            className={`h-1.5 rounded-full transition-all duration-500 ${
+              i === currentPair
+                ? "w-8 bg-primary"
+                : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+            }`}
+            aria-label={`Go to image pair ${i + 1}`}
+          />
+        ))}
+        <button
+          type="button"
+          onClick={() => setIsPaused(!isPaused)}
+          className="ml-4 rounded-full p-1.5 text-muted-foreground/50 transition-colors hover:text-muted-foreground"
+          aria-label={isPaused ? "Resume slideshow" : "Pause slideshow"}
+        >
+          {isPaused ? (
+            <svg className="size-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          ) : (
+            <svg className="size-4" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="4" width="4" height="16" />
+              <rect x="14" y="4" width="4" height="16" />
+            </svg>
+          )}
+        </button>
+      </div>
     </section>
   );
 }
@@ -332,9 +293,6 @@ function HomePage() {
 
       {/* COUNTDOWN */}
       <Countdown />
-
-      {/* THEME */}
-      <ThemeBanner />
 
       {/* AT A GLANCE */}
       <section className="border-b border-border bg-background">
