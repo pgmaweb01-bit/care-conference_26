@@ -455,7 +455,7 @@ function HomePage() {
       {/* WHO SHOULD ATTEND */}
       <section className="border-y border-border bg-linen section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid gap-10 lg:grid-cols-[1fr_400px]">
+          <div className="grid gap-6 lg:grid-cols-[1fr_400px]">
             <SectionHeading
               eyebrow="Who Should Attend"
               title="One Room. Many Perspectives. One National Conversation."
