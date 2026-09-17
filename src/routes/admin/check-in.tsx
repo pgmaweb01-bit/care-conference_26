@@ -15,50 +15,12 @@ export const Route = createFileRoute("/admin/check-in")({
   component: AdminCheckIn,
 });
 
-const MOCK_REGISTRATIONS = [
-  {
-    registrationId: "CC26-AX7K-P2MN",
-    name: "Chioma Adekunle",
-    type: "Professional",
-    checkedIn: false,
-  },
-  {
-    registrationId: "CC26-BT3F-Q9WZ",
-    name: "Dr. Yusuf Bello",
-    type: "Institutional",
-    checkedIn: true,
-  },
-  { registrationId: "CC26-CR5H-L4DV", name: "Fatima Hassan", type: "Student", checkedIn: false },
-  { registrationId: "CC26-DN8J-S6YT", name: "Emeka Obi", type: "Standard", checkedIn: false },
-  { registrationId: "CC26-EW2M-K7BX", name: "Amina Yusuf", type: "Professional", checkedIn: true },
-  { registrationId: "CC26-FP4R-T3HQ", name: "Oluwaseun Coker", type: "Standard", checkedIn: false },
-  {
-    registrationId: "CC26-GK9V-N5FL",
-    name: "Dr. Ngozi Eze",
-    type: "Institutional",
-    checkedIn: false,
-  },
-  { registrationId: "CC26-HJ6X-W8CP", name: "Ibrahim Musa", type: "Standard", checkedIn: false },
-  {
-    registrationId: "CC26-IM1Y-D4RS",
-    name: "Blessing Okonkwo",
-    type: "Professional",
-    checkedIn: true,
-  },
-  {
-    registrationId: "CC26-JL5Z-A9GT",
-    name: "Tunde Bakare",
-    type: "Institutional",
-    checkedIn: false,
-  },
-  { registrationId: "CC26-KN3B-F2VH", name: "Aisha Abdullahi", type: "Standard", checkedIn: false },
-  {
-    registrationId: "CC26-LP7C-E6WK",
-    name: "Prof. Chidi Nwosu",
-    type: "Student",
-    checkedIn: false,
-  },
-];
+const MOCK_REGISTRATIONS: Array<{
+  registrationId: string;
+  name: string;
+  type: string;
+  checkedIn: boolean;
+}> = [];
 
 type CheckResult = {
   success: boolean;

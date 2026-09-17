@@ -7,80 +7,15 @@ export const Route = createFileRoute("/admin/partners")({
   component: AdminPartners,
 });
 
-const MOCK_PARTNERS = [
-  {
-    id: 1,
-    name: "Lagos State Government",
-    tier: "Platinum",
-    contact: "Dr. Ade Kalejaiye",
-    email: "ade@lagos.gov",
-    status: "Confirmed",
-    date: "1 Sep 2026",
-  },
-  {
-    id: 2,
-    name: "MTN Nigeria",
-    tier: "Gold",
-    contact: "Nkechi Ogbonna",
-    email: "nkechi@mtn.com",
-    status: "Confirmed",
-    date: "3 Sep 2026",
-  },
-  {
-    id: 3,
-    name: "WellHome Technologies",
-    tier: "Silver",
-    contact: "Tunde Akinyemi",
-    email: "tunde@wellhome.ng",
-    status: "Pending",
-    date: "5 Sep 2026",
-  },
-  {
-    id: 4,
-    name: "Sterling Bank",
-    tier: "Gold",
-    contact: "Funke Adeyemi",
-    email: "funke@sterling.ng",
-    status: "Confirmed",
-    date: "4 Sep 2026",
-  },
-  {
-    id: 5,
-    name: "Nigeria Health Watch",
-    tier: "Silver",
-    contact: "Vivian Ihezu",
-    email: "vivian@nhw.org",
-    status: "Confirmed",
-    date: "6 Sep 2026",
-  },
-  {
-    id: 6,
-    name: "Philips Africa",
-    tier: "Platinum",
-    contact: "Olu Fadugba",
-    email: "olu@philips.com",
-    status: "Pending",
-    date: "7 Sep 2026",
-  },
-  {
-    id: 7,
-    name: "Access Bank",
-    tier: "Bronze",
-    contact: "Emeka Nwankwo",
-    email: "emeka@accessbank.com",
-    status: "Confirmed",
-    date: "8 Sep 2026",
-  },
-  {
-    id: 8,
-    name: "NurseGrid Africa",
-    tier: "Silver",
-    contact: "Amina Bello",
-    email: "amina@nursegrid.ng",
-    status: "Confirmed",
-    date: "9 Sep 2026",
-  },
-];
+const MOCK_PARTNERS: Array<{
+  id: number;
+  name: string;
+  tier: string;
+  contact: string;
+  email: string;
+  status: string;
+  date: string;
+}> = [];
 
 const TIER_COLORS: Record<string, string> = {
   Platinum: "bg-purple-100 text-purple-700",

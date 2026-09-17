@@ -6,74 +6,16 @@ export const Route = createFileRoute("/admin/messages")({
   component: AdminMessages,
 });
 
-const MOCK_MESSAGES = [
-  {
-    id: 1,
-    from: "Chioma Adekunle",
-    email: "chioma@healthng.org",
-    subject: "Partnership Enquiry",
-    message:
-      "I would like to explore a Platinum partnership for Health Nigeria. Could we schedule a call to discuss the details?",
-    date: "15 Sep 2026",
-    read: false,
-    category: "partnership",
-  },
-  {
-    id: 2,
-    from: "Dr. Yusuf Bello",
-    email: "yusuf.bello@lagos.gov",
-    subject: "Speaking Opportunity",
-    message:
-      "I am interested in presenting at the policy session on care financing. I have been working on Nigeria's home care financing framework.",
-    date: "14 Sep 2026",
-    read: false,
-    category: "speaking",
-  },
-  {
-    id: 3,
-    from: "Amina Hassan",
-    email: "amina@unilag.edu.ng",
-    subject: "Student Registration Query",
-    message:
-      "I am a final year medical student. How do I verify my student status for the discounted registration?",
-    date: "14 Sep 2026",
-    read: true,
-    category: "registration",
-  },
-  {
-    id: 4,
-    from: "Emeka Obi",
-    email: "emeka@careconnect.ng",
-    subject: "CareSouk Exhibition Booth",
-    message:
-      "We would like to book a booth at CareSouk. Can you share the booth pricing and availability?",
-    date: "13 Sep 2026",
-    read: true,
-    category: "exhibition",
-  },
-  {
-    id: 5,
-    from: "Funke Adeyemi",
-    email: "funke@sterling.ng",
-    subject: "Conference Programme Update",
-    message:
-      "Could you share the latest version of the conference programme? Our team needs to plan attendance accordingly.",
-    date: "12 Sep 2026",
-    read: true,
-    category: "general",
-  },
-  {
-    id: 6,
-    from: "Tunde Akinyemi",
-    email: "tunde@wellhome.ng",
-    subject: "Media Accreditation",
-    message:
-      "We would like to request media accreditation for the conference. We are a health tech publication.",
-    date: "11 Sep 2026",
-    read: true,
-    category: "media",
-  },
-];
+const MOCK_MESSAGES: Array<{
+  id: number;
+  from: string;
+  email: string;
+  subject: string;
+  message: string;
+  date: string;
+  read: boolean;
+  category: string;
+}> = [];
 
 const CATEGORY_COLORS: Record<string, string> = {
   partnership: "bg-purple-100 text-purple-700",

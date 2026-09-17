@@ -8,62 +8,25 @@ export const Route = createFileRoute("/admin/")({
 const STATS = [
   {
     label: "Total Registrations",
-    value: "347",
-    change: "+12 today",
+    value: "0",
+    change: "No registrations yet",
     icon: Users,
     color: "text-primary",
   },
   {
     label: "Speakers Confirmed",
-    value: "8",
-    change: "All confirmed",
+    value: "0",
+    change: "No speakers added",
     icon: Mic2,
     color: "text-green-600",
   },
-  { label: "Partners", value: "14", change: "3 pending", icon: Handshake, color: "text-accent" },
-  { label: "Messages", value: "23", change: "5 unread", icon: Mail, color: "text-blue-600" },
-];
-
-const RECENT_REGISTRATIONS = [
-  {
-    name: "Chioma Adekunle",
-    email: "chioma@healthng.org",
-    type: "Professional",
-    date: "15 Sep 2026",
-  },
-  {
-    name: "Dr. Yusuf Bello",
-    email: "yusuf.bello@lagos.gov",
-    type: "Institutional",
-    date: "14 Sep 2026",
-  },
-  { name: "Fatima Hassan", email: "fatima.h@unilag.edu.ng", type: "Student", date: "14 Sep 2026" },
-  { name: "Emeka Obi", email: "emeka@careconnect.ng", type: "Standard", date: "13 Sep 2026" },
-  {
-    name: "Amina Yusuf",
-    email: "amina@bridgehealth.org",
-    type: "Professional",
-    date: "13 Sep 2026",
-  },
-  { name: "Oluwaseun Coker", email: "seun@techcare.io", type: "Standard", date: "12 Sep 2026" },
-];
-
-const REGISTRATIONS_BY_TYPE = [
-  { type: "Standard", count: 198, percentage: 57 },
-  { type: "Professional", count: 89, percentage: 26 },
-  { type: "Institutional", count: 35, percentage: 10 },
-  { type: "Student", count: 25, percentage: 7 },
-];
-
-const UPCOMING_TASKS = [
-  { task: "Confirm final speaker lineup", due: "20 Sep 2026", priority: "high" },
-  { task: "Send partner confirmations", due: "18 Sep 2026", priority: "high" },
-  { task: "Finalize CareSouk floor plan", due: "25 Sep 2026", priority: "medium" },
-  { task: "Review conference programme", due: "22 Sep 2026", priority: "medium" },
-  { task: "Send delegate welcome emails", due: "1 Nov 2026", priority: "low" },
+  { label: "Partners", value: "0", change: "No partners yet", icon: Handshake, color: "text-accent" },
+  { label: "Messages", value: "0", change: "No messages", icon: Mail, color: "text-blue-600" },
 ];
 
 function AdminDashboard() {
+  const daysLeft = Math.max(0, Math.ceil((new Date("2026-11-19").getTime() - Date.now()) / 86400000));
+
   return (
     <div className="space-y-8">
       <div>
@@ -99,23 +62,8 @@ function AdminDashboard() {
               View all
             </Link>
           </div>
-          <div className="mt-6 space-y-4">
-            {REGISTRATIONS_BY_TYPE.map((item) => (
-              <div key={item.type}>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="font-medium">{item.type}</span>
-                  <span className="text-muted-foreground">
-                    {item.count} ({item.percentage}%)
-                  </span>
-                </div>
-                <div className="mt-2 h-2 overflow-hidden rounded-full bg-secondary">
-                  <div
-                    className="h-full rounded-full bg-primary transition-all"
-                    style={{ width: `${item.percentage}%` }}
-                  />
-                </div>
-              </div>
-            ))}
+          <div className="mt-6 flex items-center justify-center py-8 text-sm text-muted-foreground">
+            No registrations yet
           </div>
         </div>
 
@@ -130,31 +78,8 @@ function AdminDashboard() {
               View all <ArrowRight className="size-3" />
             </Link>
           </div>
-          <div className="mt-6 overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-border text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  <th className="pb-3 pr-4">Name</th>
-                  <th className="pb-3 pr-4">Email</th>
-                  <th className="pb-3 pr-4">Type</th>
-                  <th className="pb-3">Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {RECENT_REGISTRATIONS.map((reg, i) => (
-                  <tr key={i} className="border-b border-border/50 last:border-0">
-                    <td className="py-3 pr-4 font-display font-semibold">{reg.name}</td>
-                    <td className="py-3 pr-4 text-muted-foreground">{reg.email}</td>
-                    <td className="py-3 pr-4">
-                      <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
-                        {reg.type}
-                      </span>
-                    </td>
-                    <td className="py-3 text-muted-foreground">{reg.date}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-6 flex items-center justify-center py-8 text-sm text-muted-foreground">
+            No registrations yet
           </div>
         </div>
       </div>
@@ -163,30 +88,8 @@ function AdminDashboard() {
         {/* Upcoming Tasks */}
         <div className="lg:col-span-6 rounded-lg border border-border bg-card p-6">
           <h2 className="font-display text-lg font-bold">Upcoming Tasks</h2>
-          <div className="mt-5 space-y-3">
-            {UPCOMING_TASKS.map((task, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 rounded-md border border-border/50 p-3"
-              >
-                <span
-                  className={`mt-0.5 size-2 rounded-full shrink-0 ${
-                    task.priority === "high"
-                      ? "bg-red-500"
-                      : task.priority === "medium"
-                        ? "bg-yellow-500"
-                        : "bg-green-500"
-                  }`}
-                />
-                <div className="flex-1">
-                  <p className="text-sm font-medium">{task.task}</p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">Due: {task.due}</p>
-                </div>
-                <span className="text-xs font-semibold text-muted-foreground capitalize">
-                  {task.priority}
-                </span>
-              </div>
-            ))}
+          <div className="mt-5 flex items-center justify-center py-8 text-sm text-muted-foreground">
+            No tasks yet
           </div>
         </div>
 
@@ -195,7 +98,7 @@ function AdminDashboard() {
           <h2 className="font-display text-lg font-bold">Conference Countdown</h2>
           <div className="mt-5 flex items-center gap-6">
             <div className="rounded-lg bg-primary/10 p-6 text-center">
-              <p className="font-display text-5xl font-extrabold text-primary">65</p>
+              <p className="font-display text-5xl font-extrabold text-primary">{daysLeft}</p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-primary/70">
                 Days Left
               </p>
@@ -207,12 +110,12 @@ function AdminDashboard() {
               </div>
               <div className="flex items-center gap-2">
                 <TrendingUp className="size-4 text-muted-foreground" />
-                <span>347 / 500 delegates</span>
+                <span>0 / 500 delegates</span>
               </div>
               <div className="mt-2 h-2 w-40 overflow-hidden rounded-full bg-secondary">
-                <div className="h-full rounded-full bg-primary" style={{ width: "69.4%" }} />
+                <div className="h-full rounded-full bg-primary" style={{ width: "0%" }} />
               </div>
-              <p className="text-xs text-muted-foreground">69.4% capacity reached</p>
+              <p className="text-xs text-muted-foreground">0% capacity reached</p>
             </div>
           </div>
 

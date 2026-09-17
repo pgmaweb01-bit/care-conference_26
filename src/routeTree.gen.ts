@@ -21,6 +21,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as SpeakersRouteImport } from './routes/speakers'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminCheckInRouteImport } from './routes/admin/check-in'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminMessagesRouteImport } from './routes/admin/messages'
 import { Route as AdminPartnersRouteImport } from './routes/admin/partners'
 import { Route as AdminRegistrationsRouteImport } from './routes/admin/registrations'
@@ -87,6 +88,11 @@ const AdminCheckInRoute = AdminCheckInRouteImport.update({
   path: '/check-in',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminMessagesRoute = AdminMessagesRouteImport.update({
   id: '/messages',
   path: '/messages',
@@ -125,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/speakers': typeof SpeakersRoute
   '/admin/check-in': typeof AdminCheckInRoute
+  '/admin/login': typeof AdminLoginRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/registrations': typeof AdminRegistrationsRoute
@@ -143,6 +150,7 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/speakers': typeof SpeakersRoute
   '/admin/check-in': typeof AdminCheckInRoute
+  '/admin/login': typeof AdminLoginRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/registrations': typeof AdminRegistrationsRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/speakers': typeof SpeakersRoute
   '/admin/check-in': typeof AdminCheckInRoute
+  '/admin/login': typeof AdminLoginRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/registrations': typeof AdminRegistrationsRoute
@@ -184,6 +193,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/speakers'
     | '/admin/check-in'
+    | '/admin/login'
     | '/admin/messages'
     | '/admin/partners'
     | '/admin/registrations'
@@ -202,6 +212,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/speakers'
     | '/admin/check-in'
+    | '/admin/login'
     | '/admin/messages'
     | '/admin/partners'
     | '/admin/registrations'
@@ -221,6 +232,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/speakers'
     | '/admin/check-in'
+    | '/admin/login'
     | '/admin/messages'
     | '/admin/partners'
     | '/admin/registrations'
@@ -328,6 +340,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCheckInRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/messages': {
       id: '/admin/messages'
       path: '/messages'
@@ -368,6 +387,7 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminCheckInRoute: typeof AdminCheckInRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   AdminMessagesRoute: typeof AdminMessagesRoute
   AdminPartnersRoute: typeof AdminPartnersRoute
   AdminRegistrationsRoute: typeof AdminRegistrationsRoute
@@ -378,6 +398,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminCheckInRoute: AdminCheckInRoute,
+  AdminLoginRoute: AdminLoginRoute,
   AdminMessagesRoute: AdminMessagesRoute,
   AdminPartnersRoute: AdminPartnersRoute,
   AdminRegistrationsRoute: AdminRegistrationsRoute,

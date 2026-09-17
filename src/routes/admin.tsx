@@ -1,5 +1,5 @@
-import { Outlet, Link, createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { Outlet, Link, createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import {
   LayoutDashboard,
   Users,
@@ -12,9 +12,15 @@ import {
   LogOut,
   QrCode,
 } from "lucide-react";
+import { isAuthenticated, logout } from "@/lib/auth";
 
 export const Route = createFileRoute("/admin")({
   component: AdminLayout,
+  beforeLoad: () => {
+    if (typeof window !== "undefined" && !isAuthenticated()) {
+      throw new Error("Not authenticated");
+    }
+  },
 });
 
 const SIDEBAR_NAV = [
@@ -28,8 +34,32 @@ const SIDEBAR_NAV = [
 ] as const;
 
 function AdminLayout() {
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [adminEmail, setAdminEmail] = useState("");
+
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      navigate({ to: "/admin/login" });
+      return;
+    }
+    try {
+      const data = JSON.parse(localStorage.getItem("care-conf-admin-auth") || "{}");
+      setAdminEmail(data.email || "");
+    } catch {
+      setAdminEmail("");
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    logout();
+    navigate({ to: "/admin/login" });
+  };
+
+  if (!isAuthenticated()) {
+    return null;
+  }
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -90,16 +120,17 @@ function AdminLayout() {
         </nav>
 
         <div className="border-t border-white/10 p-2">
-          <Link
-            to="/"
-            className={`flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-ink-foreground/60 transition-colors hover:bg-white/10 hover:text-ink-foreground ${
+          <button
+            type="button"
+            onClick={handleLogout}
+            className={`flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-ink-foreground/60 transition-colors hover:bg-white/10 hover:text-ink-foreground ${
               collapsed ? "justify-center" : ""
             }`}
-            title={collapsed ? "Back to site" : undefined}
+            title={collapsed ? "Logout" : undefined}
           >
             <LogOut className="size-4 shrink-0" />
-            {!collapsed && <span>Back to Site</span>}
-          </Link>
+            {!collapsed && <span>Logout</span>}
+          </button>
         </div>
       </aside>
 
@@ -127,7 +158,7 @@ function AdminLayout() {
           <div className="flex items-center gap-3">
             <div className="text-right">
               <p className="font-display text-sm font-semibold">Admin User</p>
-              <p className="text-xs text-muted-foreground">admin@careconference.ng</p>
+              <p className="text-xs text-muted-foreground">{adminEmail}</p>
             </div>
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
               AU
