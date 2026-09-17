@@ -16,11 +16,6 @@ import { isAuthenticated, logout } from "@/lib/auth";
 
 export const Route = createFileRoute("/admin")({
   component: AdminLayout,
-  beforeLoad: () => {
-    if (typeof window !== "undefined" && !isAuthenticated()) {
-      throw new Error("Not authenticated");
-    }
-  },
 });
 
 const SIDEBAR_NAV = [
@@ -56,10 +51,6 @@ function AdminLayout() {
     logout();
     navigate({ to: "/admin/login" });
   };
-
-  if (!isAuthenticated()) {
-    return null;
-  }
 
   return (
     <div className="flex min-h-screen bg-background">
