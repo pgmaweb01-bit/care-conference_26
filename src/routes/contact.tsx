@@ -59,10 +59,6 @@ function ContactPage() {
                   <p className="mt-2 font-display font-semibold">+234 902 640 4091</p>
                 </div>
                 <div>
-                  <p className="eyebrow text-primary">Venue</p>
-                  <p className="mt-2 font-display font-semibold">{EVENT.venue}</p>
-                </div>
-                <div>
                   <p className="eyebrow text-primary">Date & Time</p>
                   <p className="mt-2 font-display font-semibold">
                     {EVENT.date}
