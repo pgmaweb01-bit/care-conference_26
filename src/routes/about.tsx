@@ -37,7 +37,7 @@ function AboutPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/70 to-ink/50" />
         <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
-          <p className="eyebrow text-accent">02 — About the Conference</p>
+          <p className="eyebrow text-accent">About the Conference</p>
           <h1 className="mt-4 max-w-[20ch] font-display text-4xl font-extrabold leading-[0.98] text-ink-foreground lg:text-6xl">
             Building the Future of Care in Nigeria
           </h1>
@@ -102,32 +102,31 @@ function AboutPage() {
       <section className="bg-ink text-ink-foreground">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <SectionHeading
-            index="03"
-            eyebrow="The Big Idea"
             tone="dark"
             title="You Cannot Finance Care You Cannot Count."
             lede="Care happens everywhere — at home, in communities, in hospitals, in workplaces and within families. Yet much of this work remains invisible in national systems, data and financing structures."
           />
-          <ul className="mt-12 grid gap-px overflow-hidden rounded-lg bg-white/15 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {RECOGNITIONS.map((item, i) => (
-              <li key={item} className="flex gap-4 bg-ink p-6">
-                <span className="font-display text-sm font-bold text-accent">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="text-ink-foreground/85">{item}</span>
-              </li>
+              <div key={item} className="rounded-lg bg-white/10 p-6">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/20">
+                  <span className="font-display text-xs font-bold text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-ink-foreground/85">{item}</p>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
       <section className="section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <SectionHeading
-            index="04"
-            eyebrow="The Seven Policy Layers"
+            eyebrow="The Five Policy Layers"
             title="A National Framework for Care"
-            lede="Seven interconnected areas that must work together to build a sustainable care ecosystem."
+            lede="Five interconnected areas that must work together to build a sustainable care ecosystem."
           />
           <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {POLICY_LAYERS.map((layer) => (

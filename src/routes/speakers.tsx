@@ -30,7 +30,7 @@ function SpeakersPage() {
   return (
     <>
       <PageHero
-        eyebrow="10 — Speakers"
+        eyebrow="Speakers"
         title="Voices Shaping the Conversation"
         lede="Meet the experts, leaders and practitioners contributing to the Care Conference 2026."
         backgroundImage="/SpeakerHero.webp"

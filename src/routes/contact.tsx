@@ -52,11 +52,11 @@ function ContactPage() {
               <div className="mt-8 space-y-6">
                 <div>
                   <p className="eyebrow text-primary">Email</p>
-                  <p className="mt-2 font-display font-semibold">info@careconference.ng</p>
+                  <p className="mt-2 font-display font-semibold">thepurpleglobalmission@gmail.com</p>
                 </div>
                 <div>
                   <p className="eyebrow text-primary">Phone</p>
-                  <p className="mt-2 font-display font-semibold">+234 800 000 0000</p>
+                  <p className="mt-2 font-display font-semibold">+234 902 640 4091</p>
                 </div>
                 <div>
                   <p className="eyebrow text-primary">Venue</p>

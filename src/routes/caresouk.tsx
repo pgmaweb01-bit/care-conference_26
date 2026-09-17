@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/section";
-import { CARESOUK_EXHIBITORS } from "@/data/conference";
 
 export const Route = createFileRoute("/caresouk")({
   head: () => ({
@@ -30,31 +29,10 @@ function CareSoukPage() {
   return (
     <>
       <PageHero
-        eyebrow="12 — CareSouk"
+        eyebrow="CareSouk"
         title="Discover the Care Ecosystem"
         lede="CareSouk provides a space for organisations, innovators and solution providers to showcase products, services and ideas contributing to the future of care."
       />
-
-      <section className="section-pad">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {CARESOUK_EXHIBITORS.map((exhibitor) => (
-              <article
-                key={exhibitor.name}
-                className="rounded-lg border border-border bg-card p-7 transition-colors hover:border-primary/30 hover:shadow-sm"
-              >
-                <span className="inline-block rounded-full bg-accent/10 px-3 py-1 font-display text-xs font-bold uppercase tracking-wider text-accent">
-                  {exhibitor.category}
-                </span>
-                <h3 className="mt-4 font-display text-xl font-bold">{exhibitor.name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {exhibitor.description}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="bg-ink text-ink-foreground">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">

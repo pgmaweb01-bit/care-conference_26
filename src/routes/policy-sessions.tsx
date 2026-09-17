@@ -30,7 +30,7 @@ function PolicySessionsPage() {
   return (
     <>
       <PageHero
-        eyebrow="07 — Parallel Policy Sessions"
+        eyebrow="Parallel Policy Sessions"
         title="Five Rooms. Five Critical Questions About the Future of Care."
         lede="Beginning 2:15 PM. Each room examines one of the systems that must hold for care to work as national infrastructure."
       />
@@ -58,7 +58,6 @@ function PolicySessionsPage() {
       <section className="bg-ink text-ink-foreground">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <SectionHeading
-            index="08"
             eyebrow="Closed Institutional Roundtable · 3:45 PM"
             tone="dark"
             title="From Conversation to Commitment"
@@ -87,7 +86,7 @@ function PolicySessionsPage() {
               />
             </div>
             <div className="flex flex-col justify-center">
-              <p className="eyebrow text-primary">09 — Closing Plenary · 5:15 PM</p>
+              <p className="eyebrow text-primary">Closing Plenary · 5:15 PM</p>
               <h2 className="mt-4 max-w-[18ch] font-display text-3xl font-extrabold lg:text-5xl">
                 The National Position
               </h2>

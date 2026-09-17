@@ -62,15 +62,7 @@ function Countdown() {
   return (
     <section className="border-y border-border bg-primary text-primary-foreground">
       <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8">
-        <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
-          <div>
-            <p className="font-display text-sm font-bold uppercase tracking-[0.16em] text-primary-foreground/70">
-              Counting Down
-            </p>
-            <p className="mt-1 font-display text-xl font-extrabold">
-              {EVENT.date} · Lagos
-            </p>
-          </div>
+        <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
           <div className="flex gap-4 sm:gap-6">
             {units.map((u) => (
               <div key={u.label} className="text-center">
@@ -183,7 +175,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <p className="eyebrow text-primary">01 — Organised by {EVENT.organiser}</p>
+              <p className="eyebrow text-primary">Organised by {EVENT.organiser}</p>
               <h2 className="mt-4 max-w-[20ch] font-display text-3xl font-extrabold leading-[1.05] lg:text-5xl">
                 How do we build a care system that works for everyone?
               </h2>
@@ -243,7 +235,6 @@ function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <SectionHeading
-              index="02"
               eyebrow="Why Care, Why Now?"
               title="The Future of Healthcare Is Also the Future of Care."
             />
@@ -283,7 +274,6 @@ function HomePage() {
       <section className="section-pad bg-card">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <SectionHeading
-            index="03"
             eyebrow="The Case"
             title="What the numbers say, and what they cannot yet say"
             lede="Recovery does not end at the hospital gate. Home healthcare, the managed transition from hospital to home, and the continuity that reduces avoidable readmissions are carried today by families, largely alone and largely uncounted."
@@ -324,17 +314,19 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="mt-12 max-w-[720px]">
+          <div className="mt-12">
             <h3 className="font-display text-base font-bold text-ink">
               Three documented gaps anchor the case
             </h3>
-            <div className="mt-5 divide-y divide-border">
+            <div className="mt-6 grid gap-5 sm:grid-cols-3">
               {CASE_GAPS.map((gap, i) => (
-                <div key={gap} className="flex gap-4 py-4">
-                  <span className="font-display text-sm font-bold text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-muted-foreground">{gap}</span>
+                <div key={gap} className="rounded-lg border border-border bg-background p-6">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10">
+                    <span className="font-display text-sm font-bold text-accent">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{gap}</p>
                 </div>
               ))}
             </div>
@@ -347,7 +339,6 @@ function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <SectionHeading
-              index="04"
               eyebrow="About the Conference"
               title="Building the Future of Care in Nigeria"
             />
@@ -404,8 +395,6 @@ function HomePage() {
         <div className="relative">
           <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
             <SectionHeading
-              index="05"
-              eyebrow="The Big Idea"
               tone="dark"
               title="You Cannot Finance Care You Cannot Count."
               lede="Care happens everywhere. At home. In communities. In hospitals. In workplaces. Within families. Yet much of this work remains invisible in national systems, data and financing structures."
@@ -413,17 +402,17 @@ function HomePage() {
             <p className="mt-10 max-w-[48ch] font-display text-2xl font-bold leading-snug text-accent">
               What would change if Nigeria recognised care as essential infrastructure?
             </p>
-            <div className="mt-10">
-              <ul className="grid gap-px overflow-hidden rounded-lg bg-white/15 sm:grid-cols-2">
-                {RECOGNITIONS.map((item, i) => (
-                  <li key={item} className="flex gap-4 bg-ink/60 backdrop-blur-sm p-6">
-                    <span className="font-display text-sm font-bold text-accent">
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {RECOGNITIONS.map((item, i) => (
+                <div key={item} className="rounded-lg bg-white/10 p-6 backdrop-blur-sm">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/20">
+                    <span className="font-display text-xs font-bold text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="text-ink-foreground/85">{item}</span>
-                  </li>
-                ))}
-              </ul>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-foreground/85">{item}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -433,10 +422,9 @@ function HomePage() {
       <section className="section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <SectionHeading
-            index="06"
-            eyebrow="The Seven Policy Layers"
+            eyebrow="The Five Policy Layers"
             title="A National Framework for Care"
-            lede="The conference explores seven interconnected areas that must work together to build a sustainable care ecosystem."
+            lede="The conference explores five interconnected areas that must work together to build a sustainable care ecosystem."
           />
           <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {POLICY_LAYERS.map((layer) => (
@@ -469,7 +457,6 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid gap-10 lg:grid-cols-[1fr_400px]">
             <SectionHeading
-              index="07"
               eyebrow="Who Should Attend"
               title="One Room. Many Perspectives. One National Conversation."
               lede="The Care Conference brings together the people shaping healthcare, policy, technology and communities."
@@ -498,7 +485,6 @@ function HomePage() {
       <section className="section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <SectionHeading
-            index="08"
             eyebrow="What You Will Take Away"
             title="More Than a Conference"
             lede="Your participation gives you an opportunity to:"
@@ -593,7 +579,6 @@ function HomePage() {
         <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:py-24">
           <div className="lg:col-span-7">
             <SectionHeading
-              index="09"
               eyebrow="CareSouk"
               tone="dark"
               title="Discover the Care Ecosystem"
@@ -618,7 +603,6 @@ function HomePage() {
       <section className="section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <SectionHeading
-            index="10"
             eyebrow="The Venue"
             title="IALA Hub at The Chair Centre, Lagos"
             lede="A serious civic setting for shaping Nigeria's national position on home care in one focused day."
@@ -676,7 +660,7 @@ function HomePage() {
       {/* FINAL CTA */}
       <section className="border-t border-border bg-linen">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-          <p className="eyebrow text-primary">11 — Call to Action</p>
+          <p className="eyebrow text-primary">Call to Action</p>
           <h2 className="mt-4 max-w-[20ch] font-display text-4xl font-extrabold leading-[1] lg:text-6xl">
             Be Part of the National Conversation
           </h2>

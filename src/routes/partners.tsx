@@ -30,7 +30,7 @@ function PartnersPage() {
   return (
     <>
       <PageHero
-        eyebrow="15 — Partnership"
+        eyebrow="Partnership"
         title="Partner With Us"
         lede="Are you an organisation, institution, brand, funder or innovator working to transform healthcare and care delivery? Join us in building a stronger care ecosystem for Nigeria."
       />

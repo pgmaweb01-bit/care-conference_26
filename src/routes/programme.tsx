@@ -49,7 +49,7 @@ function ProgrammePage() {
   return (
     <>
       <PageHero
-        eyebrow="06 — Programme"
+        eyebrow="Programme"
         title="A Day of Dialogue, Policy and Action"
         lede={`${EVENT.date} · ${EVENT.time} · ${EVENT.venue}`}
         backgroundImage="/Program hero.webp"
@@ -95,7 +95,7 @@ function ProgrammePage() {
 
       <section className="border-t border-border bg-linen section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <p className="eyebrow text-primary">07 — Parallel Policy Sessions · 2:15 PM</p>
+          <p className="eyebrow text-primary">Parallel Policy Sessions · 2:15 PM</p>
           <h2 className="mt-4 font-display text-3xl font-extrabold lg:text-4xl">
             Four Focused Rooms. Four Critical Questions.
           </h2>

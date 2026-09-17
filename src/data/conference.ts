@@ -315,6 +315,7 @@ export const PARTNER_TIERS = [
       "Premier branding on all conference materials",
       "Keynote speaking opportunity",
       "Exclusive exhibition space at CareSouk",
+      "Host your side event",
       "Full-page feature in conference programme",
       "VIP access to institutional roundtable",
       "Dedicated media coverage",
