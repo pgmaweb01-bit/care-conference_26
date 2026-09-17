@@ -1,5 +1,5 @@
 import { Outlet, Link, createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   LayoutDashboard,
   Users,
@@ -33,25 +33,23 @@ function AdminLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [adminEmail, setAdminEmail] = useState("");
-  const authChecked = useRef(false);
   const [authOk, setAuthOk] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated()) {
-      navigate({ to: "/admin/login" });
+      window.location.href = "/admin/login";
       return;
     }
     setAuthOk(true);
-    authChecked.current = true;
     try {
       const data = JSON.parse(localStorage.getItem("care-conf-admin-auth") || "{}");
       setAdminEmail(data.email || "");
     } catch {
       setAdminEmail("");
     }
-  }, [navigate]);
+  }, []);
 
-  if (!authOk && !authChecked.current) {
+  if (!authOk) {
     return null;
   }
 
