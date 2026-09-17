@@ -33,25 +33,19 @@ function AdminLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [adminEmail, setAdminEmail] = useState("");
-  const [authOk, setAuthOk] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated()) {
-      window.location.href = "/admin/login";
+      navigate({ to: "/admin/login" });
       return;
     }
-    setAuthOk(true);
     try {
       const data = JSON.parse(localStorage.getItem("care-conf-admin-auth") || "{}");
       setAdminEmail(data.email || "");
     } catch {
       setAdminEmail("");
     }
-  }, []);
-
-  if (!authOk) {
-    return null;
-  }
+  }, [navigate]);
 
   const handleLogout = () => {
     logout();
