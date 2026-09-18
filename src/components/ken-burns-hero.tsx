@@ -5,6 +5,10 @@ const HERO_SLIDES = [
   "/Gallery/IMG_4299.JPG.jpeg",
   "/Gallery/IMG_4297.JPG.jpeg",
   "/Gallery/IMG_4252.JPG.jpeg",
+  "/Gallery/BLQ09408.webp",
+  "/Gallery/BLQ09388.webp",
+  "/Gallery/BLQ09361.webp",
+  "/Gallery/BLQ09293.webp",
 ];
 
 const DURATION = 8000;
