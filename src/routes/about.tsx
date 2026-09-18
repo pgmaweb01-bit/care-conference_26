@@ -83,14 +83,14 @@ function AboutPage() {
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="overflow-hidden rounded-lg">
               <img
-                src="/Gallery/BLQ09331.webp"
+                src="/Gallery/IMG_4290.JPG.jpeg"
                 alt="Care Conference session"
                 className="w-full object-cover"
               />
             </div>
             <div className="overflow-hidden rounded-lg">
               <img
-                src="/Gallery/BLQ09354.webp"
+                src="/Gallery/IMG_4262.JPG.jpeg"
                 alt="Care Conference workshop"
                 className="w-full object-cover"
               />

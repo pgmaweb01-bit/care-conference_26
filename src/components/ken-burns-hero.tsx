@@ -1,10 +1,10 @@
 import { useEffect, useRef, useCallback } from "react";
 
 const HERO_SLIDES = [
-  "/Gallery/BLQ09408.webp",
-  "/Gallery/BLQ09388.webp",
-  "/Gallery/BLQ09361.webp",
-  "/Gallery/BLQ09293.webp",
+  "/Gallery/IMG_4302.JPG.jpeg",
+  "/Gallery/IMG_4299.JPG.jpeg",
+  "/Gallery/IMG_4297.JPG.jpeg",
+  "/Gallery/IMG_4252.JPG.jpeg",
 ];
 
 const DURATION = 8000;

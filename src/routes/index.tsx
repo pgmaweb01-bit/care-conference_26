@@ -83,6 +83,35 @@ function Countdown() {
 
 /* ─── CONTINUOUS SCROLL GALLERY ─── */
 const GALLERY_IMAGES = [
+  "/Gallery/IMG_4302.JPG.jpeg",
+  "/Gallery/IMG_4299.JPG.jpeg",
+  "/Gallery/IMG_4297.JPG.jpeg",
+  "/Gallery/IMG_4296.JPG.jpeg",
+  "/Gallery/IMG_4290.JPG.jpeg",
+  "/Gallery/IMG_4287.JPG.jpeg",
+  "/Gallery/IMG_4262.JPG.jpeg",
+  "/Gallery/IMG_4252.JPG.jpeg",
+  "/Gallery/IMG_4250.JPG.jpeg",
+  "/Gallery/IMG_4249.JPG.jpeg",
+  "/Gallery/IMG_3965.JPG.jpeg",
+  "/Gallery/IMG_3958.JPG.jpeg",
+  "/Gallery/IMG_3957.JPG.jpeg",
+  "/Gallery/IMG_2040.JPG.jpeg",
+  "/Gallery/IMG_2038.JPG.jpeg",
+  "/Gallery/IMG_2036.JPG.jpeg",
+  "/Gallery/IMG_2035.JPG.jpeg",
+  "/Gallery/IMG_2033.JPG.jpeg",
+  "/Gallery/IMG_2028.JPG.jpeg",
+  "/Gallery/IMG_2026.JPG.jpeg",
+  "/Gallery/IMG_2022.JPG.jpeg",
+  "/Gallery/IMG_2020.JPG.jpeg",
+  "/Gallery/IMG_2017.PNG",
+  "/Gallery/IMG_2013.PNG",
+  "/Gallery/IMG_1995.JPG.jpeg",
+  "/Gallery/IMG_1994.JPG.jpeg",
+  "/Gallery/IMG_1983.JPG.jpeg",
+  "/Gallery/IMG_1982.JPG.jpeg",
+  "/Gallery/IMG_1925.JPG.jpeg",
   "/Gallery/BLQ09408.webp",
   "/Gallery/BLQ09389.webp",
   "/Gallery/BLQ09388.webp",
@@ -344,7 +373,7 @@ function HomePage() {
             />
             <div className="mt-8 overflow-hidden rounded-lg">
               <img
-                src="/Gallery/BLQ09384.webp"
+                src="/Gallery/IMG_4249.JPG.jpeg"
                 alt="Care Conference discussion"
                 className="w-full object-cover"
               />
