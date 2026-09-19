@@ -487,7 +487,7 @@ function HomePage() {
           <div className="grid gap-6 lg:grid-cols-[1fr_400px]">
             <SectionHeading
               eyebrow="Who Should Attend"
-              title="One Room. Many Perspectives. One National Conversation."
+              title="One Room. Many Perspectives. One Conversation."
               lede="The Care Conference brings together the people shaping healthcare, policy, technology and communities."
             />
             <div className="overflow-hidden rounded-lg">
