@@ -11,7 +11,7 @@ export function SectionHeading({
 }: {
   index?: string;
   eyebrow: string;
-  title: string;
+  title: React.ReactNode;
   lede?: string;
   tone?: "light" | "dark";
   className?: string;
