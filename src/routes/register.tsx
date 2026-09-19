@@ -436,8 +436,8 @@ function AttendeeForm() {
                 <option value="" disabled>
                   Select a room
                 </option>
-                <option>Room B: The Journey Between (Coordination)</option>
-                <option>Room D: Paying for the Load Bearing Layer (Financing)</option>
+                <option>Room A: The Journey Between (Coordination)</option>
+                <option>Room B: Paying for the Load Bearing Layer (Financing)</option>
               </select>
             </Field>
             <Field label="Sector" required>
