@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { addRegistration } from "@/lib/db";
 import { generateRegistrationId } from "@/components/registration-qr";
+import { sendRegistrationEmail } from "@/lib/email";
 
 export const Route = createFileRoute("/api/registrations")({
   server: {
@@ -26,6 +27,15 @@ export const Route = createFileRoute("/api/registrations")({
             sideRoom2: body.sideRoom2,
             category: body.category,
           });
+
+          // Send confirmation email (non-blocking)
+          sendRegistrationEmail({
+            email: body.email,
+            fullName: body.fullName,
+            registrationId: regId,
+            type: body.type || "attendee",
+          }).catch((err) => console.error("Email send failed:", err));
+
           return new Response(JSON.stringify(reg), {
             status: 201,
             headers: { "Content-Type": "application/json" },
