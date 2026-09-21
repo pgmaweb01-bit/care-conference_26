@@ -164,7 +164,7 @@ function HomePage() {
             <div className="animate-rise mb-4">
               <span className="inline-block h-px w-12 bg-accent/60" />
             </div>
-            <h1 className="animate-rise font-display text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[0.85] tracking-[-0.03em]">
+            <h1 className="animate-rise font-display text-[clamp(3rem,8vw,6.5rem)] font-extrabold leading-[0.85] tracking-[-0.03em]">
               <span className="block text-ink-foreground drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Care</span>
               <span className="block text-ink-foreground drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Conference</span>
               <span className="block text-accent drop-shadow-[0_0_20px_rgba(232,121,62,0.35)]">
@@ -179,7 +179,7 @@ function HomePage() {
               <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-gradient-to-r from-accent/40 via-accent to-accent/40" />
             </div>
 
-            <p className="animate-rise mt-6 mx-auto max-w-[50ch] text-base leading-relaxed text-ink-foreground/70">
+            <p className="animate-rise mt-6 mx-auto max-w-[50ch] text-lg leading-relaxed text-ink-foreground/70">
               {EVENT.subtitle}
             </p>
 
