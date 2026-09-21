@@ -43,15 +43,19 @@ export const Route = createFileRoute("/api/registrations/")({
             category: body.category,
           });
 
-          // Send confirmation email (non-blocking)
-          sendRegistrationEmail({
+          // Send confirmation email (await so errors surface)
+          const emailResult = await sendRegistrationEmail({
             email: body.email,
             fullName: body.fullName,
             registrationId: regId,
             type: body.type || "attendee",
-          }).catch((err) => console.error("Email send failed:", err));
+          });
 
-          return new Response(JSON.stringify(reg), {
+          if (!emailResult.success) {
+            console.error("Email send failed for registration", regId, ":", emailResult.error);
+          }
+
+          return new Response(JSON.stringify({ ...reg, emailSent: emailResult.success, emailError: emailResult.error }), {
             status: 201,
             headers: { "Content-Type": "application/json" },
           });

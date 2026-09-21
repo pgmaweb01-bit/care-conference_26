@@ -11,6 +11,13 @@ export async function sendRegistrationEmail(data: {
   type: string;
 }): Promise<{ success: boolean; error?: string }> {
   try {
+    if (!process.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not set");
+      return { success: false, error: "RESEND_API_KEY not configured" };
+    }
+
+    console.log("Sending registration email to:", data.email, "ID:", data.registrationId);
+
     const qrCodeDataURL = data.type === "attendee"
       ? await generateQRCodeDataURL(data.registrationId)
       : "";
