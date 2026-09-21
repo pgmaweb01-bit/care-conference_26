@@ -34,11 +34,15 @@ function AdminLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [adminEmail, setAdminEmail] = useState("");
+  const [authChecked, setAuthChecked] = useState(false);
 
   const isLoginPage = router.location.pathname === "/admin/login";
 
   useEffect(() => {
-    if (isLoginPage) return;
+    if (isLoginPage) {
+      setAuthChecked(true);
+      return;
+    }
     if (!isAuthenticated()) {
       navigate({ to: "/admin/login" });
       return;
@@ -49,6 +53,7 @@ function AdminLayout() {
     } catch {
       setAdminEmail("");
     }
+    setAuthChecked(true);
   }, [navigate, isLoginPage]);
 
   const handleLogout = () => {
@@ -57,9 +62,13 @@ function AdminLayout() {
   };
 
   if (isLoginPage) {
+    return <Outlet />;
+  }
+
+  if (!authChecked) {
     return (
-      <div className="flex min-h-screen bg-background">
-        <Outlet />
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="size-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
       </div>
     );
   }
