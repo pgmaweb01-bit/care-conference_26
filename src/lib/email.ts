@@ -1,8 +1,9 @@
 import { Resend } from "resend";
-import { generateQRCodeDataURL } from "./qr";
 import { registrationEmailHTML } from "./email-template";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const SITE_URL = process.env.SITE_URL || "https://careconference2026.purpleglobal.org";
 
 export async function sendRegistrationEmail(data: {
   email: string;
@@ -18,14 +19,14 @@ export async function sendRegistrationEmail(data: {
 
     console.log("Sending registration email to:", data.email, "ID:", data.registrationId);
 
-    const qrCodeDataURL = data.type === "attendee"
-      ? await generateQRCodeDataURL(data.registrationId)
+    const qrCodeURL = data.type === "attendee"
+      ? `${SITE_URL}/api/qr/${data.registrationId}`
       : "";
 
     const html = registrationEmailHTML({
       fullName: data.fullName,
       registrationId: data.registrationId,
-      qrCodeDataURL,
+      qrCodeURL,
       type: data.type,
     });
 

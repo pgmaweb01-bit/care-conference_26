@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { Search, Download, Filter, CheckCircle } from "lucide-react";
+import { Search, Download, Filter, CheckCircle, Mail } from "lucide-react";
 
 interface Registration {
   id: number;
@@ -24,6 +24,8 @@ function AdminRegistrations() {
   const [search, setSearch] = useState("");
   const [filterType, setFilterType] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
+  const [resending, setResending] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -36,6 +38,13 @@ function AdminRegistrations() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   const filtered = registrations.filter((r) => {
     const matchSearch =
@@ -59,8 +68,35 @@ function AdminRegistrations() {
     a.click();
   }
 
+  async function handleResendEmail(registrationId: string) {
+    setResending(registrationId);
+    try {
+      const res = await fetch("/api/registrations/resend", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ registrationId }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setToast({ message: `Email sent successfully to ${registrationId}`, type: "success" });
+      } else {
+        setToast({ message: data.error || "Failed to send email", type: "error" });
+      }
+    } catch {
+      setToast({ message: "Failed to send email", type: "error" });
+    } finally {
+      setResending(null);
+    }
+  }
+
   return (
     <div className="space-y-6">
+      {toast && (
+        <div className={`fixed right-4 top-4 z-50 rounded-lg px-4 py-3 text-sm font-semibold shadow-lg ${toast.type === "success" ? "bg-green-600 text-white" : "bg-red-600 text-white"}`}>
+          {toast.message}
+        </div>
+      )}
+
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="font-display text-3xl font-extrabold">Registrations</h1>
@@ -122,6 +158,7 @@ function AdminRegistrations() {
               <th className="p-4">Status</th>
               <th className="p-4">Check-In</th>
               <th className="p-4 hidden lg:table-cell">Date</th>
+              <th className="p-4">Email</th>
             </tr>
           </thead>
           <tbody>
@@ -166,6 +203,17 @@ function AdminRegistrations() {
                   )}
                 </td>
                 <td className="p-4 text-muted-foreground hidden lg:table-cell">{new Date(reg.created_at).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</td>
+                <td className="p-4">
+                  <button
+                    onClick={() => handleResendEmail(reg.registration_id)}
+                    disabled={resending === reg.registration_id}
+                    className="inline-flex items-center gap-1.5 rounded-md bg-primary/10 px-2.5 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary/20 disabled:opacity-50"
+                    title="Resend confirmation email"
+                  >
+                    <Mail className={`size-3 ${resending === reg.registration_id ? "animate-pulse" : ""}`} />
+                    {resending === reg.registration_id ? "Sending..." : "Resend"}
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

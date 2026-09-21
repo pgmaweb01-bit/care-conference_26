@@ -1,7 +1,7 @@
 export function registrationEmailHTML(data: {
   fullName: string;
   registrationId: string;
-  qrCodeDataURL: string;
+  qrCodeURL: string;
   type: string;
 }): string {
   const isSpeaker = data.type === "speaker";
@@ -54,7 +54,7 @@ export function registrationEmailHTML(data: {
                     <p style="margin: 0 0 8px; color: #718096; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">
                       Your Check-In QR Code
                     </p>
-                    <img src="${data.qrCodeDataURL}" alt="QR Code" style="width: 200px; height: 200px; margin: 16px 0;" />
+                    <img src="${data.qrCodeURL}" alt="QR Code" style="width: 200px; height: 200px; margin: 16px 0;" />
                     <p style="margin: 0 0 4px; color: #1a0a2e; font-size: 14px; font-weight: 600;">
                       Registration ID
                     </p>
