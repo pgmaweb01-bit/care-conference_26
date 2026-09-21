@@ -73,7 +73,7 @@ function CareSoukPage() {
                 </ul>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link
-                    to="/contact"
+                    to="/partners"
                     className="inline-flex items-center gap-2 rounded-md bg-accent px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-accent-foreground transition-opacity hover:opacity-90"
                   >
                     Book a Booth <ArrowRight className="size-4" />
