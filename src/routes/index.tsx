@@ -160,7 +160,7 @@ function HomePage() {
       <section className="relative border-b border-border bg-ink text-ink-foreground">
         <KenBurnsHero />
         <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-          <div className="mx-auto max-w-4xl text-center">
+          <div className="max-w-3xl text-left">
             <div className="animate-rise mb-4">
               <span className="inline-block h-px w-12 bg-accent/60" />
             </div>
@@ -176,14 +176,14 @@ function HomePage() {
               <p className="font-display text-[clamp(0.875rem,2vw,1.25rem)] font-extrabold uppercase tracking-[0.2em] text-accent">
                 {EVENT.theme}
               </p>
-              <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-gradient-to-r from-accent/40 via-accent to-accent/40" />
+              <div className="mt-3 h-1 w-20 rounded-full bg-gradient-to-r from-accent/40 via-accent to-accent/40" />
             </div>
 
-            <p className="animate-rise mt-6 mx-auto max-w-[50ch] text-base leading-relaxed text-ink-foreground/70">
+            <p className="animate-rise mt-6 max-w-[50ch] text-base font-semibold leading-relaxed text-ink-foreground/80">
               {EVENT.subtitle}
             </p>
 
-            <div className="animate-rise mt-8 flex flex-wrap justify-center gap-4">
+            <div className="animate-rise mt-8 flex flex-wrap gap-4">
               <Link
                 to="/register"
                 className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.03]"
