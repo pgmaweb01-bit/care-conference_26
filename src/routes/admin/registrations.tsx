@@ -1,30 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search, Download, Filter, CheckCircle } from "lucide-react";
+import { getRegistrations, type Registration } from "@/lib/registrations";
 
 export const Route = createFileRoute("/admin/registrations")({
   component: AdminRegistrations,
 });
 
-const MOCK_REGISTRATIONS: Array<{
-  id: number;
-  registrationId: string;
-  name: string;
-  email: string;
-  phone: string;
-  organisation: string;
-  type: string;
-  status: string;
-  checkedIn: boolean;
-  date: string;
-}> = [];
-
 function AdminRegistrations() {
+  const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [search, setSearch] = useState("");
   const [filterType, setFilterType] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
 
-  const filtered = MOCK_REGISTRATIONS.filter((r) => {
+  useEffect(() => {
+    setRegistrations(getRegistrations());
+  }, []);
+
+  const filtered = registrations.filter((r) => {
     const matchSearch =
       r.name.toLowerCase().includes(search.toLowerCase()) ||
       r.email.toLowerCase().includes(search.toLowerCase()) ||
@@ -35,6 +28,17 @@ function AdminRegistrations() {
     return matchSearch && matchType && matchStatus;
   });
 
+  function handleExport() {
+    const headers = ["Reg ID", "Name", "Email", "Phone", "Organisation", "Type", "Status", "Checked In", "Date"];
+    const rows = filtered.map((r) => [r.registrationId, r.name, r.email, r.phone, r.organisation, r.type, r.status, r.checkedIn ? "Yes" : "No", r.date]);
+    const csv = [headers, ...rows].map((row) => row.map((c) => `"${c}"`).join(",")).join("\n");
+    const blob = new Blob([csv], { type: "text/csv" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `registrations-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -42,7 +46,7 @@ function AdminRegistrations() {
           <h1 className="font-display text-3xl font-extrabold">Registrations</h1>
           <p className="mt-1 text-muted-foreground">Manage conference delegate registrations.</p>
         </div>
-        <button className="inline-flex items-center gap-2 rounded-md border border-input px-4 py-2 font-display text-xs font-semibold uppercase tracking-wider transition-colors hover:bg-secondary">
+        <button onClick={handleExport} className="inline-flex items-center gap-2 rounded-md border border-input px-4 py-2 font-display text-xs font-semibold uppercase tracking-wider transition-colors hover:bg-secondary">
           <Download className="size-3.5" />
           Export CSV
         </button>
@@ -152,7 +156,7 @@ function AdminRegistrations() {
       </div>
 
       <p className="text-xs text-muted-foreground">
-        Showing {filtered.length} of {MOCK_REGISTRATIONS.length} registrations
+        Showing {filtered.length} of {registrations.length} registrations
       </p>
     </div>
   );

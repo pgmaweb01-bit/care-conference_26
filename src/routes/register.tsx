@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { ArrowRight, CheckCircle, Download, Mic, Printer, User } from "lucide-react";
 import { PageHero } from "@/components/section";
 import { EVENT } from "@/data/conference";
 import { RegistrationQR, generateRegistrationId } from "@/components/registration-qr";
+import { addRegistration } from "@/lib/registrations";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
@@ -224,7 +225,7 @@ function AttendeeForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [agreed, setAgreed] = useState(false);
-  const registrationId = useMemo(() => (submitted ? generateRegistrationId() : ""), [submitted]);
+  const [registrationId, setRegistrationId] = useState("");
   const [formData, setFormData] = useState({
     fullName: "",
     gender: "",
@@ -252,6 +253,26 @@ function AttendeeForm() {
     e.preventDefault();
     setLoading(true);
     try {
+      const regId = generateRegistrationId();
+      addRegistration({
+        registrationId: regId,
+        name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        organisation: formData.organization,
+        type: "attendee",
+        fullName: formData.fullName,
+        gender: formData.gender,
+        country: formData.country,
+        state: formData.state,
+        city: formData.city,
+        profession: formData.profession,
+        position: formData.position,
+        sideRoom1: formData.sideRoom1,
+        sideRoom2: formData.sideRoom2,
+        category: formData.sector,
+      });
+      setRegistrationId(regId);
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } finally {
@@ -577,6 +598,25 @@ function SpeakerForm() {
     e.preventDefault();
     setLoading(true);
     try {
+      const regId = generateRegistrationId();
+      addRegistration({
+        registrationId: regId,
+        name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        organisation: formData.organization,
+        type: "speaker",
+        fullName: formData.fullName,
+        gender: formData.gender,
+        country: formData.nationality,
+        state: "",
+        city: formData.departureCity,
+        profession: formData.expertise,
+        position: formData.position,
+        sideRoom1: "",
+        sideRoom2: "",
+        category: "",
+      });
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } finally {

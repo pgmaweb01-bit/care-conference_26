@@ -1,31 +1,41 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { Users, Mic2, Handshake, Mail, TrendingUp, Calendar, ArrowRight } from "lucide-react";
+import { getRegistrations, getRegistrationStats } from "@/lib/registrations";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
 });
 
-const STATS = [
-  {
-    label: "Total Registrations",
-    value: "0",
-    change: "No registrations yet",
-    icon: Users,
-    color: "text-primary",
-  },
-  {
-    label: "Speakers Confirmed",
-    value: "0",
-    change: "No speakers added",
-    icon: Mic2,
-    color: "text-green-600",
-  },
-  { label: "Partners", value: "0", change: "No partners yet", icon: Handshake, color: "text-accent" },
-  { label: "Messages", value: "0", change: "No messages", icon: Mail, color: "text-blue-600" },
-];
-
 function AdminDashboard() {
   const daysLeft = Math.max(0, Math.ceil((new Date("2026-11-19").getTime() - Date.now()) / 86400000));
+  const [stats, setStats] = useState({ total: 0, confirmed: 0, checkedIn: 0, speakers: 0 });
+  const [recentRegs, setRecentRegs] = useState<Array<{ registrationId: string; name: string; organisation: string; date: string; type: string }>>([]);
+
+  useEffect(() => {
+    setStats(getRegistrationStats());
+    const regs = getRegistrations().slice(-5).reverse();
+    setRecentRegs(regs);
+  }, []);
+
+  const STATS = [
+    {
+      label: "Total Registrations",
+      value: String(stats.total),
+      change: stats.total === 0 ? "No registrations yet" : `${stats.confirmed} confirmed`,
+      icon: Users,
+      color: "text-primary",
+    },
+    {
+      label: "Speakers Confirmed",
+      value: String(stats.speakers),
+      change: stats.speakers === 0 ? "No speakers added" : `${stats.speakers} speakers`,
+      icon: Mic2,
+      color: "text-green-600",
+    },
+    { label: "Partners", value: "0", change: "No partners yet", icon: Handshake, color: "text-accent" },
+    { label: "Checked In", value: String(stats.checkedIn), change: stats.checkedIn === 0 ? "None yet" : `${stats.checkedIn} checked in`, icon: Mail, color: "text-blue-600" },
+  ];
 
   return (
     <div className="space-y-8">
@@ -62,8 +72,21 @@ function AdminDashboard() {
               View all
             </Link>
           </div>
-          <div className="mt-6 flex items-center justify-center py-8 text-sm text-muted-foreground">
-            No registrations yet
+          <div className="mt-4 space-y-3">
+            {["attendee", "speaker"].map((t) => {
+              const count = recentRegs.filter((r) => r.type === t).length;
+              return (
+                <div key={t} className="flex items-center justify-between text-sm">
+                  <span className="capitalize text-muted-foreground">{t}s</span>
+                  <span className="font-semibold">{count}</span>
+                </div>
+              );
+            })}
+            {recentRegs.length === 0 && (
+              <div className="flex items-center justify-center py-4 text-sm text-muted-foreground">
+                No registrations yet
+              </div>
+            )}
           </div>
         </div>
 
@@ -78,9 +101,28 @@ function AdminDashboard() {
               View all <ArrowRight className="size-3" />
             </Link>
           </div>
-          <div className="mt-6 flex items-center justify-center py-8 text-sm text-muted-foreground">
-            No registrations yet
-          </div>
+          {recentRegs.length === 0 ? (
+            <div className="mt-6 flex items-center justify-center py-8 text-sm text-muted-foreground">
+              No registrations yet
+            </div>
+          ) : (
+            <div className="mt-4 space-y-3">
+              {recentRegs.map((reg) => (
+                <div key={reg.registrationId} className="flex items-center justify-between rounded-lg border border-border/50 px-4 py-3">
+                  <div>
+                    <p className="font-display text-sm font-semibold">{reg.name}</p>
+                    <p className="text-xs text-muted-foreground">{reg.organisation || "—"}</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="inline-block rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary capitalize">
+                      {reg.type}
+                    </span>
+                    <p className="mt-1 text-xs text-muted-foreground">{reg.date}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -110,12 +152,12 @@ function AdminDashboard() {
               </div>
               <div className="flex items-center gap-2">
                 <TrendingUp className="size-4 text-muted-foreground" />
-                <span>0 / 500 delegates</span>
+                <span>{stats.total} / 500 delegates</span>
               </div>
               <div className="mt-2 h-2 w-40 overflow-hidden rounded-full bg-secondary">
-                <div className="h-full rounded-full bg-primary" style={{ width: "0%" }} />
+                <div className="h-full rounded-full bg-primary" style={{ width: `${Math.min(100, (stats.total / 500) * 100)}%` }} />
               </div>
-              <p className="text-xs text-muted-foreground">0% capacity reached</p>
+              <p className="text-xs text-muted-foreground">{Math.round((stats.total / 500) * 100)}% capacity reached</p>
             </div>
           </div>
 
