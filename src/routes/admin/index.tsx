@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Users, Mic2, Handshake, Mail, TrendingUp, Calendar, ArrowRight } from "lucide-react";
-import { getRegistrations, getRegistrationStats } from "@/lib/registrations";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
@@ -10,12 +9,25 @@ export const Route = createFileRoute("/admin/")({
 function AdminDashboard() {
   const daysLeft = Math.max(0, Math.ceil((new Date("2026-11-19").getTime() - Date.now()) / 86400000));
   const [stats, setStats] = useState({ total: 0, confirmed: 0, checkedIn: 0, speakers: 0 });
-  const [recentRegs, setRecentRegs] = useState<Array<{ registrationId: string; name: string; organisation: string; date: string; type: string }>>([]);
+  const [recentRegs, setRecentRegs] = useState<Array<{ registration_id: string; full_name: string; organisation: string; created_at: string; type: string }>>([]);
 
   useEffect(() => {
-    setStats(getRegistrationStats());
-    const regs = getRegistrations().slice(-5).reverse();
-    setRecentRegs(regs);
+    async function fetchData() {
+      try {
+        const [statsRes, regsRes] = await Promise.all([
+          fetch("/api/registrations/stats"),
+          fetch("/api/registrations"),
+        ]);
+        if (statsRes.ok) setStats(await statsRes.json());
+        if (regsRes.ok) {
+          const regs = await regsRes.json();
+          setRecentRegs(regs.slice(0, 5));
+        }
+      } catch (err) {
+        console.error("Failed to fetch dashboard data:", err);
+      }
+    }
+    fetchData();
   }, []);
 
   const STATS = [
@@ -108,16 +120,16 @@ function AdminDashboard() {
           ) : (
             <div className="mt-4 space-y-3">
               {recentRegs.map((reg) => (
-                <div key={reg.registrationId} className="flex items-center justify-between rounded-lg border border-border/50 px-4 py-3">
+                <div key={reg.registration_id} className="flex items-center justify-between rounded-lg border border-border/50 px-4 py-3">
                   <div>
-                    <p className="font-display text-sm font-semibold">{reg.name}</p>
+                    <p className="font-display text-sm font-semibold">{reg.full_name}</p>
                     <p className="text-xs text-muted-foreground">{reg.organisation || "—"}</p>
                   </div>
                   <div className="text-right">
                     <span className="inline-block rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary capitalize">
                       {reg.type}
                     </span>
-                    <p className="mt-1 text-xs text-muted-foreground">{reg.date}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">{new Date(reg.created_at).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</p>
                   </div>
                 </div>
               ))}

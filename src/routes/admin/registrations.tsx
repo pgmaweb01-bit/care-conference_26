@@ -1,7 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Search, Download, Filter, CheckCircle } from "lucide-react";
-import { getRegistrations, type Registration } from "@/lib/registrations";
+
+interface Registration {
+  id: number;
+  registration_id: string;
+  full_name: string;
+  email: string;
+  phone: string;
+  organisation: string;
+  type: string;
+  status: string;
+  checked_in: boolean;
+  created_at: string;
+}
 
 export const Route = createFileRoute("/admin/registrations")({
   component: AdminRegistrations,
@@ -14,15 +26,23 @@ function AdminRegistrations() {
   const [filterStatus, setFilterStatus] = useState("all");
 
   useEffect(() => {
-    setRegistrations(getRegistrations());
+    async function fetchData() {
+      try {
+        const res = await fetch("/api/registrations");
+        if (res.ok) setRegistrations(await res.json());
+      } catch (err) {
+        console.error("Failed to fetch registrations:", err);
+      }
+    }
+    fetchData();
   }, []);
 
   const filtered = registrations.filter((r) => {
     const matchSearch =
-      r.name.toLowerCase().includes(search.toLowerCase()) ||
+      r.full_name.toLowerCase().includes(search.toLowerCase()) ||
       r.email.toLowerCase().includes(search.toLowerCase()) ||
       r.organisation.toLowerCase().includes(search.toLowerCase()) ||
-      r.registrationId.toLowerCase().includes(search.toLowerCase());
+      r.registration_id.toLowerCase().includes(search.toLowerCase());
     const matchType = filterType === "all" || r.type === filterType;
     const matchStatus = filterStatus === "all" || r.status === filterStatus;
     return matchSearch && matchType && matchStatus;
@@ -30,7 +50,7 @@ function AdminRegistrations() {
 
   function handleExport() {
     const headers = ["Reg ID", "Name", "Email", "Phone", "Organisation", "Type", "Status", "Checked In", "Date"];
-    const rows = filtered.map((r) => [r.registrationId, r.name, r.email, r.phone, r.organisation, r.type, r.status, r.checkedIn ? "Yes" : "No", r.date]);
+    const rows = filtered.map((r) => [r.registration_id, r.full_name, r.email, r.phone, r.organisation, r.type, r.status, r.checked_in ? "Yes" : "No", new Date(r.created_at).toLocaleDateString("en-GB")]);
     const csv = [headers, ...rows].map((row) => row.map((c) => `"${c}"`).join(",")).join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
     const a = document.createElement("a");
@@ -111,9 +131,9 @@ function AdminRegistrations() {
                 className="border-b border-border/50 last:border-0 hover:bg-muted/50"
               >
                 <td className="p-4">
-                  <span className="font-mono text-xs font-semibold">{reg.registrationId}</span>
+                  <span className="font-mono text-xs font-semibold">{reg.registration_id}</span>
                 </td>
-                <td className="p-4 font-display font-semibold">{reg.name}</td>
+                <td className="p-4 font-display font-semibold">{reg.full_name}</td>
                 <td className="p-4 text-muted-foreground hidden md:table-cell">
                   {reg.organisation}
                 </td>
@@ -136,7 +156,7 @@ function AdminRegistrations() {
                   </span>
                 </td>
                 <td className="p-4">
-                  {reg.checkedIn ? (
+                  {reg.checked_in ? (
                     <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-semibold text-green-700">
                       <CheckCircle className="size-3" />
                       In
@@ -145,7 +165,7 @@ function AdminRegistrations() {
                     <span className="text-xs text-muted-foreground">Pending</span>
                   )}
                 </td>
-                <td className="p-4 text-muted-foreground hidden lg:table-cell">{reg.date}</td>
+                <td className="p-4 text-muted-foreground hidden lg:table-cell">{new Date(reg.created_at).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</td>
               </tr>
             ))}
           </tbody>
