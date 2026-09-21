@@ -161,10 +161,13 @@ function HomePage() {
         <KenBurnsHero />
         <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <div className="mx-auto max-w-4xl text-center">
+            <div className="animate-rise mb-4">
+              <span className="inline-block h-px w-12 bg-accent/60" />
+            </div>
             <h1 className="animate-rise font-display text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[0.85] tracking-[-0.03em]">
-              <span className="block text-ink-foreground">Care</span>
-              <span className="block text-ink-foreground">Conference</span>
-              <span className="block text-accent">
+              <span className="block text-ink-foreground drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Care</span>
+              <span className="block text-ink-foreground drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Conference</span>
+              <span className="block text-accent drop-shadow-[0_0_20px_rgba(232,121,62,0.35)]">
                 2026
               </span>
             </h1>
@@ -173,27 +176,31 @@ function HomePage() {
               <p className="font-display text-[clamp(0.875rem,2vw,1.25rem)] font-extrabold uppercase tracking-[0.2em] text-accent">
                 {EVENT.theme}
               </p>
-              <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-accent" />
+              <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-gradient-to-r from-accent/40 via-accent to-accent/40" />
             </div>
 
-            <p className="animate-rise mt-6 mx-auto max-w-[50ch] text-base leading-relaxed text-ink-foreground/60">
+            <p className="animate-rise mt-6 mx-auto max-w-[50ch] text-base leading-relaxed text-ink-foreground/70">
               {EVENT.subtitle}
             </p>
 
             <div className="animate-rise mt-8 flex flex-wrap justify-center gap-4">
               <Link
                 to="/register"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25"
+                className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.03]"
               >
                 Register Now
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/programme"
-                className="inline-flex items-center gap-2 rounded-full border border-ink-foreground/20 px-6 py-3 font-display text-sm font-bold uppercase tracking-[0.1em] text-ink-foreground/80 transition-all hover:border-ink-foreground/40 hover:bg-ink-foreground/5"
+                className="inline-flex items-center gap-2 rounded-full border border-ink-foreground/25 bg-ink-foreground/5 px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-ink-foreground/85 backdrop-blur-sm transition-all hover:border-ink-foreground/40 hover:bg-ink-foreground/10 hover:text-ink-foreground"
               >
                 View Programme
               </Link>
+            </div>
+
+            <div className="animate-rise mt-6">
+              <span className="inline-block h-px w-12 bg-accent/60" />
             </div>
           </div>
         </div>

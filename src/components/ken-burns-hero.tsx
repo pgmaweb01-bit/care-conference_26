@@ -61,7 +61,8 @@ export function KenBurnsHero() {
           }}
         />
       ))}
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/85 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/80 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-ink/50" />
     </div>
   );
 }
