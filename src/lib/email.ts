@@ -34,7 +34,7 @@ export async function sendRegistrationEmail(data: {
       : `Registration Confirmed - Care Conference 2026 (${data.registrationId})`;
 
     await resend.emails.send({
-      from: "Care Conference 2026 <registrations@careconference2026.purpleglobal.org>",
+      from: "Care Conference 2026 <registrations@careconference2026.purpleglobalmission.org>",
       to: data.email,
       subject,
       html,
