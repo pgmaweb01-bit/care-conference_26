@@ -1,4 +1,4 @@
-import { Outlet, Link, createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Outlet, Link, createFileRoute, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   LayoutDashboard,
@@ -30,11 +30,15 @@ const SIDEBAR_NAV = [
 
 function AdminLayout() {
   const navigate = useNavigate();
+  const router = useRouterState();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [adminEmail, setAdminEmail] = useState("");
 
+  const isLoginPage = router.location.pathname === "/admin/login";
+
   useEffect(() => {
+    if (isLoginPage) return;
     if (!isAuthenticated()) {
       navigate({ to: "/admin/login" });
       return;
@@ -45,12 +49,20 @@ function AdminLayout() {
     } catch {
       setAdminEmail("");
     }
-  }, [navigate]);
+  }, [navigate, isLoginPage]);
 
   const handleLogout = () => {
     logout();
     navigate({ to: "/admin/login" });
   };
+
+  if (isLoginPage) {
+    return (
+      <div className="flex min-h-screen bg-background">
+        <Outlet />
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-background">
