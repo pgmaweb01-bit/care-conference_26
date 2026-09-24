@@ -133,16 +133,32 @@ const GALLERY_IMAGES = [
 ];
 
 const GALLERY_STATIC_IMAGES = [
+  "/Gallery 2/IMG_1985.JPG.jpeg",
+  "/Gallery 2/IMG_1986.JPG.jpeg",
+  "/Gallery 2/IMG_1988.JPG.jpeg",
+  "/Gallery 2/IMG_1992.JPG.jpeg",
   "/Gallery 2/IMG_1996.JPG.jpeg",
-  "/Gallery 2/IMG_2027.JPG.jpeg",
+  "/Gallery 2/IMG_2002.JPG.jpeg",
+  "/Gallery 2/IMG_2029.JPG.jpeg",
+  "/Gallery 2/IMG_2032.JPG.jpeg",
+  "/Gallery 2/IMG_2034.JPG.jpeg",
   "/Gallery 2/IMG_2037.JPG.jpeg",
-  "/Gallery 2/IMG_2143.JPG.jpeg",
-  "/Gallery 2/IMG_2146.JPG.jpeg",
-  "/Gallery 2/IMG_2151.JPG.jpeg",
+  "/Gallery 2/IMG_2142.JPG.jpeg",
+  "/Gallery 2/IMG_2144.JPG.jpeg",
+  "/Gallery 2/IMG_2145.JPG.jpeg",
+  "/Gallery 2/IMG_2148.JPG.jpeg",
+  "/Gallery 2/IMG_2150.JPG.jpeg",
+  "/Gallery 2/IMG_2153.JPG.jpeg",
+  "/Gallery 2/IMG_2156.JPG.jpeg",
+  "/Gallery 2/IMG_2208.JPG.jpeg",
   "/Gallery 2/IMG_2209.JPG.jpeg",
-  "/Gallery 2/IMG_2218.JPG.jpeg",
-  "/Gallery 2/IMG_2220.JPG.jpeg",
-  "/Gallery 2/IMG_2221.JPG.jpeg",
+  "/Gallery 2/IMG_2213.JPG.jpeg",
+  "/Gallery 2/IMG_2214.JPG.jpeg",
+  "/Gallery 2/IMG_2219.JPG.jpeg",
+  "/Gallery 2/IMG_2222.JPG.jpeg",
+  "/Gallery 2/IMG_2223.JPG.jpeg",
+  "/Gallery 2/IMG_2225.JPG.jpeg",
+  "/Gallery 2/IMG_2229.JPG.jpeg",
   "/Gallery 2/IMG_2402.JPG.jpeg",
 ];
 
@@ -329,6 +345,7 @@ function HomePage() {
         eyebrow="Gallery"
         title="Highlights from the Auditorium"
         lede="A selection of moments — panels, conversations and quiet work between sessions."
+        columns={5}
       />
 
       {/* THE CASE */}
