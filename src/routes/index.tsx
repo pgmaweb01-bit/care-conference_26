@@ -3,6 +3,7 @@ import { useMemo, useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/section";
 import { KenBurnsHero } from "@/components/ken-burns-hero";
+import { KenBurnsGallery } from "@/components/ken-burns-gallery";
 import {
   AUDIENCE,
   CASE_GAPS,
@@ -428,8 +429,8 @@ function HomePage() {
         </div>
       </section>
 
-      {/* SCROLLING GALLERY 2 */}
-      <ScrollingGallery images={GALLERY_TWO_IMAGES} reverse />
+      {/* DYNAMIC GALLERY */}
+      <KenBurnsGallery images={GALLERY_TWO_IMAGES} caption="19 November 2026 · IALA Hub, Lagos" />
 
       {/* ABOUT */}
       <section className="section-pad">
