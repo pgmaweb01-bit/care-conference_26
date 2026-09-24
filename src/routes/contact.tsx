@@ -75,7 +75,7 @@ function ContactPage() {
                 <img
                   src="/Gallery 2/IMG_1989.JPG.jpeg"
                   alt="Care Conference 2026 attendees"
-                  className="h-48 w-full object-cover"
+                  className="aspect-[3/4] w-full object-cover"
                   loading="lazy"
                 />
               </div>
