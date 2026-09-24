@@ -3,7 +3,6 @@ import { useMemo, useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/section";
 import { KenBurnsHero } from "@/components/ken-burns-hero";
-import { KenBurnsGallery } from "@/components/ken-burns-gallery";
 import { StaticGallery } from "@/components/static-gallery";
 import {
   AUDIENCE,
@@ -131,62 +130,6 @@ const GALLERY_IMAGES = [
   "/Gallery/BLQ09246.webp",
   "/Gallery/BLQ09223.webp",
   "/Gallery/BLQ09213.webp",
-];
-
-const GALLERY_TWO_IMAGES = [
-  "/Gallery 2/IMG_1925.JPG.jpeg",
-  "/Gallery 2/IMG_1983.JPG.jpeg",
-  "/Gallery 2/IMG_1985.JPG.jpeg",
-  "/Gallery 2/IMG_1986.JPG.jpeg",
-  "/Gallery 2/IMG_1987.JPG.jpeg",
-  "/Gallery 2/IMG_1988.JPG.jpeg",
-  "/Gallery 2/IMG_1989.JPG.jpeg",
-  "/Gallery 2/IMG_1992.JPG.jpeg",
-  "/Gallery 2/IMG_1994.JPG.jpeg",
-  "/Gallery 2/IMG_1995.JPG.jpeg",
-  "/Gallery 2/IMG_1996.JPG.jpeg",
-  "/Gallery 2/IMG_1998.JPG.jpeg",
-  "/Gallery 2/IMG_2001.JPG.jpeg",
-  "/Gallery 2/IMG_2002.JPG.jpeg",
-  "/Gallery 2/IMG_2027.JPG.jpeg",
-  "/Gallery 2/IMG_2028.JPG.jpeg",
-  "/Gallery 2/IMG_2029.JPG.jpeg",
-  "/Gallery 2/IMG_2030.JPG.jpeg",
-  "/Gallery 2/IMG_2032.JPG.jpeg",
-  "/Gallery 2/IMG_2033.JPG.jpeg",
-  "/Gallery 2/IMG_2034.JPG.jpeg",
-  "/Gallery 2/IMG_2035.JPG.jpeg",
-  "/Gallery 2/IMG_2037.JPG.jpeg",
-  "/Gallery 2/IMG_2038.JPG.jpeg",
-  "/Gallery 2/IMG_2142.JPG.jpeg",
-  "/Gallery 2/IMG_2143.JPG.jpeg",
-  "/Gallery 2/IMG_2144.JPG.jpeg",
-  "/Gallery 2/IMG_2145.JPG.jpeg",
-  "/Gallery 2/IMG_2146.JPG.jpeg",
-  "/Gallery 2/IMG_2148.JPG.jpeg",
-  "/Gallery 2/IMG_2149.JPG.jpeg",
-  "/Gallery 2/IMG_2150.JPG.jpeg",
-  "/Gallery 2/IMG_2151.JPG.jpeg",
-  "/Gallery 2/IMG_2153.JPG.jpeg",
-  "/Gallery 2/IMG_2156.JPG.jpeg",
-  "/Gallery 2/IMG_2208.JPG.jpeg",
-  "/Gallery 2/IMG_2209.JPG.jpeg",
-  "/Gallery 2/IMG_2213.JPG.jpeg",
-  "/Gallery 2/IMG_2214.JPG.jpeg",
-  "/Gallery 2/IMG_2215.JPG.jpeg",
-  "/Gallery 2/IMG_2218.JPG.jpeg",
-  "/Gallery 2/IMG_2219.JPG.jpeg",
-  "/Gallery 2/IMG_2220.JPG.jpeg",
-  "/Gallery 2/IMG_2221.JPG.jpeg",
-  "/Gallery 2/IMG_2222.JPG.jpeg",
-  "/Gallery 2/IMG_2223.JPG.jpeg",
-  "/Gallery 2/IMG_2224.JPG.jpeg",
-  "/Gallery 2/IMG_2225.JPG.jpeg",
-  "/Gallery 2/IMG_2226.JPG.jpeg",
-  "/Gallery 2/IMG_2227.JPG.jpeg",
-  "/Gallery 2/IMG_2228.JPG.jpeg",
-  "/Gallery 2/IMG_2229.JPG.jpeg",
-  "/Gallery 2/IMG_2402.JPG.jpeg",
 ];
 
 const GALLERY_STATIC_IMAGES = [
@@ -451,9 +394,6 @@ function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* DYNAMIC GALLERY */}
-      <KenBurnsGallery images={GALLERY_TWO_IMAGES} caption="19 November 2026 · IALA Hub, Lagos" />
 
       {/* ABOUT */}
       <section className="section-pad">
