@@ -71,6 +71,14 @@ function ContactPage() {
                   <p className="mt-2 font-display font-semibold">{EVENT.organiser}</p>
                 </div>
               </div>
+              <div className="mt-8 overflow-hidden rounded-lg">
+                <img
+                  src="/Gallery 2/IMG_1989.JPG.jpeg"
+                  alt="Care Conference 2026 attendees"
+                  className="h-48 w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
             </div>
 
             <div className="lg:col-span-7">

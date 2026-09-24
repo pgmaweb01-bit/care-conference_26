@@ -131,12 +131,74 @@ const GALLERY_IMAGES = [
   "/Gallery/BLQ09213.webp",
 ];
 
-function ScrollingGallery() {
-  const images = [...GALLERY_IMAGES, ...GALLERY_IMAGES];
+const GALLERY_TWO_IMAGES = [
+  "/Gallery 2/IMG_1925.JPG.jpeg",
+  "/Gallery 2/IMG_1983.JPG.jpeg",
+  "/Gallery 2/IMG_1985.JPG.jpeg",
+  "/Gallery 2/IMG_1986.JPG.jpeg",
+  "/Gallery 2/IMG_1987.JPG.jpeg",
+  "/Gallery 2/IMG_1988.JPG.jpeg",
+  "/Gallery 2/IMG_1989.JPG.jpeg",
+  "/Gallery 2/IMG_1992.JPG.jpeg",
+  "/Gallery 2/IMG_1994.JPG.jpeg",
+  "/Gallery 2/IMG_1995.JPG.jpeg",
+  "/Gallery 2/IMG_1996.JPG.jpeg",
+  "/Gallery 2/IMG_1998.JPG.jpeg",
+  "/Gallery 2/IMG_2001.JPG.jpeg",
+  "/Gallery 2/IMG_2002.JPG.jpeg",
+  "/Gallery 2/IMG_2027.JPG.jpeg",
+  "/Gallery 2/IMG_2028.JPG.jpeg",
+  "/Gallery 2/IMG_2029.JPG.jpeg",
+  "/Gallery 2/IMG_2030.JPG.jpeg",
+  "/Gallery 2/IMG_2032.JPG.jpeg",
+  "/Gallery 2/IMG_2033.JPG.jpeg",
+  "/Gallery 2/IMG_2034.JPG.jpeg",
+  "/Gallery 2/IMG_2035.JPG.jpeg",
+  "/Gallery 2/IMG_2037.JPG.jpeg",
+  "/Gallery 2/IMG_2038.JPG.jpeg",
+  "/Gallery 2/IMG_2142.JPG.jpeg",
+  "/Gallery 2/IMG_2143.JPG.jpeg",
+  "/Gallery 2/IMG_2144.JPG.jpeg",
+  "/Gallery 2/IMG_2145.JPG.jpeg",
+  "/Gallery 2/IMG_2146.JPG.jpeg",
+  "/Gallery 2/IMG_2148.JPG.jpeg",
+  "/Gallery 2/IMG_2149.JPG.jpeg",
+  "/Gallery 2/IMG_2150.JPG.jpeg",
+  "/Gallery 2/IMG_2151.JPG.jpeg",
+  "/Gallery 2/IMG_2153.JPG.jpeg",
+  "/Gallery 2/IMG_2156.JPG.jpeg",
+  "/Gallery 2/IMG_2208.JPG.jpeg",
+  "/Gallery 2/IMG_2209.JPG.jpeg",
+  "/Gallery 2/IMG_2213.JPG.jpeg",
+  "/Gallery 2/IMG_2214.JPG.jpeg",
+  "/Gallery 2/IMG_2215.JPG.jpeg",
+  "/Gallery 2/IMG_2218.JPG.jpeg",
+  "/Gallery 2/IMG_2219.JPG.jpeg",
+  "/Gallery 2/IMG_2220.JPG.jpeg",
+  "/Gallery 2/IMG_2221.JPG.jpeg",
+  "/Gallery 2/IMG_2222.JPG.jpeg",
+  "/Gallery 2/IMG_2223.JPG.jpeg",
+  "/Gallery 2/IMG_2224.JPG.jpeg",
+  "/Gallery 2/IMG_2225.JPG.jpeg",
+  "/Gallery 2/IMG_2226.JPG.jpeg",
+  "/Gallery 2/IMG_2227.JPG.jpeg",
+  "/Gallery 2/IMG_2228.JPG.jpeg",
+  "/Gallery 2/IMG_2229.JPG.jpeg",
+  "/Gallery 2/IMG_2402.JPG.jpeg",
+];
+
+function ScrollingGallery({
+  images = GALLERY_IMAGES,
+  reverse = false,
+}: {
+  images?: string[];
+  reverse?: boolean;
+}) {
+  const doubled = [...images, ...images];
   return (
     <section className="border-y border-border bg-ink py-4 overflow-hidden">
-      <div className="flex animate-marquee w-max">
-        {images.map((src, i) => (
+      <div className={`flex w-max ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}>
+        {doubled.map((src, i) => (
           <div key={i} className="relative w-52 shrink-0 sm:w-64 md:w-72 lg:w-96">
             <div className="aspect-[3/2] overflow-hidden">
               <img
@@ -229,7 +291,15 @@ function HomePage() {
               </div>
             </div>
 
-            <div className="flex flex-col justify-center lg:col-span-5">
+            <div className="flex flex-col justify-center gap-6 lg:col-span-5">
+              <div className="overflow-hidden rounded-lg">
+                <img
+                  src="/Gallery 2/IMG_2143.JPG.jpeg"
+                  alt="Care Conference delegates in session"
+                  className="h-56 w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
               <div className="rounded-lg border border-border bg-card p-7">
                 <dl className="space-y-6">
                   <div>
@@ -358,6 +428,9 @@ function HomePage() {
         </div>
       </section>
 
+      {/* SCROLLING GALLERY 2 */}
+      <ScrollingGallery images={GALLERY_TWO_IMAGES} reverse />
+
       {/* ABOUT */}
       <section className="section-pad">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-12">
@@ -372,6 +445,24 @@ function HomePage() {
                 alt="Care Conference discussion"
                 className="w-full object-cover"
               />
+            </div>
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              <div className="overflow-hidden rounded-lg">
+                <img
+                  src="/Gallery 2/IMG_2220.JPG.jpeg"
+                  alt="Care Conference panel session"
+                  className="h-40 w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="overflow-hidden rounded-lg">
+                <img
+                  src="/Gallery 2/IMG_2218.JPG.jpeg"
+                  alt="Care Conference networking"
+                  className="h-40 w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
           <div className="lg:col-span-7">

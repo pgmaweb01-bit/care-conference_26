@@ -80,7 +80,7 @@ function AboutPage() {
 
       <section className="border-y border-border">
         <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <div className="overflow-hidden rounded-lg">
               <img
                 src="/Gallery/IMG_4290.JPG.jpeg"
@@ -93,6 +93,14 @@ function AboutPage() {
                 src="/Gallery/IMG_4262.JPG.jpeg"
                 alt="Care Conference workshop"
                 className="w-full object-cover"
+              />
+            </div>
+            <div className="overflow-hidden rounded-lg">
+              <img
+                src="/Gallery 2/IMG_2151.JPG.jpeg"
+                alt="Care Conference 2026 session"
+                className="w-full object-cover"
+                loading="lazy"
               />
             </div>
           </div>

@@ -259,6 +259,22 @@
   backface-visibility: hidden;
 }
 
+.animate-marquee-reverse {
+  animation: marquee-reverse 70s linear infinite;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-rise,
   .animate-fade-in-up {
