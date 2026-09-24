@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/section";
 import { KenBurnsHero } from "@/components/ken-burns-hero";
 import { KenBurnsGallery } from "@/components/ken-burns-gallery";
+import { StaticGallery } from "@/components/static-gallery";
 import {
   AUDIENCE,
   CASE_GAPS,
@@ -188,6 +189,20 @@ const GALLERY_TWO_IMAGES = [
   "/Gallery 2/IMG_2402.JPG.jpeg",
 ];
 
+const GALLERY_STATIC_IMAGES = [
+  "/Gallery 2/IMG_1996.JPG.jpeg",
+  "/Gallery 2/IMG_2027.JPG.jpeg",
+  "/Gallery 2/IMG_2037.JPG.jpeg",
+  "/Gallery 2/IMG_2143.JPG.jpeg",
+  "/Gallery 2/IMG_2146.JPG.jpeg",
+  "/Gallery 2/IMG_2151.JPG.jpeg",
+  "/Gallery 2/IMG_2209.JPG.jpeg",
+  "/Gallery 2/IMG_2218.JPG.jpeg",
+  "/Gallery 2/IMG_2220.JPG.jpeg",
+  "/Gallery 2/IMG_2221.JPG.jpeg",
+  "/Gallery 2/IMG_2402.JPG.jpeg",
+];
+
 function ScrollingGallery({
   images = GALLERY_IMAGES,
   reverse = false,
@@ -364,6 +379,14 @@ function HomePage() {
 
       {/* SCROLLING GALLERY */}
       <ScrollingGallery />
+
+      {/* STATIC GALLERY */}
+      <StaticGallery
+        images={GALLERY_STATIC_IMAGES}
+        eyebrow="Gallery"
+        title="Highlights from the Auditorium"
+        lede="A selection of moments — panels, conversations and quiet work between sessions."
+      />
 
       {/* THE CASE */}
       <section className="section-pad bg-card">
