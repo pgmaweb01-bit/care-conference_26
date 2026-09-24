@@ -14,10 +14,21 @@ const NAV = [
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
+  const scrollToTopIfSameRoute = (to: string) => () => {
+    if (window.location.pathname === to) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+    setOpen(false);
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+        <Link
+          to="/"
+          className="flex items-center gap-3"
+          onClick={scrollToTopIfSameRoute("/")}
+        >
           <img
             src="/Logo Header.webp"
             alt="The Purple Global Mission"
@@ -30,6 +41,7 @@ export function SiteHeader() {
             <Link
               key={item.to}
               to={item.to}
+              onClick={scrollToTopIfSameRoute(item.to)}
               className="font-display text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
               activeProps={{ className: "text-foreground" }}
             >
@@ -63,7 +75,7 @@ export function SiteHeader() {
               <li key={item.to}>
                 <Link
                   to={item.to}
-                  onClick={() => setOpen(false)}
+                  onClick={scrollToTopIfSameRoute(item.to)}
                   className="block rounded-md px-2 py-2 font-display text-sm font-medium hover:bg-secondary"
                 >
                   {item.label}

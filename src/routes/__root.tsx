@@ -7,7 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { type ReactNode } from "react";
+import { type ReactNode, useEffect } from "react";
 
 import appCss from "../styles.css?url";
 
@@ -123,6 +123,10 @@ function RootComponent() {
   const router = useRouter();
   const pathname = router.state.location.pathname;
   const isAdmin = pathname.startsWith("/admin");
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
