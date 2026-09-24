@@ -20,7 +20,7 @@ export function StaticGallery({
   }[columns];
 
   return (
-    <section className="bg-card pb-24 pt-24 lg:pb-32 lg:pt-32">
+    <section className="bg-card pb-24 pt-20 lg:pb-32 lg:pt-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <div>

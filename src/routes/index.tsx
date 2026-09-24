@@ -339,15 +339,6 @@ function HomePage() {
       {/* SCROLLING GALLERY */}
       <ScrollingGallery />
 
-      {/* STATIC GALLERY */}
-      <StaticGallery
-        images={GALLERY_STATIC_IMAGES}
-        eyebrow="Gallery"
-        title="Highlights from the Auditorium"
-        lede="A selection of moments — panels, conversations and quiet work between sessions."
-        columns={5}
-      />
-
       {/* THE CASE */}
       <section className="section-pad bg-card">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -752,6 +743,15 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* STATIC GALLERY */}
+      <StaticGallery
+        images={GALLERY_STATIC_IMAGES}
+        eyebrow="From Past Editions"
+        title="Moments from Previous Care Conferences"
+        lede="A look back at the energy, conversations and quiet work from earlier editions of the Care Conference."
+        columns={5}
+      />
 
       {/* FINAL CTA */}
       <section className="border-t border-border bg-linen">
