@@ -542,18 +542,27 @@ function HomePage() {
       {/* WHO SHOULD ATTEND */}
       <section className="border-y border-border bg-linen section-pad">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid gap-6 lg:grid-cols-[1fr_400px]">
+          <div className="grid gap-6 lg:grid-cols-[1fr_640px]">
             <SectionHeading
               eyebrow="Who Should Attend"
               title={<>One Room.<br />Many Perspectives. One Conversation.</>}
               lede="The Care Conference brings together the people shaping healthcare, policy, technology and communities."
             />
-            <div className="overflow-hidden rounded-lg">
-              <img
-                src="/Who should attend.webp"
-                alt="Care Conference attendees"
-                className="h-full w-full object-cover"
-              />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="overflow-hidden rounded-lg">
+                <img
+                  src="/Who should attend.webp"
+                  alt="Care Conference attendees"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="overflow-hidden rounded-lg">
+                <img
+                  src="/Gallery 2/IMG_2030.JPG.jpeg"
+                  alt="Care Conference in session"
+                  className="h-full w-full object-cover"
+                />
+              </div>
             </div>
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
