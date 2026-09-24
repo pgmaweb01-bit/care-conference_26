@@ -27,6 +27,10 @@ import { Route as AdminPartnersRouteImport } from './routes/admin/partners'
 import { Route as AdminRegistrationsRouteImport } from './routes/admin/registrations'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminSpeakersRouteImport } from './routes/admin/speakers'
+import { Route as ApiQrRegistrationIdRouteImport } from './routes/api/qr/$registrationId'
+import { Route as ApiRegistrationsIndexRouteImport } from './routes/api/registrations/index'
+import { Route as ApiRegistrationsResendRouteImport } from './routes/api/registrations/resend'
+import { Route as ApiRegistrationsStatsRouteImport } from './routes/api/registrations/stats'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -118,6 +122,26 @@ const AdminSpeakersRoute = AdminSpeakersRouteImport.update({
   path: '/speakers',
   getParentRoute: () => AdminRoute,
 } as any)
+const ApiQrRegistrationIdRoute = ApiQrRegistrationIdRouteImport.update({
+  id: '/api/qr/$registrationId',
+  path: '/api/qr/$registrationId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiRegistrationsIndexRoute = ApiRegistrationsIndexRouteImport.update({
+  id: '/api/registrations/',
+  path: '/api/registrations/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiRegistrationsResendRoute = ApiRegistrationsResendRouteImport.update({
+  id: '/api/registrations/resend',
+  path: '/api/registrations/resend',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiRegistrationsStatsRoute = ApiRegistrationsStatsRouteImport.update({
+  id: '/api/registrations/stats',
+  path: '/api/registrations/stats',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -138,6 +162,10 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
   '/admin/': typeof AdminIndexRoute
+  '/api/qr/$registrationId': typeof ApiQrRegistrationIdRoute
+  '/api/registrations/resend': typeof ApiRegistrationsResendRoute
+  '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
+  '/api/registrations/': typeof ApiRegistrationsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -157,6 +185,10 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
   '/admin': typeof AdminIndexRoute
+  '/api/qr/$registrationId': typeof ApiQrRegistrationIdRoute
+  '/api/registrations/resend': typeof ApiRegistrationsResendRoute
+  '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
+  '/api/registrations': typeof ApiRegistrationsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -178,6 +210,10 @@ export interface FileRoutesById {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
   '/admin/': typeof AdminIndexRoute
+  '/api/qr/$registrationId': typeof ApiQrRegistrationIdRoute
+  '/api/registrations/resend': typeof ApiRegistrationsResendRoute
+  '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
+  '/api/registrations/': typeof ApiRegistrationsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -200,6 +236,10 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/speakers'
     | '/admin/'
+    | '/api/qr/$registrationId'
+    | '/api/registrations/resend'
+    | '/api/registrations/stats'
+    | '/api/registrations/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -219,6 +259,10 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/speakers'
     | '/admin'
+    | '/api/qr/$registrationId'
+    | '/api/registrations/resend'
+    | '/api/registrations/stats'
+    | '/api/registrations'
   id:
     | '__root__'
     | '/'
@@ -239,6 +283,10 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/speakers'
     | '/admin/'
+    | '/api/qr/$registrationId'
+    | '/api/registrations/resend'
+    | '/api/registrations/stats'
+    | '/api/registrations/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -252,6 +300,10 @@ export interface RootRouteChildren {
   ProgrammeRoute: typeof ProgrammeRoute
   RegisterRoute: typeof RegisterRoute
   SpeakersRoute: typeof SpeakersRoute
+  ApiQrRegistrationIdRoute: typeof ApiQrRegistrationIdRoute
+  ApiRegistrationsResendRoute: typeof ApiRegistrationsResendRoute
+  ApiRegistrationsStatsRoute: typeof ApiRegistrationsStatsRoute
+  ApiRegistrationsIndexRoute: typeof ApiRegistrationsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -382,6 +434,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSpeakersRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/api/qr/$registrationId': {
+      id: '/api/qr/$registrationId'
+      path: '/api/qr/$registrationId'
+      fullPath: '/api/qr/$registrationId'
+      preLoaderRoute: typeof ApiQrRegistrationIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/registrations/': {
+      id: '/api/registrations/'
+      path: '/api/registrations'
+      fullPath: '/api/registrations/'
+      preLoaderRoute: typeof ApiRegistrationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/registrations/resend': {
+      id: '/api/registrations/resend'
+      path: '/api/registrations/resend'
+      fullPath: '/api/registrations/resend'
+      preLoaderRoute: typeof ApiRegistrationsResendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/registrations/stats': {
+      id: '/api/registrations/stats'
+      path: '/api/registrations/stats'
+      fullPath: '/api/registrations/stats'
+      preLoaderRoute: typeof ApiRegistrationsStatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -420,6 +500,10 @@ const rootRouteChildren: RootRouteChildren = {
   ProgrammeRoute: ProgrammeRoute,
   RegisterRoute: RegisterRoute,
   SpeakersRoute: SpeakersRoute,
+  ApiQrRegistrationIdRoute: ApiQrRegistrationIdRoute,
+  ApiRegistrationsResendRoute: ApiRegistrationsResendRoute,
+  ApiRegistrationsStatsRoute: ApiRegistrationsStatsRoute,
+  ApiRegistrationsIndexRoute: ApiRegistrationsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

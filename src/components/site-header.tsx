@@ -6,7 +6,6 @@ import { EVENT } from "@/data/conference";
 const NAV = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
-  { to: "/programme", label: "Programme" },
   { to: "/speakers", label: "Speakers" },
   { to: "/caresouk", label: "CareSouk" },
   { to: "/partners", label: "Partners" },
@@ -40,12 +39,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            to="/programme"
-            className="hidden rounded-md border border-input px-4 py-2 font-display text-[12px] font-semibold uppercase tracking-[0.12em] transition-colors hover:bg-secondary sm:inline-block"
-          >
-            View Programme
-          </Link>
           <Link
             to="/register"
             className="rounded-md bg-primary px-4 py-2 font-display text-[12px] font-semibold uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:bg-primary/90"

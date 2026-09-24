@@ -3,7 +3,6 @@ import { EVENT } from "@/data/conference";
 
 const QUICK_LINKS = [
   { to: "/about", label: "About" },
-  { to: "/programme", label: "Programme" },
   { to: "/speakers", label: "Speakers" },
   { to: "/policy-sessions", label: "Policy Sessions" },
 ] as const;

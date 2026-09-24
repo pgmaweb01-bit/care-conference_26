@@ -191,12 +191,6 @@ function HomePage() {
                 Register Now
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link
-                to="/programme"
-                className="inline-flex items-center gap-2 rounded-full border border-ink-foreground/25 bg-ink-foreground/5 px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-ink-foreground/85 backdrop-blur-sm transition-all hover:border-ink-foreground/40 hover:bg-ink-foreground/10 hover:text-ink-foreground"
-              >
-                View Programme
-              </Link>
             </div>
 
             <div className="animate-rise mt-6">
@@ -231,12 +225,6 @@ function HomePage() {
                   className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
                 >
                   Register for the Conference <ArrowRight className="size-4" />
-                </Link>
-                <Link
-                  to="/programme"
-                  className="inline-flex items-center gap-2 rounded-md border border-input px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] transition-colors hover:bg-secondary"
-                >
-                  View Programme
                 </Link>
               </div>
             </div>
