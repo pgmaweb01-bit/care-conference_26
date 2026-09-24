@@ -62,8 +62,21 @@ function Countdown() {
 
   return (
     <section className="border-y border-border bg-primary text-primary-foreground">
-      <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8">
-        <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
+      <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8">
+        <div className="flex flex-col items-center gap-8 sm:flex-row sm:justify-center sm:gap-10">
+          <div className="text-center sm:text-left">
+            <p className="eyebrow text-primary-foreground/70">Countdown to the Conference</p>
+            <p className="mt-3 font-display text-xl font-extrabold leading-tight">
+              {EVENT.date}
+            </p>
+            <p className="mt-1 max-w-[30ch] text-sm leading-relaxed text-primary-foreground/70">
+              {EVENT.time} &middot; {EVENT.venue}
+            </p>
+          </div>
+          <div
+            className="hidden h-16 w-px bg-primary-foreground/25 sm:block"
+            aria-hidden="true"
+          />
           <div className="flex gap-4 sm:gap-6">
             {units.map((u) => (
               <div key={u.label} className="text-center">
@@ -475,7 +488,7 @@ function HomePage() {
       {/* BIG IDEA */}
       <section className="relative bg-ink text-ink-foreground">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/The big Idea.webp')" }}
         />
         <div className="absolute inset-0 bg-ink/85" />
@@ -616,42 +629,33 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="mt-10 overflow-hidden">
-          <div className="flex animate-marquee">
-            {[...SPEAKERS, ...SPEAKERS].map((speaker, i) => (
-              <div
-                key={i}
-                className="group relative w-36 shrink-0 sm:w-44 md:w-52"
-              >
-                <div className="aspect-[3/4] overflow-hidden rounded-lg">
-                  <div className="relative flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20">
-                    <span className="font-display text-3xl font-bold text-primary/40 sm:text-4xl">
-                      {speaker.initials}
-                    </span>
-                    <div className="absolute inset-0 flex items-end bg-gradient-to-t from-ink via-ink/60 to-transparent p-4 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
-                      <div>
-                        <p className="font-display text-xs font-bold text-primary">
-                          {speaker.role}
-                        </p>
-                        <p className="mt-1 text-sm font-bold text-ink-foreground">
-                          {speaker.name}
-                        </p>
-                        <p className="mt-1.5 hidden text-[11px] leading-relaxed text-ink-foreground/60 sm:block">
-                          {speaker.bio}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p className="mt-2 text-center text-xs font-bold text-foreground sm:hidden">
-                  {speaker.name}
-                </p>
-                <p className="text-center text-[10px] text-muted-foreground sm:hidden">
-                  {speaker.role}
-                </p>
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {SPEAKERS.filter(
+            (s, i, arr) => arr.findIndex((x) => x.role === s.role) === i,
+          ).map((speaker) => (
+            <div
+              key={speaker.role}
+              className="flex flex-col items-center rounded-lg border border-border bg-card p-7 text-center"
+            >
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20">
+                <span className="font-display text-lg font-bold text-primary/50">
+                  {speaker.initials}
+                </span>
               </div>
-            ))}
-          </div>
+              <p className="mt-4 font-display text-sm font-bold">{speaker.role}</p>
+              <p className="mt-1 text-xs text-muted-foreground">{speaker.name}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 rounded-lg border border-dashed border-border bg-background px-6 py-8 text-center">
+          <p className="font-display text-lg font-bold text-foreground">
+            Our full speaker lineup is being finalised.
+          </p>
+          <p className="mt-2 mx-auto max-w-[52ch] text-sm leading-relaxed text-muted-foreground">
+            Keynote speakers, panel chairs and panellists will be announced here as they are
+            confirmed across the coming weeks.
+          </p>
         </div>
 
         <div className="mt-10 text-center">
