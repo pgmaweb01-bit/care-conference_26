@@ -10,6 +10,16 @@ export function generateRegistrationId(): string {
   return id;
 }
 
+export function generatePitchApplicationId(): string {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let id = "PD26-";
+  for (let i = 0; i < 4; i++) {
+    if (i === 2) id += "-";
+    id += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return id;
+}
+
 export function RegistrationQR({
   registrationId,
   size = 200,

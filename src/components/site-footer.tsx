@@ -9,6 +9,7 @@ const QUICK_LINKS = [
 
 const SECOND_LINKS = [
   { to: "/caresouk", label: "CareSouk" },
+  { to: "/pitch-and-demo", label: "Pitch & Demo" },
   { to: "/partners", label: "Partners" },
   { to: "/register", label: "Register" },
   { to: "/contact", label: "Contact" },

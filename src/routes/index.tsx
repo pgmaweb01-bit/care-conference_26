@@ -669,6 +669,34 @@ function HomePage() {
         </div>
       </section>
 
+      {/* PITCH & DEMO */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-accent/10">
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:py-24">
+          <div className="lg:col-span-7">
+            <SectionHeading
+              eyebrow="Pitch & Demo Room"
+              title="Pitch at The Care Conference 2026"
+              lede="Eight selected founders building solutions that help Nigerians receive safe care at home will pitch for five minutes to a panel of investors, followed by three minutes of questions. The audience includes institutional and investment stakeholders from across the health system."
+            />
+          </div>
+          <div className="flex flex-col justify-end lg:col-span-5">
+            <p className="font-display text-2xl font-extrabold text-primary">
+              Pitch. Demo. Connect.
+            </p>
+            <p className="mt-2 max-w-[40ch] text-sm leading-relaxed text-muted-foreground">
+              Applying is free. Pitching is free. Take the applications form: it takes about 15
+              minutes, and you will need your pitch deck ready.
+            </p>
+            <Link
+              to="/pitch-and-demo"
+              className="mt-6 inline-flex w-fit items-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground"
+            >
+              Apply to Pitch <ArrowRight className="size-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* CARESOUK */}
       <section className="relative overflow-hidden bg-ink text-ink-foreground">
         <div

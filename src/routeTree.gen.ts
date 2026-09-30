@@ -15,6 +15,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CaresoukRouteImport } from './routes/caresouk'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as PitchAndDemoRouteImport } from './routes/pitch-and-demo'
 import { Route as PolicySessionsRouteImport } from './routes/policy-sessions'
 import { Route as ProgrammeRouteImport } from './routes/programme'
 import { Route as RegisterRouteImport } from './routes/register'
@@ -24,9 +25,11 @@ import { Route as AdminCheckInRouteImport } from './routes/admin/check-in'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminMessagesRouteImport } from './routes/admin/messages'
 import { Route as AdminPartnersRouteImport } from './routes/admin/partners'
+import { Route as AdminPitchApplicationsRouteImport } from './routes/admin/pitch-applications'
 import { Route as AdminRegistrationsRouteImport } from './routes/admin/registrations'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminSpeakersRouteImport } from './routes/admin/speakers'
+import { Route as ApiPitchApplicationsIndexRouteImport } from './routes/api/pitch-applications/index'
 import { Route as ApiQrRegistrationIdRouteImport } from './routes/api/qr/$registrationId'
 import { Route as ApiRegistrationsIndexRouteImport } from './routes/api/registrations/index'
 import { Route as ApiRegistrationsResendRouteImport } from './routes/api/registrations/resend'
@@ -60,6 +63,11 @@ const ContactRoute = ContactRouteImport.update({
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PitchAndDemoRoute = PitchAndDemoRouteImport.update({
+  id: '/pitch-and-demo',
+  path: '/pitch-and-demo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PolicySessionsRoute = PolicySessionsRouteImport.update({
@@ -107,6 +115,11 @@ const AdminPartnersRoute = AdminPartnersRouteImport.update({
   path: '/partners',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminPitchApplicationsRoute = AdminPitchApplicationsRouteImport.update({
+  id: '/pitch-applications',
+  path: '/pitch-applications',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminRegistrationsRoute = AdminRegistrationsRouteImport.update({
   id: '/registrations',
   path: '/registrations',
@@ -122,6 +135,12 @@ const AdminSpeakersRoute = AdminSpeakersRouteImport.update({
   path: '/speakers',
   getParentRoute: () => AdminRoute,
 } as any)
+const ApiPitchApplicationsIndexRoute =
+  ApiPitchApplicationsIndexRouteImport.update({
+    id: '/api/pitch-applications/',
+    path: '/api/pitch-applications/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiQrRegistrationIdRoute = ApiQrRegistrationIdRouteImport.update({
   id: '/api/qr/$registrationId',
   path: '/api/qr/$registrationId',
@@ -150,6 +169,7 @@ export interface FileRoutesByFullPath {
   '/caresouk': typeof CaresoukRoute
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
+  '/pitch-and-demo': typeof PitchAndDemoRoute
   '/policy-sessions': typeof PolicySessionsRoute
   '/programme': typeof ProgrammeRoute
   '/register': typeof RegisterRoute
@@ -158,6 +178,7 @@ export interface FileRoutesByFullPath {
   '/admin/login': typeof AdminLoginRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/partners': typeof AdminPartnersRoute
+  '/admin/pitch-applications': typeof AdminPitchApplicationsRoute
   '/admin/registrations': typeof AdminRegistrationsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
@@ -165,6 +186,7 @@ export interface FileRoutesByFullPath {
   '/api/qr/$registrationId': typeof ApiQrRegistrationIdRoute
   '/api/registrations/resend': typeof ApiRegistrationsResendRoute
   '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
+  '/api/pitch-applications/': typeof ApiPitchApplicationsIndexRoute
   '/api/registrations/': typeof ApiRegistrationsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -173,6 +195,7 @@ export interface FileRoutesByTo {
   '/caresouk': typeof CaresoukRoute
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
+  '/pitch-and-demo': typeof PitchAndDemoRoute
   '/policy-sessions': typeof PolicySessionsRoute
   '/programme': typeof ProgrammeRoute
   '/register': typeof RegisterRoute
@@ -181,6 +204,7 @@ export interface FileRoutesByTo {
   '/admin/login': typeof AdminLoginRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/partners': typeof AdminPartnersRoute
+  '/admin/pitch-applications': typeof AdminPitchApplicationsRoute
   '/admin/registrations': typeof AdminRegistrationsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
@@ -188,6 +212,7 @@ export interface FileRoutesByTo {
   '/api/qr/$registrationId': typeof ApiQrRegistrationIdRoute
   '/api/registrations/resend': typeof ApiRegistrationsResendRoute
   '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
+  '/api/pitch-applications': typeof ApiPitchApplicationsIndexRoute
   '/api/registrations': typeof ApiRegistrationsIndexRoute
 }
 export interface FileRoutesById {
@@ -198,6 +223,7 @@ export interface FileRoutesById {
   '/caresouk': typeof CaresoukRoute
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
+  '/pitch-and-demo': typeof PitchAndDemoRoute
   '/policy-sessions': typeof PolicySessionsRoute
   '/programme': typeof ProgrammeRoute
   '/register': typeof RegisterRoute
@@ -206,6 +232,7 @@ export interface FileRoutesById {
   '/admin/login': typeof AdminLoginRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/partners': typeof AdminPartnersRoute
+  '/admin/pitch-applications': typeof AdminPitchApplicationsRoute
   '/admin/registrations': typeof AdminRegistrationsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
@@ -213,6 +240,7 @@ export interface FileRoutesById {
   '/api/qr/$registrationId': typeof ApiQrRegistrationIdRoute
   '/api/registrations/resend': typeof ApiRegistrationsResendRoute
   '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
+  '/api/pitch-applications/': typeof ApiPitchApplicationsIndexRoute
   '/api/registrations/': typeof ApiRegistrationsIndexRoute
 }
 export interface FileRouteTypes {
@@ -224,6 +252,7 @@ export interface FileRouteTypes {
     | '/caresouk'
     | '/contact'
     | '/partners'
+    | '/pitch-and-demo'
     | '/policy-sessions'
     | '/programme'
     | '/register'
@@ -232,6 +261,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/admin/messages'
     | '/admin/partners'
+    | '/admin/pitch-applications'
     | '/admin/registrations'
     | '/admin/settings'
     | '/admin/speakers'
@@ -239,6 +269,7 @@ export interface FileRouteTypes {
     | '/api/qr/$registrationId'
     | '/api/registrations/resend'
     | '/api/registrations/stats'
+    | '/api/pitch-applications/'
     | '/api/registrations/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -247,6 +278,7 @@ export interface FileRouteTypes {
     | '/caresouk'
     | '/contact'
     | '/partners'
+    | '/pitch-and-demo'
     | '/policy-sessions'
     | '/programme'
     | '/register'
@@ -255,6 +287,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/admin/messages'
     | '/admin/partners'
+    | '/admin/pitch-applications'
     | '/admin/registrations'
     | '/admin/settings'
     | '/admin/speakers'
@@ -262,6 +295,7 @@ export interface FileRouteTypes {
     | '/api/qr/$registrationId'
     | '/api/registrations/resend'
     | '/api/registrations/stats'
+    | '/api/pitch-applications'
     | '/api/registrations'
   id:
     | '__root__'
@@ -271,6 +305,7 @@ export interface FileRouteTypes {
     | '/caresouk'
     | '/contact'
     | '/partners'
+    | '/pitch-and-demo'
     | '/policy-sessions'
     | '/programme'
     | '/register'
@@ -279,6 +314,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/admin/messages'
     | '/admin/partners'
+    | '/admin/pitch-applications'
     | '/admin/registrations'
     | '/admin/settings'
     | '/admin/speakers'
@@ -286,6 +322,7 @@ export interface FileRouteTypes {
     | '/api/qr/$registrationId'
     | '/api/registrations/resend'
     | '/api/registrations/stats'
+    | '/api/pitch-applications/'
     | '/api/registrations/'
   fileRoutesById: FileRoutesById
 }
@@ -296,6 +333,7 @@ export interface RootRouteChildren {
   CaresoukRoute: typeof CaresoukRoute
   ContactRoute: typeof ContactRoute
   PartnersRoute: typeof PartnersRoute
+  PitchAndDemoRoute: typeof PitchAndDemoRoute
   PolicySessionsRoute: typeof PolicySessionsRoute
   ProgrammeRoute: typeof ProgrammeRoute
   RegisterRoute: typeof RegisterRoute
@@ -303,6 +341,7 @@ export interface RootRouteChildren {
   ApiQrRegistrationIdRoute: typeof ApiQrRegistrationIdRoute
   ApiRegistrationsResendRoute: typeof ApiRegistrationsResendRoute
   ApiRegistrationsStatsRoute: typeof ApiRegistrationsStatsRoute
+  ApiPitchApplicationsIndexRoute: typeof ApiPitchApplicationsIndexRoute
   ApiRegistrationsIndexRoute: typeof ApiRegistrationsIndexRoute
 }
 
@@ -348,6 +387,13 @@ declare module '@tanstack/react-router' {
       path: '/partners'
       fullPath: '/partners'
       preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pitch-and-demo': {
+      id: '/pitch-and-demo'
+      path: '/pitch-and-demo'
+      fullPath: '/pitch-and-demo'
+      preLoaderRoute: typeof PitchAndDemoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/policy-sessions': {
@@ -413,6 +459,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPartnersRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/pitch-applications': {
+      id: '/admin/pitch-applications'
+      path: '/pitch-applications'
+      fullPath: '/admin/pitch-applications'
+      preLoaderRoute: typeof AdminPitchApplicationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/registrations': {
       id: '/admin/registrations'
       path: '/registrations'
@@ -433,6 +486,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/speakers'
       preLoaderRoute: typeof AdminSpeakersRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/api/pitch-applications/': {
+      id: '/api/pitch-applications/'
+      path: '/api/pitch-applications'
+      fullPath: '/api/pitch-applications/'
+      preLoaderRoute: typeof ApiPitchApplicationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/qr/$registrationId': {
       id: '/api/qr/$registrationId'
@@ -470,6 +530,7 @@ interface AdminRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
   AdminMessagesRoute: typeof AdminMessagesRoute
   AdminPartnersRoute: typeof AdminPartnersRoute
+  AdminPitchApplicationsRoute: typeof AdminPitchApplicationsRoute
   AdminRegistrationsRoute: typeof AdminRegistrationsRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminSpeakersRoute: typeof AdminSpeakersRoute
@@ -481,6 +542,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
   AdminMessagesRoute: AdminMessagesRoute,
   AdminPartnersRoute: AdminPartnersRoute,
+  AdminPitchApplicationsRoute: AdminPitchApplicationsRoute,
   AdminRegistrationsRoute: AdminRegistrationsRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminSpeakersRoute: AdminSpeakersRoute,
@@ -496,6 +558,7 @@ const rootRouteChildren: RootRouteChildren = {
   CaresoukRoute: CaresoukRoute,
   ContactRoute: ContactRoute,
   PartnersRoute: PartnersRoute,
+  PitchAndDemoRoute: PitchAndDemoRoute,
   PolicySessionsRoute: PolicySessionsRoute,
   ProgrammeRoute: ProgrammeRoute,
   RegisterRoute: RegisterRoute,
@@ -503,6 +566,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiQrRegistrationIdRoute: ApiQrRegistrationIdRoute,
   ApiRegistrationsResendRoute: ApiRegistrationsResendRoute,
   ApiRegistrationsStatsRoute: ApiRegistrationsStatsRoute,
+  ApiPitchApplicationsIndexRoute: ApiPitchApplicationsIndexRoute,
   ApiRegistrationsIndexRoute: ApiRegistrationsIndexRoute,
 }
 export const routeTree = rootRouteImport

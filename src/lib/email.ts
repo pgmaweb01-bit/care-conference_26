@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { registrationEmailHTML } from "./email-template";
+import { pitchApplicationEmailHTML, registrationEmailHTML } from "./email-template";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -44,6 +44,38 @@ export async function sendRegistrationEmail(data: {
     return { success: true };
   } catch (error) {
     console.error("Failed to send registration email:", error);
+    return { success: false, error: "Failed to send email" };
+  }
+}
+
+export async function sendPitchApplicationEmail(data: {
+  email: string;
+  fullName: string;
+  applicationId: string;
+}): Promise<{ success: boolean; error?: string }> {
+  try {
+    if (!process.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not set");
+      return { success: false, error: "RESEND_API_KEY not configured" };
+    }
+
+    console.log("Sending pitch application email to:", data.email, "ID:", data.applicationId);
+
+    const html = pitchApplicationEmailHTML({
+      fullName: data.fullName,
+      applicationId: data.applicationId,
+    });
+
+    await resend.emails.send({
+      from: "Care Conference 2026 <registrations@careconference2026.purpleglobalmission.org>",
+      to: data.email,
+      subject: "Your Pitch Application is Received - Care Conference 2026",
+      html,
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to send pitch application email:", error);
     return { success: false, error: "Failed to send email" };
   }
 }

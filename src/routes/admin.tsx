@@ -11,6 +11,7 @@ import {
   Menu,
   LogOut,
   QrCode,
+  Presentation,
 } from "lucide-react";
 import { isAuthenticated, logout } from "@/lib/auth";
 
@@ -22,6 +23,7 @@ const SIDEBAR_NAV = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/admin/check-in", label: "Check-In", icon: QrCode },
   { to: "/admin/registrations", label: "Registrations", icon: Users },
+  { to: "/admin/pitch-applications", label: "Pitch Applications", icon: Presentation },
   { to: "/admin/speakers", label: "Speakers", icon: Mic2 },
   { to: "/admin/partners", label: "Partners", icon: Handshake },
   { to: "/admin/messages", label: "Messages", icon: Mail },
