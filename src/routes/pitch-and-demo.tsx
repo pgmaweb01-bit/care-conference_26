@@ -173,6 +173,7 @@ function PitchAndDemoPage() {
         eyebrow="Pitch & Demo Room · Innovation Showcase"
         title="Pitch at The Care Conference 2026"
         lede="Applications are now open for the Pitch and Demo Room at The Care Conference 2026. Eight selected founders building solutions that help Nigerians receive safe care at home will each pitch for five minutes to a panel of investors, followed by three minutes of their questions, on 19 November at IALA Hub, The Chair Centre, Lagos. The audience includes institutional and investment stakeholders from across the health system."
+        backgroundImage="/About Hero.webp"
       />
 
       <div className="mx-auto max-w-3xl px-6 py-12">
