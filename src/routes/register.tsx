@@ -443,10 +443,9 @@ function AttendeeForm() {
                 <option value="" disabled>
                   Select a room
                 </option>
-                <option>Room A: Who Cares for Nigeria? (Workforce)</option>
-                <option>Room B: The Journey Between (Coordination)</option>
-                <option>Room C: You Cannot Finance What You Cannot Count (Digital)</option>
-                <option>Room D: Paying for the Load Bearing Layer (Financing)</option>
+                <option>Room A: Care Workforce &amp; Continuation of Care</option>
+                <option>Room B: Conference on Healthy Ageing</option>
+                <option>Room C: Pitch/Demo Room</option>
               </select>
             </Field>
             <Field label="Side room, second choice" required>
@@ -460,8 +459,9 @@ function AttendeeForm() {
                 <option value="" disabled>
                   Select a room
                 </option>
-                <option>Room A: The Journey Between (Coordination)</option>
-                <option>Room B: Paying for the Load Bearing Layer (Financing)</option>
+                <option>Room A: Care Workforce &amp; Continuation of Care</option>
+                <option>Room B: Conference on Healthy Ageing</option>
+                <option>Room C: Pitch/Demo Room</option>
               </select>
             </Field>
             <Field label="Sector" required>
