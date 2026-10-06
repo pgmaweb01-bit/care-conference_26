@@ -27,6 +27,7 @@ import { Route as AdminMessagesRouteImport } from './routes/admin/messages'
 import { Route as AdminPartnersRouteImport } from './routes/admin/partners'
 import { Route as AdminPitchApplicationsRouteImport } from './routes/admin/pitch-applications'
 import { Route as AdminRegistrationsRouteImport } from './routes/admin/registrations'
+import { Route as AdminSendEmailRouteImport } from './routes/admin/send-email'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminSpeakersRouteImport } from './routes/admin/speakers'
 import { Route as ApiPitchApplicationsIndexRouteImport } from './routes/api/pitch-applications/index'
@@ -34,6 +35,7 @@ import { Route as ApiQrRegistrationIdRouteImport } from './routes/api/qr/$regist
 import { Route as ApiRegistrationsIndexRouteImport } from './routes/api/registrations/index'
 import { Route as ApiRegistrationsResendRouteImport } from './routes/api/registrations/resend'
 import { Route as ApiRegistrationsStatsRouteImport } from './routes/api/registrations/stats'
+import { Route as ApiAdminSendEmailIndexRouteImport } from './routes/api/admin/send-email/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -125,6 +127,11 @@ const AdminRegistrationsRoute = AdminRegistrationsRouteImport.update({
   path: '/registrations',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminSendEmailRoute = AdminSendEmailRouteImport.update({
+  id: '/send-email',
+  path: '/send-email',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -161,6 +168,11 @@ const ApiRegistrationsStatsRoute = ApiRegistrationsStatsRouteImport.update({
   path: '/api/registrations/stats',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminSendEmailIndexRoute = ApiAdminSendEmailIndexRouteImport.update({
+  id: '/api/admin/send-email/',
+  path: '/api/admin/send-email/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -180,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/pitch-applications': typeof AdminPitchApplicationsRoute
   '/admin/registrations': typeof AdminRegistrationsRoute
+  '/admin/send-email': typeof AdminSendEmailRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
   '/admin/': typeof AdminIndexRoute
@@ -188,6 +201,7 @@ export interface FileRoutesByFullPath {
   '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
   '/api/pitch-applications/': typeof ApiPitchApplicationsIndexRoute
   '/api/registrations/': typeof ApiRegistrationsIndexRoute
+  '/api/admin/send-email/': typeof ApiAdminSendEmailIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -206,6 +220,7 @@ export interface FileRoutesByTo {
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/pitch-applications': typeof AdminPitchApplicationsRoute
   '/admin/registrations': typeof AdminRegistrationsRoute
+  '/admin/send-email': typeof AdminSendEmailRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
   '/admin': typeof AdminIndexRoute
@@ -214,6 +229,7 @@ export interface FileRoutesByTo {
   '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
   '/api/pitch-applications': typeof ApiPitchApplicationsIndexRoute
   '/api/registrations': typeof ApiRegistrationsIndexRoute
+  '/api/admin/send-email': typeof ApiAdminSendEmailIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -234,6 +250,7 @@ export interface FileRoutesById {
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/pitch-applications': typeof AdminPitchApplicationsRoute
   '/admin/registrations': typeof AdminRegistrationsRoute
+  '/admin/send-email': typeof AdminSendEmailRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
   '/admin/': typeof AdminIndexRoute
@@ -242,6 +259,7 @@ export interface FileRoutesById {
   '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
   '/api/pitch-applications/': typeof ApiPitchApplicationsIndexRoute
   '/api/registrations/': typeof ApiRegistrationsIndexRoute
+  '/api/admin/send-email/': typeof ApiAdminSendEmailIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -263,6 +281,7 @@ export interface FileRouteTypes {
     | '/admin/partners'
     | '/admin/pitch-applications'
     | '/admin/registrations'
+    | '/admin/send-email'
     | '/admin/settings'
     | '/admin/speakers'
     | '/admin/'
@@ -271,6 +290,7 @@ export interface FileRouteTypes {
     | '/api/registrations/stats'
     | '/api/pitch-applications/'
     | '/api/registrations/'
+    | '/api/admin/send-email/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -289,6 +309,7 @@ export interface FileRouteTypes {
     | '/admin/partners'
     | '/admin/pitch-applications'
     | '/admin/registrations'
+    | '/admin/send-email'
     | '/admin/settings'
     | '/admin/speakers'
     | '/admin'
@@ -297,6 +318,7 @@ export interface FileRouteTypes {
     | '/api/registrations/stats'
     | '/api/pitch-applications'
     | '/api/registrations'
+    | '/api/admin/send-email'
   id:
     | '__root__'
     | '/'
@@ -316,6 +338,7 @@ export interface FileRouteTypes {
     | '/admin/partners'
     | '/admin/pitch-applications'
     | '/admin/registrations'
+    | '/admin/send-email'
     | '/admin/settings'
     | '/admin/speakers'
     | '/admin/'
@@ -324,6 +347,7 @@ export interface FileRouteTypes {
     | '/api/registrations/stats'
     | '/api/pitch-applications/'
     | '/api/registrations/'
+    | '/api/admin/send-email/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -343,6 +367,7 @@ export interface RootRouteChildren {
   ApiRegistrationsStatsRoute: typeof ApiRegistrationsStatsRoute
   ApiPitchApplicationsIndexRoute: typeof ApiPitchApplicationsIndexRoute
   ApiRegistrationsIndexRoute: typeof ApiRegistrationsIndexRoute
+  ApiAdminSendEmailIndexRoute: typeof ApiAdminSendEmailIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -473,6 +498,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRegistrationsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/send-email': {
+      id: '/admin/send-email'
+      path: '/send-email'
+      fullPath: '/admin/send-email'
+      preLoaderRoute: typeof AdminSendEmailRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/settings': {
       id: '/admin/settings'
       path: '/settings'
@@ -522,6 +554,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiRegistrationsStatsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/send-email/': {
+      id: '/api/admin/send-email/'
+      path: '/api/admin/send-email'
+      fullPath: '/api/admin/send-email/'
+      preLoaderRoute: typeof ApiAdminSendEmailIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -532,6 +571,7 @@ interface AdminRouteChildren {
   AdminPartnersRoute: typeof AdminPartnersRoute
   AdminPitchApplicationsRoute: typeof AdminPitchApplicationsRoute
   AdminRegistrationsRoute: typeof AdminRegistrationsRoute
+  AdminSendEmailRoute: typeof AdminSendEmailRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminSpeakersRoute: typeof AdminSpeakersRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -544,6 +584,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminPartnersRoute: AdminPartnersRoute,
   AdminPitchApplicationsRoute: AdminPitchApplicationsRoute,
   AdminRegistrationsRoute: AdminRegistrationsRoute,
+  AdminSendEmailRoute: AdminSendEmailRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminSpeakersRoute: AdminSpeakersRoute,
   AdminIndexRoute: AdminIndexRoute,
@@ -568,6 +609,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiRegistrationsStatsRoute: ApiRegistrationsStatsRoute,
   ApiPitchApplicationsIndexRoute: ApiPitchApplicationsIndexRoute,
   ApiRegistrationsIndexRoute: ApiRegistrationsIndexRoute,
+  ApiAdminSendEmailIndexRoute: ApiAdminSendEmailIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

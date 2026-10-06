@@ -4,12 +4,22 @@ const CREDENTIALS = {
   password: "CAREadmin2026",
 };
 
+export const ADMIN_EMAIL = CREDENTIALS.email;
+
 export function login(email: string, password: string): boolean {
   if (email === CREDENTIALS.email && password === CREDENTIALS.password) {
     localStorage.setItem(AUTH_KEY, JSON.stringify({ email, authenticated: true }));
     return true;
   }
   return false;
+}
+
+export function verifyAdminCredentials(email: string, password: string): boolean {
+  return email === CREDENTIALS.email && password === CREDENTIALS.password;
+}
+
+export function getAuthHeader(): string {
+  return btoa(`${CREDENTIALS.email}:${CREDENTIALS.password}`);
 }
 
 export function logout(): void {

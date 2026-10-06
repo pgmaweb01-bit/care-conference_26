@@ -12,6 +12,7 @@ import {
   LogOut,
   QrCode,
   Presentation,
+  SendHorizontal,
 } from "lucide-react";
 import { isAuthenticated, logout } from "@/lib/auth";
 
@@ -27,6 +28,7 @@ const SIDEBAR_NAV = [
   { to: "/admin/speakers", label: "Speakers", icon: Mic2 },
   { to: "/admin/partners", label: "Partners", icon: Handshake },
   { to: "/admin/messages", label: "Messages", icon: Mail },
+  { to: "/admin/send-email", label: "Send Email", icon: SendHorizontal },
   { to: "/admin/settings", label: "Settings", icon: Settings },
 ] as const;
 
