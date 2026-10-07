@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { verifyAdminCredentials } from "@/lib/auth";
+import { isAuthenticatedRequest } from "@/lib/auth";
 import { sendBulkEmail, type EmailRecipient } from "@/lib/email";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -17,24 +17,7 @@ export const Route = createFileRoute("/api/admin/send-email/")({
     handlers: {
       POST: async ({ request }) => {
         try {
-          const authHeader = request.headers.get("x-admin-auth");
-          if (!authHeader) {
-            return json({ error: "Unauthorized" }, 401);
-          }
-
-          let adminEmail = "";
-          let adminPassword = "";
-          try {
-            const decoded = atob(authHeader);
-            const separator = decoded.indexOf(":");
-            if (separator > 0) {
-              adminEmail = decoded.slice(0, separator);
-              adminPassword = decoded.slice(separator + 1);
-            }
-          } catch {
-            // fall through to unauthorized
-          }
-          if (!verifyAdminCredentials(adminEmail, adminPassword)) {
+          if (!isAuthenticatedRequest(request)) {
             return json({ error: "Unauthorized" }, 401);
           }
 

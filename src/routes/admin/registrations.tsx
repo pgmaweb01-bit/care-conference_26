@@ -1,6 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { Search, Download, Filter, CheckCircle, Mail, LayoutList, Contact } from "lucide-react";
+import {
+  Search,
+  Download,
+  Filter,
+  CheckCircle,
+  Mail,
+  LayoutList,
+  Contact,
+  Trash2,
+} from "lucide-react";
+import { getAuthHeader } from "@/lib/auth";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface Registration {
   id: number;
@@ -35,6 +55,8 @@ function AdminRegistrations() {
   const [filterStatus, setFilterStatus] = useState("all");
   const [view, setView] = useState<"table" | "details">("table");
   const [resending, setResending] = useState<string | null>(null);
+  const [confirmDelete, setConfirmDelete] = useState<Registration | null>(null);
+  const [deleting, setDeleting] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
   useEffect(() => {
@@ -68,9 +90,49 @@ function AdminRegistrations() {
   });
 
   function handleExport() {
-    const headers = ["Reg ID", "Name", "Email", "Phone", "Organisation", "Type", "Gender", "Country", "State", "City", "Profession", "Position", "Side Room 1", "Side Room 2", "Sector", "Status", "Checked In", "Date"];
-    const rows = filtered.map((r) => [r.registration_id, r.full_name, r.email, r.phone, r.organisation, r.type, r.gender, r.country, r.state, r.city, r.profession, r.position, r.side_room1, r.side_room2, r.category, r.status, r.checked_in ? "Yes" : "No", new Date(r.created_at).toLocaleDateString("en-GB")]);
-    const csv = [headers, ...rows].map((row) => row.map((c) => `"${String(c ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
+    const headers = [
+      "Reg ID",
+      "Name",
+      "Email",
+      "Phone",
+      "Organisation",
+      "Type",
+      "Gender",
+      "Country",
+      "State",
+      "City",
+      "Profession",
+      "Position",
+      "Side Room 1",
+      "Side Room 2",
+      "Sector",
+      "Status",
+      "Checked In",
+      "Date",
+    ];
+    const rows = filtered.map((r) => [
+      r.registration_id,
+      r.full_name,
+      r.email,
+      r.phone,
+      r.organisation,
+      r.type,
+      r.gender,
+      r.country,
+      r.state,
+      r.city,
+      r.profession,
+      r.position,
+      r.side_room1,
+      r.side_room2,
+      r.category,
+      r.status,
+      r.checked_in ? "Yes" : "No",
+      new Date(r.created_at).toLocaleDateString("en-GB"),
+    ]);
+    const csv = [headers, ...rows]
+      .map((row) => row.map((c) => `"${String(c ?? "").replace(/"/g, '""')}"`).join(","))
+      .join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
@@ -99,20 +161,85 @@ function AdminRegistrations() {
     }
   }
 
+  async function handleDelete() {
+    if (!confirmDelete) return;
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/registrations/${confirmDelete.registration_id}`, {
+        method: "DELETE",
+        headers: { "x-admin-auth": getAuthHeader() },
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        const deleted = confirmDelete;
+        setRegistrations((prev) =>
+          prev.filter((r) => r.registration_id !== deleted.registration_id),
+        );
+        setConfirmDelete(null);
+        setToast({
+          message: `Deleted ${deleted.full_name} (${deleted.registration_id})`,
+          type: "success",
+        });
+      } else {
+        setToast({ message: data.error || "Failed to delete registration", type: "error" });
+      }
+    } catch {
+      setToast({ message: "Failed to delete registration", type: "error" });
+    } finally {
+      setDeleting(false);
+    }
+  }
+
   return (
     <div className="space-y-6">
       {toast && (
-        <div className={`fixed right-4 top-4 z-50 rounded-lg px-4 py-3 text-sm font-semibold shadow-lg ${toast.type === "success" ? "bg-green-600 text-white" : "bg-red-600 text-white"}`}>
+        <div
+          className={`fixed right-4 top-4 z-50 rounded-lg px-4 py-3 text-sm font-semibold shadow-lg ${toast.type === "success" ? "bg-green-600 text-white" : "bg-red-600 text-white"}`}
+        >
           {toast.message}
         </div>
       )}
+
+      <AlertDialog
+        open={confirmDelete !== null}
+        onOpenChange={(open) => {
+          if (!open && !deleting) setConfirmDelete(null);
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete this registration?</AlertDialogTitle>
+            <AlertDialogDescription>
+              You're about to permanently delete <strong>{confirmDelete?.full_name}</strong>{" "}
+              <span className="font-mono">({confirmDelete?.registration_id})</span>. This will
+              remove their record and QR check-in from the system. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              disabled={deleting}
+              onClick={(e) => {
+                e.preventDefault();
+                handleDelete();
+              }}
+              className="bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
+            >
+              {deleting ? "Deleting..." : "Yes, delete"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="font-display text-3xl font-extrabold">Registrations</h1>
           <p className="mt-1 text-muted-foreground">Manage conference delegate registrations.</p>
         </div>
-        <button onClick={handleExport} className="inline-flex items-center gap-2 rounded-md border border-input px-4 py-2 font-display text-xs font-semibold uppercase tracking-wider transition-colors hover:bg-secondary">
+        <button
+          onClick={handleExport}
+          className="inline-flex items-center gap-2 rounded-md border border-input px-4 py-2 font-display text-xs font-semibold uppercase tracking-wider transition-colors hover:bg-secondary"
+        >
           <Download className="size-3.5" />
           Export CSV
         </button>
@@ -123,7 +250,9 @@ function AdminRegistrations() {
         <button
           onClick={() => setView("table")}
           className={`inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition-colors ${
-            view === "table" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+            view === "table"
+              ? "bg-primary text-primary-foreground"
+              : "text-muted-foreground hover:text-foreground"
           }`}
         >
           <LayoutList className="size-4" />
@@ -132,7 +261,9 @@ function AdminRegistrations() {
         <button
           onClick={() => setView("details")}
           className={`inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition-colors ${
-            view === "details" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+            view === "details"
+              ? "bg-primary text-primary-foreground"
+              : "text-muted-foreground hover:text-foreground"
           }`}
         >
           <Contact className="size-4" />
@@ -191,7 +322,7 @@ function AdminRegistrations() {
                 <th className="p-4">Status</th>
                 <th className="p-4">Check-In</th>
                 <th className="p-4 hidden lg:table-cell">Date</th>
-                <th className="p-4">Email</th>
+                <th className="p-4">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -235,17 +366,35 @@ function AdminRegistrations() {
                       <span className="text-xs text-muted-foreground">Pending</span>
                     )}
                   </td>
-                  <td className="p-4 text-muted-foreground hidden lg:table-cell">{new Date(reg.created_at).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</td>
+                  <td className="p-4 text-muted-foreground hidden lg:table-cell">
+                    {new Date(reg.created_at).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </td>
                   <td className="p-4">
-                    <button
-                      onClick={() => handleResendEmail(reg.registration_id)}
-                      disabled={resending === reg.registration_id}
-                      className="inline-flex items-center gap-1.5 rounded-md bg-primary/10 px-2.5 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary/20 disabled:opacity-50"
-                      title="Resend confirmation email"
-                    >
-                      <Mail className={`size-3 ${resending === reg.registration_id ? "animate-pulse" : ""}`} />
-                      {resending === reg.registration_id ? "Sending..." : "Resend"}
-                    </button>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => handleResendEmail(reg.registration_id)}
+                        disabled={resending === reg.registration_id}
+                        className="inline-flex items-center gap-1.5 rounded-md bg-primary/10 px-2.5 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary/20 disabled:opacity-50"
+                        title="Resend confirmation email"
+                      >
+                        <Mail
+                          className={`size-3 ${resending === reg.registration_id ? "animate-pulse" : ""}`}
+                        />
+                        {resending === reg.registration_id ? "Sending..." : "Resend"}
+                      </button>
+                      <button
+                        onClick={() => setConfirmDelete(reg)}
+                        className="inline-flex items-center gap-1.5 rounded-md border border-input px-2.5 py-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:bg-red-50 hover:text-red-600"
+                        title="Delete registration"
+                      >
+                        <Trash2 className="size-3" />
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -264,6 +413,7 @@ function AdminRegistrations() {
               reg={reg}
               resending={resending === reg.registration_id}
               onResend={() => handleResendEmail(reg.registration_id)}
+              onDelete={() => setConfirmDelete(reg)}
             />
           ))}
           {filtered.length === 0 && (
@@ -285,10 +435,12 @@ function DetailCard({
   reg,
   resending,
   onResend,
+  onDelete,
 }: {
   reg: Registration;
   resending: boolean;
   onResend: () => void;
+  onDelete: () => void;
 }) {
   const fields: Array<[string, string | undefined]> = [
     ["Registration ID", reg.registration_id],
@@ -308,7 +460,16 @@ function DetailCard({
     ["Sector", reg.category],
     ["Status", reg.status],
     ["Checked in", reg.checked_in ? "Yes" : "No"],
-    ["Registered on", new Date(reg.created_at).toLocaleString("en-GB", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })],
+    [
+      "Registered on",
+      new Date(reg.created_at).toLocaleString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    ],
   ];
 
   return (
@@ -344,6 +505,13 @@ function DetailCard({
             <Mail className={`size-3 ${resending ? "animate-pulse" : ""}`} />
             {resending ? "Sending..." : "Resend"}
           </button>
+          <button
+            onClick={onDelete}
+            className="grid size-8 place-items-center rounded-md border border-input text-muted-foreground transition-colors hover:bg-red-50 hover:text-red-600"
+            title="Delete registration"
+          >
+            <Trash2 className="size-3.5" />
+          </button>
         </div>
       </div>
       <div className="grid gap-x-6 gap-y-4 px-5 py-5 sm:grid-cols-2 xl:grid-cols-3">
@@ -352,7 +520,9 @@ function DetailCard({
             <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
               {label}
             </p>
-            <p className={`mt-0.5 text-sm break-words ${value ? "text-foreground" : "text-muted-foreground/60"}`}>
+            <p
+              className={`mt-0.5 text-sm break-words ${value ? "text-foreground" : "text-muted-foreground/60"}`}
+            >
               {value || "—"}
             </p>
           </div>

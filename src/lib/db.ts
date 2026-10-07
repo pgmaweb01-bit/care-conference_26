@@ -68,6 +68,13 @@ export async function addRegistration(data: {
   return rows[0] as Registration;
 }
 
+export async function deleteRegistration(registrationId: string): Promise<boolean> {
+  const rows = await sql`
+    DELETE FROM registrations WHERE registration_id = ${registrationId} RETURNING id
+  `;
+  return rows.length > 0;
+}
+
 export interface PitchApplication {
   id: number;
   application_id: string;

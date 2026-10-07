@@ -33,6 +33,7 @@ import { Route as AdminSpeakersRouteImport } from './routes/admin/speakers'
 import { Route as ApiPitchApplicationsIndexRouteImport } from './routes/api/pitch-applications/index'
 import { Route as ApiQrRegistrationIdRouteImport } from './routes/api/qr/$registrationId'
 import { Route as ApiRegistrationsIndexRouteImport } from './routes/api/registrations/index'
+import { Route as ApiRegistrationsRegistrationIdRouteImport } from './routes/api/registrations/$registrationId'
 import { Route as ApiRegistrationsResendRouteImport } from './routes/api/registrations/resend'
 import { Route as ApiRegistrationsStatsRouteImport } from './routes/api/registrations/stats'
 import { Route as ApiAdminSendEmailIndexRouteImport } from './routes/api/admin/send-email/index'
@@ -158,6 +159,12 @@ const ApiRegistrationsIndexRoute = ApiRegistrationsIndexRouteImport.update({
   path: '/api/registrations/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiRegistrationsRegistrationIdRoute =
+  ApiRegistrationsRegistrationIdRouteImport.update({
+    id: '/api/registrations/$registrationId',
+    path: '/api/registrations/$registrationId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiRegistrationsResendRoute = ApiRegistrationsResendRouteImport.update({
   id: '/api/registrations/resend',
   path: '/api/registrations/resend',
@@ -197,6 +204,7 @@ export interface FileRoutesByFullPath {
   '/admin/speakers': typeof AdminSpeakersRoute
   '/admin/': typeof AdminIndexRoute
   '/api/qr/$registrationId': typeof ApiQrRegistrationIdRoute
+  '/api/registrations/$registrationId': typeof ApiRegistrationsRegistrationIdRoute
   '/api/registrations/resend': typeof ApiRegistrationsResendRoute
   '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
   '/api/pitch-applications/': typeof ApiPitchApplicationsIndexRoute
@@ -225,6 +233,7 @@ export interface FileRoutesByTo {
   '/admin/speakers': typeof AdminSpeakersRoute
   '/admin': typeof AdminIndexRoute
   '/api/qr/$registrationId': typeof ApiQrRegistrationIdRoute
+  '/api/registrations/$registrationId': typeof ApiRegistrationsRegistrationIdRoute
   '/api/registrations/resend': typeof ApiRegistrationsResendRoute
   '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
   '/api/pitch-applications': typeof ApiPitchApplicationsIndexRoute
@@ -255,6 +264,7 @@ export interface FileRoutesById {
   '/admin/speakers': typeof AdminSpeakersRoute
   '/admin/': typeof AdminIndexRoute
   '/api/qr/$registrationId': typeof ApiQrRegistrationIdRoute
+  '/api/registrations/$registrationId': typeof ApiRegistrationsRegistrationIdRoute
   '/api/registrations/resend': typeof ApiRegistrationsResendRoute
   '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
   '/api/pitch-applications/': typeof ApiPitchApplicationsIndexRoute
@@ -286,6 +296,7 @@ export interface FileRouteTypes {
     | '/admin/speakers'
     | '/admin/'
     | '/api/qr/$registrationId'
+    | '/api/registrations/$registrationId'
     | '/api/registrations/resend'
     | '/api/registrations/stats'
     | '/api/pitch-applications/'
@@ -314,6 +325,7 @@ export interface FileRouteTypes {
     | '/admin/speakers'
     | '/admin'
     | '/api/qr/$registrationId'
+    | '/api/registrations/$registrationId'
     | '/api/registrations/resend'
     | '/api/registrations/stats'
     | '/api/pitch-applications'
@@ -343,6 +355,7 @@ export interface FileRouteTypes {
     | '/admin/speakers'
     | '/admin/'
     | '/api/qr/$registrationId'
+    | '/api/registrations/$registrationId'
     | '/api/registrations/resend'
     | '/api/registrations/stats'
     | '/api/pitch-applications/'
@@ -363,6 +376,7 @@ export interface RootRouteChildren {
   RegisterRoute: typeof RegisterRoute
   SpeakersRoute: typeof SpeakersRoute
   ApiQrRegistrationIdRoute: typeof ApiQrRegistrationIdRoute
+  ApiRegistrationsRegistrationIdRoute: typeof ApiRegistrationsRegistrationIdRoute
   ApiRegistrationsResendRoute: typeof ApiRegistrationsResendRoute
   ApiRegistrationsStatsRoute: typeof ApiRegistrationsStatsRoute
   ApiPitchApplicationsIndexRoute: typeof ApiPitchApplicationsIndexRoute
@@ -540,6 +554,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiRegistrationsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/registrations/$registrationId': {
+      id: '/api/registrations/$registrationId'
+      path: '/api/registrations/$registrationId'
+      fullPath: '/api/registrations/$registrationId'
+      preLoaderRoute: typeof ApiRegistrationsRegistrationIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/registrations/resend': {
       id: '/api/registrations/resend'
       path: '/api/registrations/resend'
@@ -605,6 +626,7 @@ const rootRouteChildren: RootRouteChildren = {
   RegisterRoute: RegisterRoute,
   SpeakersRoute: SpeakersRoute,
   ApiQrRegistrationIdRoute: ApiQrRegistrationIdRoute,
+  ApiRegistrationsRegistrationIdRoute: ApiRegistrationsRegistrationIdRoute,
   ApiRegistrationsResendRoute: ApiRegistrationsResendRoute,
   ApiRegistrationsStatsRoute: ApiRegistrationsStatsRoute,
   ApiPitchApplicationsIndexRoute: ApiPitchApplicationsIndexRoute,

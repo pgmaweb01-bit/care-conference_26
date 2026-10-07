@@ -22,6 +22,19 @@ export function getAuthHeader(): string {
   return btoa(`${CREDENTIALS.email}:${CREDENTIALS.password}`);
 }
 
+export function isAuthenticatedRequest(request: Request): boolean {
+  const header = request.headers.get("x-admin-auth");
+  if (!header) return false;
+  try {
+    const decoded = atob(header);
+    const separator = decoded.indexOf(":");
+    if (separator < 0) return false;
+    return verifyAdminCredentials(decoded.slice(0, separator), decoded.slice(separator + 1));
+  } catch {
+    return false;
+  }
+}
+
 export function logout(): void {
   localStorage.removeItem(AUTH_KEY);
 }
