@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle, Download, Mic, Printer, User } from "lucide-re
 import { PageHero } from "@/components/section";
 import { EVENT } from "@/data/conference";
 import { RegistrationQR, generateRegistrationId } from "@/components/registration-qr";
+import { processSpeakerMedia } from "@/lib/media";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
@@ -17,8 +18,7 @@ export const Route = createFileRoute("/register")({
       { property: "og:title", content: "Register — Care Conference 2026" },
       {
         property: "og:description",
-        content:
-          "Register for Care Conference 2026: Care as Infrastructure.",
+        content: "Register for Care Conference 2026: Care as Infrastructure.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/register" },
@@ -106,17 +106,13 @@ function Field({
 
 function SectionCard({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-6 shadow-sm sm:p-8">
-      {children}
-    </div>
+    <div className="rounded-xl border border-border bg-card p-6 shadow-sm sm:p-8">{children}</div>
   );
 }
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-display text-lg font-bold tracking-tight text-foreground">
-      {children}
-    </h2>
+    <h2 className="font-display text-lg font-bold tracking-tight text-foreground">{children}</h2>
   );
 }
 
@@ -245,8 +241,7 @@ function AttendeeForm() {
     specialNeeds: "",
   });
 
-  const update = (field: string, value: string) =>
-    setFormData((p) => ({ ...p, [field]: value }));
+  const update = (field: string, value: string) => setFormData((p) => ({ ...p, [field]: value }));
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -550,7 +545,9 @@ function AttendeeForm() {
           className="group relative inline-flex h-11 items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary via-primary to-primary/80 px-7 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98] disabled:opacity-60"
         >
           <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-          <span className="relative z-10">{loading ? "Registering…" : "Complete Registration"}</span>
+          <span className="relative z-10">
+            {loading ? "Registering…" : "Complete Registration"}
+          </span>
         </button>
       </form>
     </div>
@@ -562,6 +559,12 @@ function AttendeeForm() {
 function SpeakerForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [media, setMedia] = useState<{ headshot: File | null; photos: File[]; cv: File | null }>({
+    headshot: null,
+    photos: [],
+    cv: null,
+  });
   const [formData, setFormData] = useState({
     fullName: "",
     title: "",
@@ -594,37 +597,65 @@ function SpeakerForm() {
     dietary: "",
   });
 
-  const update = (field: string, value: string) =>
-    setFormData((p) => ({ ...p, [field]: value }));
+  const update = (field: string, value: string) => setFormData((p) => ({ ...p, [field]: value }));
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setError("");
     setLoading(true);
     try {
-      await fetch("/api/registrations", {
+      const processed = await processSpeakerMedia(media);
+      if (processed.error) {
+        setError(processed.error);
+        return;
+      }
+
+      const body = JSON.stringify({
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        organisation: formData.organization,
+        type: "speaker",
+        gender: formData.gender,
+        country: formData.nationality,
+        state: "",
+        city: formData.departureCity,
+        profession: formData.expertise,
+        position: formData.position,
+        sideRoom1: "",
+        sideRoom2: "",
+        category: "",
+        speakerProfile: {
+          ...formData,
+          headshot: processed.headshot,
+          photos: processed.photos,
+          cv: processed.cv,
+        },
+      });
+
+      if (body.length > 4_400_000) {
+        setError(
+          "Your photos and CV are too large in total. Please upload fewer or smaller photos and try again.",
+        );
+        return;
+      }
+
+      const res = await fetch("/api/registrations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          email: formData.email,
-          phone: formData.phone,
-          organisation: formData.organization,
-          type: "speaker",
-          gender: formData.gender,
-          country: formData.nationality,
-          state: "",
-          city: formData.departureCity,
-          profession: formData.expertise,
-          position: formData.position,
-          sideRoom1: "",
-          sideRoom2: "",
-          category: "",
-        }),
+        body,
       });
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error || "Submission failed. Please try again.");
+      }
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       console.error("Registration failed:", err);
+      setError(
+        err instanceof Error && err.message ? err.message : "Submission failed. Please try again.",
+      );
     } finally {
       setLoading(false);
     }
@@ -793,6 +824,7 @@ function SpeakerForm() {
                 name="headshot"
                 accept="image/*"
                 className={inputClass}
+                onChange={(e) => setMedia((p) => ({ ...p, headshot: e.target.files?.[0] ?? null }))}
               />
             </Field>
             <Field label="Additional Photos">
@@ -802,7 +834,17 @@ function SpeakerForm() {
                 accept="image/*"
                 multiple
                 className={inputClass}
+                onChange={(e) =>
+                  setMedia((p) => ({
+                    ...p,
+                    photos: Array.from(e.target.files ?? []).slice(0, 6),
+                  }))
+                }
               />
+              <p className="mt-1 text-[11px] text-muted-foreground/60">
+                Up to 6 photos — JPG or PNG recommended
+                {media.photos.length > 0 ? ` — ${media.photos.length} selected` : ""}
+              </p>
             </Field>
             <Field label="CV / Resume">
               <input
@@ -810,7 +852,12 @@ function SpeakerForm() {
                 name="cv"
                 accept=".pdf,.doc,.docx"
                 className={inputClass}
+                onChange={(e) => setMedia((p) => ({ ...p, cv: e.target.files?.[0] ?? null }))}
               />
+              <p className="mt-1 text-[11px] text-muted-foreground/60">
+                PDF or Word document, max 2 MB
+                {media.cv ? ` — ${media.cv.name}` : ""}
+              </p>
             </Field>
           </div>
         </SectionCard>
@@ -1000,6 +1047,11 @@ function SpeakerForm() {
         </SectionCard>
 
         {/* Submit */}
+        {error ? (
+          <div className="rounded-md border border-red-300 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+            {error}
+          </div>
+        ) : null}
         <div className="flex items-center justify-between border-t border-border pt-6">
           <p className="text-xs text-muted-foreground">
             Our Speaker Coordinator will be in touch within 5 business days.

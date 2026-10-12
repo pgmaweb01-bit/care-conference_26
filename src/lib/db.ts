@@ -2,6 +2,35 @@ import { neon } from "@neondatabase/serverless";
 
 const sql = neon(process.env.DATABASE_URL!);
 
+export interface SpeakerProfile {
+  title?: string;
+  nationality?: string;
+  yearsExperience?: string;
+  bio?: string;
+  profileUrl?: string;
+  expertise?: string;
+  paName?: string;
+  paEmail?: string;
+  paPhone?: string;
+  departureCountry?: string;
+  departureCity?: string;
+  airport?: string;
+  passportName?: string;
+  passportNumber?: string;
+  airline?: string;
+  flightNumber?: string;
+  arrivalDate?: string;
+  arrivalTime?: string;
+  departureDate?: string;
+  departureTime?: string;
+  hotelPreference?: string;
+  roomType?: string;
+  dietary?: string;
+  headshot?: string | null;
+  photos?: string[];
+  cv?: { name: string; dataUrl: string } | null;
+}
+
 export interface Registration {
   id: number;
   registration_id: string;
@@ -22,11 +51,22 @@ export interface Registration {
   status: string;
   checked_in: boolean;
   created_at: string;
+  speaker_profile: SpeakerProfile | null;
 }
 
-export async function getRegistrations(): Promise<Registration[]> {
+export async function getRegistrations(): Promise<Omit<Registration, "speaker_profile">[]> {
   const rows = await sql`
-    SELECT * FROM registrations ORDER BY created_at DESC
+    SELECT id, registration_id, full_name, email, phone, organisation, type, gender,
+           country, state, city, profession, position, side_room1, side_room2,
+           category, status, checked_in, created_at
+    FROM registrations ORDER BY created_at DESC
+  `;
+  return rows as Omit<Registration, "speaker_profile">[];
+}
+
+export async function getSpeakerRegistrations(): Promise<Registration[]> {
+  const rows = await sql`
+    SELECT * FROM registrations WHERE type = 'speaker' ORDER BY created_at DESC
   `;
   return rows as Registration[];
 }
@@ -59,10 +99,11 @@ export async function addRegistration(data: {
   sideRoom1?: string;
   sideRoom2?: string;
   category?: string;
+  speakerProfile?: Record<string, unknown> | null;
 }): Promise<Registration> {
   const rows = await sql`
-    INSERT INTO registrations (registration_id, full_name, email, phone, organisation, type, gender, country, state, city, profession, position, side_room1, side_room2, category)
-    VALUES (${data.registrationId}, ${data.fullName}, ${data.email}, ${data.phone || ""}, ${data.organisation || ""}, ${data.type || "attendee"}, ${data.gender || ""}, ${data.country || ""}, ${data.state || ""}, ${data.city || ""}, ${data.profession || ""}, ${data.position || ""}, ${data.sideRoom1 || ""}, ${data.sideRoom2 || ""}, ${data.category || ""})
+    INSERT INTO registrations (registration_id, full_name, email, phone, organisation, type, gender, country, state, city, profession, position, side_room1, side_room2, category, speaker_profile)
+    VALUES (${data.registrationId}, ${data.fullName}, ${data.email}, ${data.phone || ""}, ${data.organisation || ""}, ${data.type || "attendee"}, ${data.gender || ""}, ${data.country || ""}, ${data.state || ""}, ${data.city || ""}, ${data.profession || ""}, ${data.position || ""}, ${data.sideRoom1 || ""}, ${data.sideRoom2 || ""}, ${data.category || ""}, ${data.speakerProfile ? JSON.stringify(data.speakerProfile) : null}::jsonb)
     RETURNING *
   `;
   return rows[0] as Registration;

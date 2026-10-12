@@ -36,6 +36,7 @@ import { Route as ApiRegistrationsIndexRouteImport } from './routes/api/registra
 import { Route as ApiRegistrationsRegistrationIdRouteImport } from './routes/api/registrations/$registrationId'
 import { Route as ApiRegistrationsResendRouteImport } from './routes/api/registrations/resend'
 import { Route as ApiRegistrationsStatsRouteImport } from './routes/api/registrations/stats'
+import { Route as ApiSpeakersIndexRouteImport } from './routes/api/speakers/index'
 import { Route as ApiAdminSendEmailIndexRouteImport } from './routes/api/admin/send-email/index'
 
 const IndexRoute = IndexRouteImport.update({
@@ -175,6 +176,11 @@ const ApiRegistrationsStatsRoute = ApiRegistrationsStatsRouteImport.update({
   path: '/api/registrations/stats',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiSpeakersIndexRoute = ApiSpeakersIndexRouteImport.update({
+  id: '/api/speakers/',
+  path: '/api/speakers/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAdminSendEmailIndexRoute = ApiAdminSendEmailIndexRouteImport.update({
   id: '/api/admin/send-email/',
   path: '/api/admin/send-email/',
@@ -209,6 +215,7 @@ export interface FileRoutesByFullPath {
   '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
   '/api/pitch-applications/': typeof ApiPitchApplicationsIndexRoute
   '/api/registrations/': typeof ApiRegistrationsIndexRoute
+  '/api/speakers/': typeof ApiSpeakersIndexRoute
   '/api/admin/send-email/': typeof ApiAdminSendEmailIndexRoute
 }
 export interface FileRoutesByTo {
@@ -238,6 +245,7 @@ export interface FileRoutesByTo {
   '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
   '/api/pitch-applications': typeof ApiPitchApplicationsIndexRoute
   '/api/registrations': typeof ApiRegistrationsIndexRoute
+  '/api/speakers': typeof ApiSpeakersIndexRoute
   '/api/admin/send-email': typeof ApiAdminSendEmailIndexRoute
 }
 export interface FileRoutesById {
@@ -269,6 +277,7 @@ export interface FileRoutesById {
   '/api/registrations/stats': typeof ApiRegistrationsStatsRoute
   '/api/pitch-applications/': typeof ApiPitchApplicationsIndexRoute
   '/api/registrations/': typeof ApiRegistrationsIndexRoute
+  '/api/speakers/': typeof ApiSpeakersIndexRoute
   '/api/admin/send-email/': typeof ApiAdminSendEmailIndexRoute
 }
 export interface FileRouteTypes {
@@ -301,6 +310,7 @@ export interface FileRouteTypes {
     | '/api/registrations/stats'
     | '/api/pitch-applications/'
     | '/api/registrations/'
+    | '/api/speakers/'
     | '/api/admin/send-email/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -330,6 +340,7 @@ export interface FileRouteTypes {
     | '/api/registrations/stats'
     | '/api/pitch-applications'
     | '/api/registrations'
+    | '/api/speakers'
     | '/api/admin/send-email'
   id:
     | '__root__'
@@ -360,6 +371,7 @@ export interface FileRouteTypes {
     | '/api/registrations/stats'
     | '/api/pitch-applications/'
     | '/api/registrations/'
+    | '/api/speakers/'
     | '/api/admin/send-email/'
   fileRoutesById: FileRoutesById
 }
@@ -381,6 +393,7 @@ export interface RootRouteChildren {
   ApiRegistrationsStatsRoute: typeof ApiRegistrationsStatsRoute
   ApiPitchApplicationsIndexRoute: typeof ApiPitchApplicationsIndexRoute
   ApiRegistrationsIndexRoute: typeof ApiRegistrationsIndexRoute
+  ApiSpeakersIndexRoute: typeof ApiSpeakersIndexRoute
   ApiAdminSendEmailIndexRoute: typeof ApiAdminSendEmailIndexRoute
 }
 
@@ -575,6 +588,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiRegistrationsStatsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/speakers/': {
+      id: '/api/speakers/'
+      path: '/api/speakers'
+      fullPath: '/api/speakers/'
+      preLoaderRoute: typeof ApiSpeakersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/admin/send-email/': {
       id: '/api/admin/send-email/'
       path: '/api/admin/send-email'
@@ -631,6 +651,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiRegistrationsStatsRoute: ApiRegistrationsStatsRoute,
   ApiPitchApplicationsIndexRoute: ApiPitchApplicationsIndexRoute,
   ApiRegistrationsIndexRoute: ApiRegistrationsIndexRoute,
+  ApiSpeakersIndexRoute: ApiSpeakersIndexRoute,
   ApiAdminSendEmailIndexRoute: ApiAdminSendEmailIndexRoute,
 }
 export const routeTree = rootRouteImport
