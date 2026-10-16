@@ -46,7 +46,7 @@ function CareSoukPage() {
       >
         <div className="mt-7 flex flex-wrap gap-2 text-[11px] font-bold uppercase tracking-[0.14em]">
           <span className="rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1.5 text-primary">
-            18–19 November 2026
+            19 November 2026
           </span>
           <span className="rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1.5 text-primary">
             IALA Hub, The Chair Centre, Lagos
@@ -137,12 +137,12 @@ function CareSoukPage() {
               {
                 icon: Monitor,
                 title: "Shared Screens",
-                body: "The curated CareSouk loop rotates across the room's large format displays throughout both conference days.",
+                body: "The curated CareSouk loop rotates across the room's large format displays throughout the conference day.",
               },
               {
                 icon: Tv,
                 title: "Dedicated Screen",
-                body: "A 55 inch display exclusively yours for both days, with your content also featured across the shared screens.",
+                body: "A 55 inch display exclusively yours for the conference day, with your content also featured across the shared screens.",
               },
               {
                 icon: Upload,
@@ -231,8 +231,8 @@ function CareSoukPage() {
               </div>
               <p className="mt-5 font-display text-4xl font-extrabold">₦1,000,000</p>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                A dedicated 55 inch freestanding display assigned exclusively to your brand for both
-                conference days.
+                A dedicated 55 inch freestanding display assigned exclusively to your brand for the
+                conference day.
               </p>
               <ul className="mt-6 space-y-3 text-sm">
                 {[
@@ -247,9 +247,9 @@ function CareSoukPage() {
                     </a>
                   </>,
                   "Your product content also featured across the shared screens in the room",
-                  "Full control of your screen content: video, motion graphics or static visuals, with an optional refresh between Day One and Day Two",
+                  "Full control of your screen content: video, motion graphics or static visuals",
                   "Brand listing as a CareSouk Exhibitor in the conference programme",
-                  "Two delegate passes covering both days",
+                  "Two delegate passes",
                   "One exhibitor spotlight in the conference's digital communications",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -275,9 +275,9 @@ function CareSoukPage() {
               </p>
               <ul className="mt-6 space-y-3 text-sm">
                 {[
-                  "Rotation across shared screens throughout both conference days, with a guaranteed minimum number of plays per day",
+                  "Rotation across shared screens throughout the conference day, with a guaranteed minimum number of plays",
                   "Name listing as a CareSouk Exhibitor in the digital programme",
-                  "One delegate pass covering both days",
+                  "One delegate pass",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <Check className="mt-0.5 size-4 shrink-0 text-primary" />
@@ -408,7 +408,7 @@ function CareSoukPage() {
               {
                 step: "3",
                 title: "Submit",
-                body: "Deliver your content by Friday 31 October 2026. The technical team runs a full check and your product takes the screen on 18 November.",
+                body: "Deliver your content by Friday 31 October 2026. The technical team runs a full check and your product takes the screen on 19 November.",
               },
             ].map((item) => (
               <div key={item.step} className="rounded-lg bg-white/10 p-6">
@@ -442,7 +442,7 @@ function CareSoukPage() {
                 href: "https://www.purpleglobalmission.org",
               },
               { icon: MapPin, label: "Venue", value: "IALA Hub, The Chair Centre, Lagos" },
-              { icon: CalendarDays, label: "Dates", value: "18 and 19 November 2026" },
+              { icon: CalendarDays, label: "Dates", value: "19 November 2026" },
             ].map((item) => {
               const inner = (
                 <>
