@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CreditCard } from "lucide-react";
 import { PageHero } from "@/components/section";
-import { PARTNER_TIERS } from "@/data/conference";
+import { PARTNER_TIERS, PAYMENT_LINK } from "@/data/conference";
 
 export const Route = createFileRoute("/partners")({
   head: () => ({
@@ -68,6 +68,14 @@ function PartnersPage() {
                 >
                   Become a {tier.tier} Partner <ArrowRight className="size-4" />
                 </Link>
+                <a
+                  href={PAYMENT_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-accent-foreground transition-opacity hover:opacity-90"
+                >
+                  <CreditCard className="size-4" /> Pay Now
+                </a>
               </article>
             ))}
           </div>

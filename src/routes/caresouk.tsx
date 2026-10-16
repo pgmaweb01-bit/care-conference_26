@@ -3,6 +3,7 @@ import {
   ArrowRight,
   CalendarDays,
   Check,
+  CreditCard,
   Globe,
   Mail,
   MapPin,
@@ -12,6 +13,7 @@ import {
   Upload,
 } from "lucide-react";
 import { PageHero } from "@/components/section";
+import { PAYMENT_LINK } from "@/data/conference";
 
 export const Route = createFileRoute("/caresouk")({
   head: () => ({
@@ -258,6 +260,16 @@ function CareSoukPage() {
                   </li>
                 ))}
               </ul>
+              <div className="mt-auto pt-8">
+                <a
+                  href={PAYMENT_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  <CreditCard className="size-4" /> Pay Now — ₦1,000,000
+                </a>
+              </div>
             </div>
 
             <div className="flex flex-col rounded-lg border border-border bg-card p-8">
@@ -285,6 +297,16 @@ function CareSoukPage() {
                   </li>
                 ))}
               </ul>
+              <div className="mt-auto pt-8">
+                <a
+                  href={PAYMENT_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  <CreditCard className="size-4" /> Pay Now — ₦400,000
+                </a>
+              </div>
             </div>
           </div>
 

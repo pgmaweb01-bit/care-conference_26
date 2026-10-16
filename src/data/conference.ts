@@ -9,6 +9,8 @@ export const EVENT = {
   organiser: "The Purple Global Mission",
 };
 
+export const PAYMENT_LINK = "https://paystack.shop/pay/careconferene26";
+
 export const POLICY_LAYERS = [
   {
     no: "01",
@@ -382,5 +384,3 @@ export const CASE_GAPS = [
   "No consolidated public register of home care providers.",
   "Telemedicine operating without a dedicated regulatory framework.",
 ];
-
-
