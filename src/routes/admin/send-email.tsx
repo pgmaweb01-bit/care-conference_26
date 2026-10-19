@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { SendHorizontal, FlaskConical, Users } from "lucide-react";
+import { SendHorizontal, FlaskConical, Users, Search, X } from "lucide-react";
 import { ADMIN_EMAIL, getAuthHeader } from "@/lib/auth";
 import { broadcastEmailHTML, textToHtml } from "@/lib/email-template";
 
@@ -34,7 +34,10 @@ const AUDIENCES = [
   { value: "speakers", label: "Speakers only" },
   { value: "confirmed", label: "Confirmed registrations" },
   { value: "pitch", label: "Pitch & Demo applicants" },
+  { value: "individual", label: "One or more people" },
 ] as const;
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function AdminSendEmail() {
   const [registrations, setRegistrations] = useState<Registration[]>([]);
@@ -44,16 +47,21 @@ function AdminSendEmail() {
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState<"bulk" | "test" | null>(null);
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
+  const [selectedPeople, setSelectedPeople] = useState<Recipient[]>([]);
+  const [search, setSearch] = useState("");
+  const [svcStatus, setSvcStatus] = useState<{ configured: boolean; from: string } | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const [regsRes, pitchRes] = await Promise.all([
+        const [regsRes, pitchRes, svcRes] = await Promise.all([
           fetch("/api/registrations"),
           fetch("/api/pitch-applications"),
+          fetch("/api/admin/send-email", { headers: { "x-admin-auth": getAuthHeader() } }),
         ]);
         if (regsRes.ok) setRegistrations(await regsRes.json());
         if (pitchRes.ok) setPitchApplications(await pitchRes.json());
+        if (svcRes.ok) setSvcStatus(await svcRes.json());
       } catch (err) {
         console.error("Failed to fetch recipients:", err);
       }
@@ -67,9 +75,53 @@ function AdminSendEmail() {
     return () => clearTimeout(timer);
   }, [toast]);
 
+  const allPeople = useMemo(() => {
+    const list: Recipient[] = [
+      ...registrations.map((r) => ({
+        email: r.email,
+        fullName: r.full_name,
+        registrationId: r.registration_id,
+      })),
+      ...pitchApplications.map((p) => ({
+        email: p.email,
+        fullName: p.full_name,
+        registrationId: p.application_id,
+      })),
+    ];
+    const seen = new Set<string>();
+    const deduped = list.filter((p) => {
+      const email = p.email.trim().toLowerCase();
+      if (!email || seen.has(email)) return false;
+      seen.add(email);
+      return true;
+    });
+    return deduped.sort((a, b) => a.fullName.localeCompare(b.fullName));
+  }, [registrations, pitchApplications]);
+
+  const searchResults = useMemo(() => {
+    const q = search.trim();
+    if (!q) return [];
+    const ql = q.toLowerCase();
+    const matched = allPeople
+      .filter(
+        (p) =>
+          p.fullName.toLowerCase().includes(ql) ||
+          p.email.toLowerCase().includes(ql) ||
+          (p.registrationId ?? "").toLowerCase().includes(ql),
+      )
+      .slice(0, 50);
+    const exactEmail = allPeople.some((p) => p.email.toLowerCase() === ql);
+    if (EMAIL_RE.test(q) && !exactEmail) {
+      return [{ email: q, fullName: q }, ...matched];
+    }
+    return matched;
+  }, [search, allPeople]);
+
   const recipients = useMemo(() => {
     let list: Recipient[];
-    if (audience === "pitch") {
+    if (audience === "individual") {
+      list = selectedPeople;
+    } else if (audience === "pitch") {
       list = pitchApplications.map((p) => ({
         email: p.email,
         fullName: p.full_name,
@@ -96,7 +148,7 @@ function AdminSendEmail() {
       seen.add(email);
       return true;
     });
-  }, [audience, registrations, pitchApplications]);
+  }, [audience, selectedPeople, registrations, pitchApplications]);
 
   const sample = recipients[0];
   const previewHtml = useMemo(
@@ -114,6 +166,17 @@ function AdminSendEmail() {
 
   const canSend =
     Boolean(subject.trim() && message.trim() && recipients.length > 0) && sending === null;
+
+  function addPerson(person: Recipient) {
+    const email = person.email.trim().toLowerCase();
+    if (!email || selectedPeople.some((p) => p.email.trim().toLowerCase() === email)) return;
+    setSelectedPeople((prev) => [...prev, person]);
+    setSearch("");
+  }
+
+  function removePerson(email: string) {
+    setSelectedPeople((prev) => prev.filter((p) => p.email !== email));
+  }
 
   async function handleSend(list: Recipient[], mode: "bulk" | "test") {
     if (mode === "bulk" && !canSend) return;
@@ -142,14 +205,17 @@ function AdminSendEmail() {
           setMessage("");
         }
       } else {
-        setToast({
-          message:
-            data.error ||
-            (data.failed
-              ? `Partially sent: ${data.sent} delivered, ${data.failed} failed`
-              : "Failed to send email"),
-          type: "error",
-        });
+        let errorMessage: string;
+        if (data.failed && data.error) {
+          errorMessage = `Sent ${data.sent}, failed ${data.failed} — ${data.error}`;
+        } else if (data.error) {
+          errorMessage = data.error;
+        } else if (data.failed) {
+          errorMessage = `Partially sent: ${data.sent} delivered, ${data.failed} failed`;
+        } else {
+          errorMessage = "Failed to send email";
+        }
+        setToast({ message: errorMessage, type: "error" });
       }
     } catch {
       setToast({ message: "Failed to send email", type: "error" });
@@ -175,6 +241,20 @@ function AdminSendEmail() {
         <p className="mt-1 text-muted-foreground">
           Compose and send reminders to delegates, speakers and applicants.
         </p>
+        {svcStatus && (
+          <p
+            className={`mt-2 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${
+              svcStatus.configured
+                ? "border-green-600/30 bg-green-600/10 text-green-700 dark:text-green-400"
+                : "border-red-600/40 bg-red-600/10 text-red-700 dark:text-red-400"
+            }`}
+            title={`Sending as: ${svcStatus.from}`}
+          >
+            {svcStatus.configured
+              ? `Email service ready — sending as ${svcStatus.from.replace(/^.*</, "<")}`
+              : "Email service not configured — RESEND_API_KEY is missing on the server (Vercel → Settings → Environment Variables)"}
+          </p>
+        )}
       </div>
 
       <div className="grid gap-6 lg:grid-cols-12">
@@ -202,6 +282,75 @@ function AdminSendEmail() {
                 {recipients.length}
               </span>
             </div>
+
+            {audience === "individual" && (
+              <div className="mt-3 space-y-3">
+                {selectedPeople.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {selectedPeople.map((p) => (
+                      <span
+                        key={p.email}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary"
+                      >
+                        {p.fullName}
+                        <button
+                          type="button"
+                          aria-label={`Remove ${p.fullName}`}
+                          onClick={() => removePerson(p.email)}
+                          className="rounded-full p-0.5 hover:bg-primary/20"
+                        >
+                          <X className="size-3" />
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <input
+                    type="text"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search by name, email or registration ID — or type any email address"
+                    className="w-full rounded-md border border-input bg-background py-3 pl-9 pr-4 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+                {search.trim() && (
+                  <div className="max-h-56 divide-y divide-border overflow-y-auto rounded-md border border-border">
+                    {searchResults.length === 0 && (
+                      <div className="px-4 py-3 text-sm text-muted-foreground">
+                        No matches found.
+                      </div>
+                    )}
+                    {searchResults.map((p) => (
+                      <button
+                        type="button"
+                        key={p.email}
+                        onClick={() => addPerson(p)}
+                        className="flex w-full items-center justify-between gap-3 px-4 py-2.5 text-left transition-colors hover:bg-secondary"
+                      >
+                        <span className="min-w-0">
+                          <span className="block truncate text-sm font-semibold">{p.fullName}</span>
+                          <span className="block truncate text-xs text-muted-foreground">
+                            {p.email}
+                          </span>
+                        </span>
+                        {p.registrationId && (
+                          <span className="shrink-0 font-mono text-[10px] tracking-wider text-muted-foreground">
+                            {p.registrationId}
+                          </span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                {!search.trim() && selectedPeople.length === 0 && (
+                  <p className="text-xs text-muted-foreground">
+                    Search above and click a person to add them. You can pick one person or several.
+                  </p>
+                )}
+              </div>
+            )}
           </div>
 
           <div>

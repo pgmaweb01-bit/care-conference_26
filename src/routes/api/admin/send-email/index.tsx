@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { isAuthenticatedRequest } from "@/lib/auth";
-import { sendBulkEmail, type EmailRecipient } from "@/lib/email";
+import { getEmailServiceStatus, sendBulkEmail, type EmailRecipient } from "@/lib/email";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_RECIPIENTS = 1000;
@@ -15,6 +15,12 @@ function json(data: unknown, status: number): Response {
 export const Route = createFileRoute("/api/admin/send-email/")({
   server: {
     handlers: {
+      GET: async ({ request }) => {
+        if (!isAuthenticatedRequest(request)) {
+          return json({ error: "Unauthorized" }, 401);
+        }
+        return json(getEmailServiceStatus(), 200);
+      },
       POST: async ({ request }) => {
         try {
           if (!isAuthenticatedRequest(request)) {

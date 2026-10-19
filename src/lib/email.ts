@@ -13,6 +13,15 @@ const SITE_URL = process.env.SITE_URL || "https://careconference2026.purplegloba
 const FROM_ADDRESS =
   "Care Conference 2026 <registrations@careconference2026.purpleglobalmission.org>";
 
+export function getEmailServiceStatus(): { configured: boolean; from: string } {
+  return { configured: Boolean(process.env["RESEND_API_KEY"]), from: FROM_ADDRESS };
+}
+
+function describeResendError(error: { name?: string; message?: string }): string {
+  const name = error.name ? `${error.name}: ` : "";
+  return `Resend ${name}${error.message || "unknown error"}`;
+}
+
 export interface EmailRecipient {
   email: string;
   fullName: string;
@@ -57,12 +66,16 @@ export async function sendRegistrationEmail(data: {
         ? "Speaker Profile Received - Care Conference 2026"
         : `Registration Confirmed - Care Conference 2026 (${data.registrationId})`;
 
-    await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: FROM_ADDRESS,
       to: data.email,
       subject,
       html,
     });
+    if (error) {
+      console.error("Resend registration email rejected:", error);
+      return { success: false, error: describeResendError(error) };
+    }
 
     return { success: true };
   } catch (error) {
@@ -89,12 +102,16 @@ export async function sendPitchApplicationEmail(data: {
       applicationId: data.applicationId,
     });
 
-    await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: FROM_ADDRESS,
       to: data.email,
       subject: "Your Pitch Application is Received - Care Conference 2026",
       html,
     });
+    if (error) {
+      console.error("Resend pitch email rejected:", error);
+      return { success: false, error: describeResendError(error) };
+    }
 
     return { success: true };
   } catch (error) {
@@ -129,6 +146,7 @@ export async function sendBulkEmail(data: {
 
   let sent = 0;
   let failed = 0;
+  let firstError: string | undefined;
 
   // Resend allows up to 100 emails per batch request
   for (let i = 0; i < payload.length; i += 100) {
@@ -138,16 +156,25 @@ export async function sendBulkEmail(data: {
       if (error) {
         console.error("Bulk email batch error:", error);
         failed += chunk.length;
+        if (!firstError) firstError = describeResendError(error);
       } else {
         sent += chunk.length;
       }
     } catch (error) {
       console.error("Bulk email batch failed:", error);
       failed += chunk.length;
+      if (!firstError) {
+        firstError = error instanceof Error ? error.message : String(error);
+      }
     }
   }
 
   console.log(`Bulk email finished: ${sent} sent, ${failed} failed`);
 
-  return { success: failed === 0 && sent > 0, sent, failed };
+  return {
+    success: failed === 0 && sent > 0,
+    sent,
+    failed,
+    ...(failed > 0 && firstError ? { error: firstError } : {}),
+  };
 }
