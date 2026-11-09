@@ -186,13 +186,26 @@ export const ROOMS = [
 export type Speaker = {
   name: string;
   role: string;
-  image: string;
+  image?: string;
   bio?: string;
 };
 
 export const SPEAKERS: Speaker[] = [
   {
-    name: "Hon. Omobolanle Akinyemi-Obe",
+    name: "Abiola Hakeemat Etti-Ayilara",
+    role: "Convener, Care Conference. Founder, The Purple Global Mission",
+  },
+  {
+    name: "Dr. 'Bosun Tijani",
+    role: "Minister of Communications, Innovation and Digital Economy of the Federal Republic of Nigeria",
+    image: "/speakers/dr-bosun-tijani.jpg",
+  },
+  {
+    name: "Dr Obiageli Obi Ezekwesili",
+    role: "Special Guest of Honour and Chair, The Homecare Framework - Care as Infrastructure for Everyday Life",
+  },
+  {
+    name: "Hon. Medinat Omobolanle Akinyemi-Obe",
     role: "Director General, National Senior Citizens Centre",
     image: "/speakers/hon-omobolanle-akinyemi-obe.jpg",
     bio: [
@@ -206,8 +219,56 @@ export const SPEAKERS: Speaker[] = [
     ].join("\n\n"),
   },
   {
+    name: "Alhaji Dr. Ndagi Alhassan",
+    role: "Registrar, Nursing and Midwifery Council of Nigeria",
+    image: "/speakers/dr-alhassan-ndagi.jpg",
+  },
+  {
+    name: "Prof. Akin Abayomi",
+    role: "Honourable Commissioner for Health, Lagos State",
+  },
+  {
+    name: "Dr Kemi Ogunyemi",
+    role: "Special Adviser on Health to the Governor Lagos State",
+  },
+  {
+    name: "Dr Emmanuella Zamba",
+    role: "Permanent Secretary/CEO, Lagos State Health Management Agency",
+  },
+  {
+    name: "Dr. Victoria Egunjobi",
+    role: "Executive Secretary, Health Facility Monitoring and Accreditation Agency (HEFAMAA)",
+    image: "/speakers/dr-victoria-egunjobi.jpg",
+  },
+  {
+    name: "Adenike Oyetunde-Lawal",
+    role: "General Manager, Lagos State Office for Disability Affairs (LASODA)",
+  },
+  {
+    name: "Dr Simisola Alabi",
+    role: "Physician | Health Policy Consultant | Founder, Dr. Simisola Alabi Foundation",
+  },
+  {
+    name: "Chike Chukwuelue",
+    role: "Group Head, Equity Investments, Bank of Industry Limited",
+    image: "/speakers/chike-chukwuelue.jpg",
+    bio: [
+      "Chike Chukwuelue is a seasoned finance professional with over 20 years of experience across banking, corporate finance, investment structuring, and development finance. He is currently the Group Head, Equity Investments at the Bank of Industry (BOI), Nigeria's oldest and foremost Development Finance Institution.",
+      "His experience spans SME, commercial and corporate banking, treasury and financial markets, private equity, and deal origination and structuring. He has been involved in mobilising approximately US$7 billion in funding from international financial institutions, working with development finance institutions and government-backed financial institutions.",
+      "At BOI, his work focuses on equity investments, portfolio management, and structuring investments that support business growth and economic development. He is particularly interested in private capital, innovative financing solutions, and investments that promote enterprise growth, job creation, and sustainable economic development in Nigeria and across Africa.",
+    ].join("\n\n"),
+  },
+  {
+    name: "Prof Prisca Adejumo",
+    role: "Special Guest of Honour and Co-Chair, The Homecare Framework - Care as Infrastructure for Everyday Life",
+  },
+  {
+    name: "Ernest Elue",
+    role: "Head of Strategy and Business, ProvidusBank",
+  },
+  {
     name: "Dr OluToyin Akande-Ajala",
-    role: "Consultant Geriatrician, FRCP",
+    role: "MD/Founder, JBS Gerontology Centre",
     image: "/speakers/dr-olutoyin-akande-ajala.jpg",
     bio: [
       "Dr OluToyin Akande-Ajala, a luminary in geriatric medicine, is a UK-trained and fully certified Consultant Geriatrician, Fellow of the Royal College of Physicians of London (FRCP), and a passionate advocate for healthy aging.",
@@ -221,6 +282,21 @@ export const SPEAKERS: Speaker[] = [
       "She is married to a Consultant Obstetrician and Gynaecologist, and they have four children.",
       "An avid traveller, she has visited all seven continents, including Antarctica, and 84 countries.",
     ].join("\n\n"),
+  },
+  {
+    name: "Zahid Ali",
+    role: "Digital Health Strategist, Founder TECHMEDO",
+    image: "/speakers/zahid-ali.jpg",
+    bio: [
+      "Zahid Ali is a digital health strategist and health system transformation leader with more than two decades of experience in healthcare IT, AI and data. He is Founder of TECHMEDO, a Rural health transformation platform, with a focus on underserved and remote populations.",
+      "Over the last decade, Zahid has led digital transformation of healthcare at country and state level, shaping the digital platforms, data architecture and information systems that underpin modern health services. His expertise spans interoperability (FHIR/HL7), smart hospital design, value-based care and national-scale health data integration.",
+      "Zahid has worked with leading institutions including Harvard, UCSF, Mayo Clinic, Houston Methodist and Cleveland Clinic, and has advised the NHS on AI adoption. He leads the Integration of Data subgroup within the WHO/Europe Public Health Innovation Platform, serves on the IT Advisory Committee of the Indus Hospital and Health Network, and sits on multiple advisory boards and regulatory and standards task forces.",
+      "A recognized thought leader, he has spoken at more than 30 international conferences, including HIMSS, HLTH, CHIME, KLAS, FII, SDAIA and the Global Health Exhibition. His honors include the HIMSS EMERGE 2025 Innovation Award, the HIMSS 2022 Changemaker Award, Global CIO 200 recognition and selection as a Prix Galien USA finalist.",
+    ].join("\n\n"),
+  },
+  {
+    name: "Dr. Buloala Lilly-West",
+    role: "Health Lead - Promote & Access, SHELL NIGERIA EXPLORATION AND PRODUCTION COMPANY LIMITED (SNEPCo)",
   },
   {
     name: "Dr. Ifeoma Orifa",
@@ -238,7 +314,7 @@ export const SPEAKERS: Speaker[] = [
   },
   {
     name: "Dr. Nkajima Nwakaji",
-    role: "Founder, KajiCare",
+    role: "MD/Founder KajiCare",
     image: "/speakers/dr-nkajima-nwakaji.jpg",
     bio: [
       "Dr. Nkajima is a medical doctor, clinical researcher, healthcare entrepreneur, and the Founder of KajiCare, an elder home-care and concierge agency focused on professional, compassionate, and clinically informed care, with particular expertise in dementia and memory care.",
@@ -247,29 +323,21 @@ export const SPEAKERS: Speaker[] = [
     ].join("\n\n"),
   },
   {
-    name: "Chike Chukwuelue",
-    role: "Group Head, Equity Investments, BOI",
-    image: "/speakers/chike-chukwuelue.jpg",
-    bio: [
-      "Chike Chukwuelue is a seasoned finance professional with over 20 years of experience across banking, corporate finance, investment structuring, and development finance. He is currently the Group Head, Equity Investments at the Bank of Industry (BOI), Nigeria's oldest and foremost Development Finance Institution.",
-      "His experience spans SME, commercial and corporate banking, treasury and financial markets, private equity, and deal origination and structuring. He has been involved in mobilising approximately US$7 billion in funding from international financial institutions, working with development finance institutions and government-backed financial institutions.",
-      "At BOI, his work focuses on equity investments, portfolio management, and structuring investments that support business growth and economic development. He is particularly interested in private capital, innovative financing solutions, and investments that promote enterprise growth, job creation, and sustainable economic development in Nigeria and across Africa.",
-    ].join("\n\n"),
+    name: "Dr. Gbonjubola Abiri",
+    role: "C.E.O Redi-Med Consulting Services",
   },
   {
-    name: "Zahid Ali",
-    role: "Digital Health Strategist & Founder, TECHMEDO",
-    image: "/speakers/zahid-ali.jpg",
-    bio: [
-      "Zahid Ali is a digital health strategist and health system transformation leader with more than two decades of experience in healthcare IT, AI and data. He is Founder of TECHMEDO, a Rural health transformation platform, with a focus on underserved and remote populations.",
-      "Over the last decade, Zahid has led digital transformation of healthcare at country and state level, shaping the digital platforms, data architecture and information systems that underpin modern health services. His expertise spans interoperability (FHIR/HL7), smart hospital design, value-based care and national-scale health data integration.",
-      "Zahid has worked with leading institutions including Harvard, UCSF, Mayo Clinic, Houston Methodist and Cleveland Clinic, and has advised the NHS on AI adoption. He leads the Integration of Data subgroup within the WHO/Europe Public Health Innovation Platform, serves on the IT Advisory Committee of the Indus Hospital and Health Network, and sits on multiple advisory boards and regulatory and standards task forces.",
-      "A recognized thought leader, he has spoken at more than 30 international conferences, including HIMSS, HLTH, CHIME, KLAS, FII, SDAIA and the Global Health Exhibition. His honors include the HIMSS EMERGE 2025 Innovation Award, the HIMSS 2022 Changemaker Award, Global CIO 200 recognition and selection as a Prix Galien USA finalist.",
-    ].join("\n\n"),
+    name: "Bisola Edun",
+    role: "MD/CEO Taé",
   },
   {
-    name: "Opeyemi Adamolekun",
-    role: "Governance Advocate & Co-Founder, EiE Nigeria",
+    name: "Olayinka Aremu",
+    role: "Founder and CEO, AgeWell CareLink",
+    image: "/speakers/olayinka-aremu.jpg",
+  },
+  {
+    name: "Opeyemi 'Yemi' Adamolekun",
+    role: "Board Member, Kaleyewa Elder Care Foundation",
     image: "/speakers/opeyemi-adamolekun.jpg",
     bio: [
       "Opeyemi is an active citizen, advocate and thought leader, working at the intersection of governance, public accountability and the rights & responsibilities of citizens. From 2011 to 2025, she served as the Pioneer Executive Director of Enough is Enough (EiE) Nigeria, a non-partisan network of individuals and organisations committed to building a culture of good governance & public accountability in Nigeria through active citizenship. She is a co-Founder of the organisation and continues to serve on the Board.",
@@ -280,36 +348,16 @@ export const SPEAKERS: Speaker[] = [
     ].join("\n\n"),
   },
   {
-    name: "Tobiloba Ajayi",
-    role: "Founder, Let Cerebral Palsy Kids Learn Foundation",
+    name: "Tobilola Ajayi",
+    role: "Chief Responsibility Officer, The Let Cerebral Palsy Kids Learn Foundation",
     image: "/speakers/tobiloba-ajayi.jpg",
     bio: [
-      "Tobiloba has over 17 years experience working with various organisations in the Disability Management sector in different countries. She holds a degree in Law and was called to the Nigerian Bar in 2008. She also holds a Masters Degree in International Law. She started by working on Disability Policy as a member of the Nigerian Vision 20:20:20 policy drafting team, and went on to work with various NGO's in a quest to improving the lives of persons with disabilities.",
+      "Tobilola has over 17 years experience working with various organisations in the Disability Management sector in different countries. She holds a degree in Law and was called to the Nigerian Bar in 2008. She also holds a Masters Degree in International Law. She started by working on Disability Policy as a member of the Nigerian Vision 20:20:20 policy drafting team, and went on to work with various NGO's in a quest to improving the lives of persons with disabilities.",
       "In March 2017, she launched ‘The Let Cerebral Palsy Kids Learn Foundation’ to promote inclusive mainstream education for children with Cerebral Palsy in Nigeria. This was born out of a realization in 2016, during her Mandela Washington Fellowship Professional Development Experience; that children with Cerebral palsy were being excluded from mainstream education by the school system in Nigeria.",
       "To date, the Foundation has provided support to 1000+ children and their families and enabled over 150+ of these children access inclusive education. Each family accesses continuous counselling, referrals, school placement supports and school readiness assessments. The project has also trained over 1000 Teachers in its bid to address the knowledge and skill gap of mainstream classroom teachers to engage children with Cerebral Palsy in their classrooms.",
-      "Tobiloba is also a 9 time published author- 5 of which are books in the Cerebral Palsy Rollercoaster Series, a series of books that cover various areas of managing a Cerebral Palsy diagnosis.",
+      "Tobilola is also a 9 time published author- 5 of which are books in the Cerebral Palsy Rollercoaster Series, a series of books that cover various areas of managing a Cerebral Palsy diagnosis.",
     ].join("\n\n"),
   },
-  {
-    name: "Tara Koko",
-    role: "Beauty Founder & Business Executive",
-    image: "/speakers/tara-koko.jpg",
-    bio: "Tara Koko is a thoroughbred professional with public speaking experience spanning over 25 years and over 16 years of Business Leadership as a Beauty Founder and Executive.",
-  },
-  {
-    name: "Esther Adeshina",
-    role: "Registered Nurse & Founder, Fonia Academy",
-    image: "/speakers/esther-adeshina.jpg",
-    bio: [
-      "Esther Adeshina is a visionary leader and Registered Nurse working at the intersection of community development, corporate leadership, and communications. She is deeply committed to building quality minds and creating environments where young people can thrive, guided by the belief that personal development drives community transformation.",
-      "She is a multiple award-winning public speaker; Founder and Lead Facilitator at Fonia Academy where she helps individuals discover, develop, and deploy their voices with confidence and clarity.",
-      "In addition to facilitating sessions on effective communication, she serves as an event host and master of ceremonies for high-impact events, bringing the ambience, warmth, and exquisite professionalism needed at such events.",
-    ].join("\n\n"),
-  },
-  { name: "Dr. Bosun Tijani", role: "", image: "/speakers/dr-bosun-tijani.jpg" },
-  { name: "Dr. Alhassan Ndagi", role: "", image: "/speakers/dr-alhassan-ndagi.jpg" },
-  { name: "Dr. Victoria Egunjobi", role: "", image: "/speakers/dr-victoria-egunjobi.jpg" },
-  { name: "Olayinka Aremu", role: "", image: "/speakers/olayinka-aremu.jpg" },
 ];
 
 export const TAKEAWAYS = [

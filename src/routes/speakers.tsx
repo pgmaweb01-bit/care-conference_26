@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/section";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { SPEAKERS, type Speaker } from "@/data/conference";
+import { speakerInitials } from "@/lib/utils";
 
 export const Route = createFileRoute("/speakers")({
   head: () => ({
@@ -49,19 +50,27 @@ function SpeakersPage() {
                 className="group flex flex-col rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary/30 hover:shadow-sm"
               >
                 <div className="aspect-square w-full overflow-hidden rounded-lg bg-muted">
-                  <img
-                    src={speaker.image}
-                    alt={speaker.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
-                  />
+                  {speaker.image ? (
+                    <img
+                      src={speaker.image}
+                      alt={speaker.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/15 via-primary/8 to-accent/15">
+                      <span className="font-display text-4xl font-extrabold text-primary/40">
+                        {speakerInitials(speaker.name)}
+                      </span>
+                    </div>
+                  )}
                 </div>
+                <h3 className="mt-4 font-display text-lg font-bold">{speaker.name}</h3>
                 {speaker.role && (
-                  <p className="mt-4 text-xs font-bold uppercase leading-relaxed tracking-[0.14em] text-primary">
+                  <p className="mt-1.5 text-xs font-bold uppercase leading-relaxed tracking-[0.14em] text-primary">
                     {speaker.role}
                   </p>
                 )}
-                <h3 className="mt-2 font-display text-lg font-bold">{speaker.name}</h3>
                 {speaker.bio ? (
                   <>
                     <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
@@ -115,11 +124,13 @@ function SpeakersPage() {
           {active && (
             <>
               <div className="flex items-start gap-4 pr-8">
-                <img
-                  src={active.image}
-                  alt=""
-                  className="h-20 w-20 shrink-0 rounded-full object-cover object-top"
-                />
+                {active.image && (
+                  <img
+                    src={active.image}
+                    alt=""
+                    className="h-20 w-20 shrink-0 rounded-full object-cover object-top"
+                  />
+                )}
                 <div className="min-w-0">
                   <DialogTitle className="font-display text-xl font-extrabold">
                     {active.name}

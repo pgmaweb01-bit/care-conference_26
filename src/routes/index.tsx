@@ -14,6 +14,7 @@ import {
   SPEAKERS,
   TAKEAWAYS,
 } from "@/data/conference";
+import { speakerInitials } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -632,26 +633,32 @@ function HomePage() {
               className="flex flex-col items-center rounded-lg border border-border bg-card p-7 text-center"
             >
               <div className="h-16 w-16 overflow-hidden rounded-full bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20">
-                <img
-                  src={speaker.image}
-                  alt={speaker.name}
-                  loading="lazy"
-                  className="h-full w-full object-cover object-top"
-                />
+                {speaker.image ? (
+                  <img
+                    src={speaker.image}
+                    alt={speaker.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover object-top"
+                  />
+                ) : (
+                  <span className="flex h-full w-full items-center justify-center font-display text-lg font-bold text-primary/50">
+                    {speakerInitials(speaker.name)}
+                  </span>
+                )}
               </div>
-              <p className="mt-4 font-display text-sm font-bold">{speaker.role}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{speaker.name}</p>
+              <p className="mt-4 font-display text-sm font-bold">{speaker.name}</p>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{speaker.role}</p>
             </div>
           ))}
         </div>
 
         <div className="mt-10 rounded-lg border border-dashed border-border bg-background px-6 py-8 text-center">
           <p className="font-display text-lg font-bold text-foreground">
-            Our full speaker lineup is being finalised.
+            {SPEAKERS.length} speakers and special guests confirmed.
           </p>
           <p className="mt-2 mx-auto max-w-[52ch] text-sm leading-relaxed text-muted-foreground">
-            Keynote speakers, panel chairs and panellists will be announced here as they are
-            confirmed across the coming weeks.
+            Keynote speakers, special guests and session leaders confirmed for 19 November 2026 —
+            with bios and portraits added as they arrive.
           </p>
         </div>
 
