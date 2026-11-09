@@ -194,6 +194,7 @@ export const SPEAKERS: Speaker[] = [
   {
     name: "Abiola Hakeemat Etti-Ayilara",
     role: "Convener, Care Conference. Founder, The Purple Global Mission",
+    image: "/speakers/abiola-hakeemat-etti-ayilara.jpg",
   },
   {
     name: "Dr. 'Bosun Tijani",
@@ -203,6 +204,7 @@ export const SPEAKERS: Speaker[] = [
   {
     name: "Dr Obiageli Obi Ezekwesili",
     role: "Special Guest of Honour and Chair, The Homecare Framework - Care as Infrastructure for Everyday Life",
+    image: "/speakers/dr-obiageli-ezekwesili.jpg",
   },
   {
     name: "Hon. Medinat Omobolanle Akinyemi-Obe",
@@ -230,10 +232,12 @@ export const SPEAKERS: Speaker[] = [
   {
     name: "Dr Kemi Ogunyemi",
     role: "Special Adviser on Health to the Governor Lagos State",
+    image: "/speakers/dr-kemi-ogunyemi.jpg",
   },
   {
     name: "Dr Emmanuella Zamba",
     role: "Permanent Secretary/CEO, Lagos State Health Management Agency",
+    image: "/speakers/dr-emmanuella-zamba.jpg",
   },
   {
     name: "Dr. Victoria Egunjobi",
@@ -243,10 +247,12 @@ export const SPEAKERS: Speaker[] = [
   {
     name: "Adenike Oyetunde-Lawal",
     role: "General Manager, Lagos State Office for Disability Affairs (LASODA)",
+    image: "/speakers/adenike-oyetunde-lawal.jpg",
   },
   {
     name: "Dr Simisola Alabi",
     role: "Physician | Health Policy Consultant | Founder, Dr. Simisola Alabi Foundation",
+    image: "/speakers/dr-simisola-alabi.jpg",
   },
   {
     name: "Chike Chukwuelue",
@@ -261,6 +267,7 @@ export const SPEAKERS: Speaker[] = [
   {
     name: "Prof Prisca Adejumo",
     role: "Special Guest of Honour and Co-Chair, The Homecare Framework - Care as Infrastructure for Everyday Life",
+    image: "/speakers/prof-prisca-adejumo.jpg",
   },
   {
     name: "Ernest Elue",
@@ -297,6 +304,7 @@ export const SPEAKERS: Speaker[] = [
   {
     name: "Dr. Buloala Lilly-West",
     role: "Health Lead - Promote & Access, SHELL NIGERIA EXPLORATION AND PRODUCTION COMPANY LIMITED (SNEPCo)",
+    image: "/speakers/dr-buloala-lilly-west.jpg",
   },
   {
     name: "Dr. Ifeoma Orifa",
@@ -325,10 +333,12 @@ export const SPEAKERS: Speaker[] = [
   {
     name: "Dr. Gbonjubola Abiri",
     role: "C.E.O Redi-Med Consulting Services",
+    image: "/speakers/dr-gbonjubola-abiri.jpg",
   },
   {
     name: "Bisola Edun",
     role: "MD/CEO Taé",
+    image: "/speakers/bisola-edun.jpg",
   },
   {
     name: "Olayinka Aremu",
