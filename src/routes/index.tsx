@@ -66,17 +66,12 @@ function Countdown() {
         <div className="flex flex-col items-center gap-8 sm:flex-row sm:justify-center sm:gap-10">
           <div className="text-center sm:text-left">
             <p className="eyebrow text-primary-foreground/70">Countdown to the Conference</p>
-            <p className="mt-3 font-display text-xl font-extrabold leading-tight">
-              {EVENT.date}
-            </p>
+            <p className="mt-3 font-display text-xl font-extrabold leading-tight">{EVENT.date}</p>
             <p className="mt-1 max-w-[30ch] text-sm leading-relaxed text-primary-foreground/70">
               {EVENT.time} &middot; {EVENT.venue}
             </p>
           </div>
-          <div
-            className="hidden h-16 w-px bg-primary-foreground/25 sm:block"
-            aria-hidden="true"
-          />
+          <div className="hidden h-16 w-px bg-primary-foreground/25 sm:block" aria-hidden="true" />
           <div className="flex gap-4 sm:gap-6">
             {units.map((u) => (
               <div key={u.label} className="text-center">
@@ -215,8 +210,12 @@ function HomePage() {
               <span className="inline-block h-px w-12 bg-accent/60" />
             </div>
             <h1 className="animate-rise font-display text-[clamp(3rem,8vw,6.5rem)] font-extrabold leading-[0.85] tracking-[-0.03em]">
-              <span className="block text-ink-foreground drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Care</span>
-              <span className="block text-ink-foreground drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">Conference</span>
+              <span className="block text-ink-foreground drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">
+                Care
+              </span>
+              <span className="block text-ink-foreground drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">
+                Conference
+              </span>
               <span className="block text-accent drop-shadow-[0_0_20px_rgba(232,121,62,0.35)]">
                 2026
               </span>
@@ -260,14 +259,14 @@ function HomePage() {
                 How do we build a care system that works for everyone?
               </h2>
               <p className="mt-6 max-w-[55ch] text-lg leading-relaxed text-muted-foreground">
-                Nigeria's health system cannot achieve lasting impact without recognising the systems,
-                people, policies and resources that make care possible beyond the hospital.
+                Nigeria's health system cannot achieve lasting impact without recognising the
+                systems, people, policies and resources that make care possible beyond the hospital.
               </p>
               <p className="mt-4 max-w-[55ch] text-muted-foreground">
-                The Care Conference 2026 brings together policymakers, healthcare leaders, clinicians,
-                caregivers, innovators, researchers, investors and community advocates to shape a
-                national position on home care and establish care as a critical part of Nigeria's
-                health infrastructure.
+                The Care Conference 2026 brings together policymakers, healthcare leaders,
+                clinicians, caregivers, innovators, researchers, investors and community advocates
+                to shape a national position on home care and establish care as a critical part of
+                Nigeria's health infrastructure.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
@@ -329,12 +328,12 @@ function HomePage() {
                 </p>
                 <p className="mt-5 leading-relaxed text-muted-foreground">
                   People need support before they reach hospitals, after they leave hospitals and
-                  throughout the long periods when they live with chronic conditions, disability, ageing
-                  and recovery. Care connects all of these moments.
+                  throughout the long periods when they live with chronic conditions, disability,
+                  ageing and recovery. Care connects all of these moments.
                 </p>
                 <p className="mt-8 border-l-2 border-primary pl-6 font-display text-xl font-bold leading-snug">
-                  The question is no longer whether care is essential. The question is whether we are
-                  ready to build the infrastructure to support it.
+                  The question is no longer whether care is essential. The question is whether we
+                  are ready to build the infrastructure to support it.
                 </p>
               </div>
               <div className="overflow-hidden rounded-lg">
@@ -363,19 +362,10 @@ function HomePage() {
 
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {CASE_STATS.map((stat) => (
-              <div
-                key={stat.number}
-                className="border-t-3 border-accent bg-background p-6"
-              >
-                <p className="font-display text-4xl font-extrabold text-ink">
-                  {stat.number}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {stat.text}
-                </p>
-                <p className="mt-4 text-xs text-muted-foreground/60">
-                  {stat.source}
-                </p>
+              <div key={stat.number} className="border-t-3 border-accent bg-background p-6">
+                <p className="font-display text-4xl font-extrabold text-ink">{stat.number}</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{stat.text}</p>
+                <p className="mt-4 text-xs text-muted-foreground/60">{stat.source}</p>
               </div>
             ))}
           </div>
@@ -386,10 +376,10 @@ function HomePage() {
             </h3>
             <p className="mt-4 leading-relaxed text-muted-foreground">
               Care as infrastructure is a health system position. It holds that home healthcare is a
-              load bearing layer of the health system, and that it must be built the way any national
-              infrastructure is built: with clinical, coordination, digital, workforce, and financing
-              systems that determine whether recognised, funded care is actually safe, continuous,
-              and accountable at national scale.
+              load bearing layer of the health system, and that it must be built the way any
+              national infrastructure is built: with clinical, coordination, digital, workforce, and
+              financing systems that determine whether recognised, funded care is actually safe,
+              continuous, and accountable at national scale.
             </p>
             <p className="mt-4 font-display text-base font-semibold text-ink">
               A register of who provides care is not a record of what care is delivered.
@@ -558,7 +548,13 @@ function HomePage() {
           <div className="grid gap-6 lg:grid-cols-[1fr_640px]">
             <SectionHeading
               eyebrow="Who Should Attend"
-              title={<>One Room.<br />Many Perspectives. One Conversation.</>}
+              title={
+                <>
+                  One Room.
+                  <br />
+                  Many Perspectives. One Conversation.
+                </>
+              }
               lede="The Care Conference brings together the people shaping healthcare, policy, technology and communities."
             />
             <div className="grid grid-cols-2 gap-4">
@@ -630,17 +626,18 @@ function HomePage() {
         </div>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {SPEAKERS.filter(
-            (s, i, arr) => arr.findIndex((x) => x.role === s.role) === i,
-          ).map((speaker) => (
+          {SPEAKERS.slice(0, 6).map((speaker) => (
             <div
-              key={speaker.role}
+              key={speaker.name}
               className="flex flex-col items-center rounded-lg border border-border bg-card p-7 text-center"
             >
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20">
-                <span className="font-display text-lg font-bold text-primary/50">
-                  {speaker.initials}
-                </span>
+              <div className="h-16 w-16 overflow-hidden rounded-full bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20">
+                <img
+                  src={speaker.image}
+                  alt={speaker.name}
+                  loading="lazy"
+                  className="h-full w-full object-cover object-top"
+                />
               </div>
               <p className="mt-4 font-display text-sm font-bold">{speaker.role}</p>
               <p className="mt-1 text-xs text-muted-foreground">{speaker.name}</p>
@@ -763,8 +760,8 @@ function HomePage() {
                 <div>
                   <dt className="eyebrow text-primary">Capacity</dt>
                   <dd className="mt-2 text-muted-foreground">
-                    Seats are assigned first come first served against room capacity and confirmed by
-                    email before the day.
+                    Seats are assigned first come first served against room capacity and confirmed
+                    by email before the day.
                   </dd>
                 </div>
               </dl>

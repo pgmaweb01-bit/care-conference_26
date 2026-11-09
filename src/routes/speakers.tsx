@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/section";
-import { SPEAKERS } from "@/data/conference";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { SPEAKERS, type Speaker } from "@/data/conference";
 
 export const Route = createFileRoute("/speakers")({
   head: () => ({
@@ -27,6 +29,8 @@ export const Route = createFileRoute("/speakers")({
 });
 
 function SpeakersPage() {
+  const [active, setActive] = useState<Speaker | null>(null);
+
   return (
     <>
       <PageHero
@@ -42,16 +46,38 @@ function SpeakersPage() {
             {SPEAKERS.map((speaker) => (
               <article
                 key={speaker.name}
-                className="group rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary/30 hover:shadow-sm"
+                className="group flex flex-col rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary/30 hover:shadow-sm"
               >
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 font-display text-2xl font-extrabold text-primary">
-                  {speaker.initials}
+                <div className="aspect-square w-full overflow-hidden rounded-lg bg-muted">
+                  <img
+                    src={speaker.image}
+                    alt={speaker.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                  />
                 </div>
-                <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-primary">
-                  {speaker.role}
-                </p>
+                {speaker.role && (
+                  <p className="mt-4 text-xs font-bold uppercase leading-relaxed tracking-[0.14em] text-primary">
+                    {speaker.role}
+                  </p>
+                )}
                 <h3 className="mt-2 font-display text-lg font-bold">{speaker.name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{speaker.bio}</p>
+                {speaker.bio ? (
+                  <>
+                    <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                      {speaker.bio}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setActive(speaker)}
+                      className="mt-auto inline-flex items-center gap-1.5 pt-4 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-colors hover:text-primary/80"
+                    >
+                      Read full bio <ArrowRight className="size-3.5" />
+                    </button>
+                  </>
+                ) : (
+                  <p className="mt-auto pt-4 text-xs text-muted-foreground">Bio coming soon</p>
+                )}
               </article>
             ))}
           </div>
@@ -83,6 +109,33 @@ function SpeakersPage() {
           </div>
         </div>
       </section>
+
+      <Dialog open={active !== null} onOpenChange={(open) => !open && setActive(null)}>
+        <DialogContent className="max-h-[88vh] overflow-y-auto sm:max-w-2xl">
+          {active && (
+            <>
+              <div className="flex items-start gap-4 pr-8">
+                <img
+                  src={active.image}
+                  alt=""
+                  className="h-20 w-20 shrink-0 rounded-full object-cover object-top"
+                />
+                <div className="min-w-0">
+                  <DialogTitle className="font-display text-xl font-extrabold">
+                    {active.name}
+                  </DialogTitle>
+                  <DialogDescription className="mt-1 text-xs font-bold uppercase leading-relaxed tracking-[0.12em] text-primary">
+                    {active.role || "Speaker"}
+                  </DialogDescription>
+                </div>
+              </div>
+              <div className="mt-2 space-y-4 whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
+                {active.bio}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
