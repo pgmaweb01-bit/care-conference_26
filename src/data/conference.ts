@@ -312,10 +312,6 @@ export const SPEAKERS: Speaker[] = [
     image: "/speakers/prof-prisca-adejumo.jpg",
   },
   {
-    name: "Ernest Elue",
-    role: "Head of Strategy and Business, ProvidusBank",
-  },
-  {
     name: "Dr OluToyin Akande-Ajala",
     role: "MD/Founder, JBS Gerontology Centre",
     image: "/speakers/dr-olutoyin-akande-ajala.jpg",
@@ -342,11 +338,6 @@ export const SPEAKERS: Speaker[] = [
       "Zahid has worked with leading institutions including Harvard, UCSF, Mayo Clinic, Houston Methodist and Cleveland Clinic, and has advised the NHS on AI adoption. He leads the Integration of Data subgroup within the WHO/Europe Public Health Innovation Platform, serves on the IT Advisory Committee of the Indus Hospital and Health Network, and sits on multiple advisory boards and regulatory and standards task forces.",
       "A recognized thought leader, he has spoken at more than 30 international conferences, including HIMSS, HLTH, CHIME, KLAS, FII, SDAIA and the Global Health Exhibition. His honors include the HIMSS EMERGE 2025 Innovation Award, the HIMSS 2022 Changemaker Award, Global CIO 200 recognition and selection as a Prix Galien USA finalist.",
     ].join("\n\n"),
-  },
-  {
-    name: "Dr. Buloala Lilly-West",
-    role: "Health Lead - Promote & Access, SHELL NIGERIA EXPLORATION AND PRODUCTION COMPANY LIMITED (SNEPCo)",
-    image: "/speakers/dr-buloala-lilly-west.jpg",
   },
   {
     name: "Dr. Ifeoma Orifa",
