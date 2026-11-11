@@ -440,7 +440,6 @@ function AttendeeForm() {
                 </option>
                 <option>Room A: Care Workforce &amp; Continuation of Care</option>
                 <option>Room B: Conference on Healthy Ageing</option>
-                <option>Room C: Pitch/Demo Room</option>
               </select>
             </Field>
             <Field label="Side room, second choice" required>
@@ -456,7 +455,6 @@ function AttendeeForm() {
                 </option>
                 <option>Room A: Care Workforce &amp; Continuation of Care</option>
                 <option>Room B: Conference on Healthy Ageing</option>
-                <option>Room C: Pitch/Demo Room</option>
               </select>
             </Field>
             <Field label="Sector" required>
