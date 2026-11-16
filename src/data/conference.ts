@@ -277,11 +277,6 @@ export const SPEAKERS: Speaker[] = [
     image: "/speakers/dr-kemi-ogunyemi.jpg",
   },
   {
-    name: "Dr Emmanuella Zamba",
-    role: "Permanent Secretary/CEO, Lagos State Health Management Agency",
-    image: "/speakers/dr-emmanuella-zamba.jpg",
-  },
-  {
     name: "Dr. Victoria Egunjobi",
     role: "Executive Secretary, Health Facility Monitoring and Accreditation Agency (HEFAMAA)",
     image: "/speakers/dr-victoria-egunjobi.jpg",
@@ -351,16 +346,6 @@ export const SPEAKERS: Speaker[] = [
       "Dr. Orifa brings to the care sector a unique combination of clinical nursing experience and entrepreneurial leadership. She understands the realities of care delivery not only from the perspective of a healthcare professional, but also from that of an organisation responsible for recruiting, training, deploying and supporting care workers.",
       "She is passionate about building a care ecosystem in Nigeria where caregivers are properly trained, appropriately recognised, fairly treated and equipped to provide safe, dignified and compassionate care.",
       "As a panelist at The Care Conference 2026, Dr. Orifa brings a practical, frontline and systems-level perspective to the conversation on Care Workforce Development and Protection, with a particular interest in how Nigeria can build a sustainable care workforce that serves both those who receive care and those who provide it.",
-    ].join("\n\n"),
-  },
-  {
-    name: "Dr. Nkajima Nwakaji",
-    role: "MD/Founder KajiCare",
-    image: "/speakers/dr-nkajima-nwakaji.jpg",
-    bio: [
-      "Dr. Nkajima is a medical doctor, clinical researcher, healthcare entrepreneur, and the Founder of KajiCare, an elder home-care and concierge agency focused on professional, compassionate, and clinically informed care, with particular expertise in dementia and memory care.",
-      "She holds an MSc in Clinical Trials from the University of London and has professional experience with Médecins Sans Frontières (MSF). Dr. Nkajima is particularly passionate about advancing the recognition of care as an essential component of health and social infrastructure. She advocates for a shift from viewing home and community care as informal support to recognising it as a professional, accountable, evidence-informed component of the healthcare system, supported by appropriate standards, trained caregivers, clinical oversight, technology, and meaningful family engagement.",
-      "Through KajiCare, she brings practical experience of the systems, workforce, and accountability required to deliver safe, high-quality care beyond the hospital. She is passionate about advancing care as an essential component of Nigeria's health and social infrastructure and ensuring that older adults can age with dignity, safety, and quality of life.",
     ].join("\n\n"),
   },
   {
