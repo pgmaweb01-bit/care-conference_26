@@ -13,7 +13,7 @@ import {
   Upload,
 } from "lucide-react";
 import { PageHero } from "@/components/section";
-import { PAYMENT_LINK } from "@/data/conference";
+import { PAYMENT_LINK, REGISTRATION_OPEN } from "@/data/conference";
 
 export const Route = createFileRoute("/caresouk")({
   head: () => ({
@@ -107,7 +107,7 @@ function CareSoukPage() {
                     to="/register"
                     className="inline-flex items-center gap-2 rounded-md border border-white/20 px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-ink-foreground transition-colors hover:bg-white/10"
                   >
-                    Register for Conference
+                    {REGISTRATION_OPEN ? "Register for Conference" : "Registration Closed"}
                   </Link>
                 </div>
               </div>

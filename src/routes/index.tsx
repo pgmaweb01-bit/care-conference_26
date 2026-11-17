@@ -11,6 +11,7 @@ import {
   EVENT,
   POLICY_LAYERS,
   RECOGNITIONS,
+  REGISTRATION_OPEN,
   SPEAKERS,
   TAKEAWAYS,
 } from "@/data/conference";
@@ -236,10 +237,20 @@ function HomePage() {
             <div className="animate-rise mt-8 flex flex-wrap justify-center gap-4">
               <Link
                 to="/register"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.03]"
+                className={
+                  REGISTRATION_OPEN
+                    ? "group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.03]"
+                    : "inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-ink-foreground/70 transition-colors hover:bg-white/10 hover:text-ink-foreground"
+                }
               >
-                Register Now
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                {REGISTRATION_OPEN ? (
+                  <>
+                    Register Now
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                  </>
+                ) : (
+                  "Registration Closed"
+                )}
               </Link>
             </div>
 
@@ -272,9 +283,19 @@ function HomePage() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   to="/register"
-                  className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
+                  className={
+                    REGISTRATION_OPEN
+                      ? "inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
+                      : "inline-flex items-center gap-2 rounded-md border border-input px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  }
                 >
-                  Register for the Conference <ArrowRight className="size-4" />
+                  {REGISTRATION_OPEN ? (
+                    <>
+                      Register for the Conference <ArrowRight className="size-4" />
+                    </>
+                  ) : (
+                    "Registration Closed"
+                  )}
                 </Link>
               </div>
             </div>
@@ -817,9 +838,19 @@ function HomePage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               to="/register"
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
+              className={
+                REGISTRATION_OPEN
+                  ? "inline-flex items-center gap-2 rounded-md bg-primary px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
+                  : "inline-flex items-center gap-2 rounded-md border border-input px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              }
             >
-              Register Now <ArrowRight className="size-4" />
+              {REGISTRATION_OPEN ? (
+                <>
+                  Register Now <ArrowRight className="size-4" />
+                </>
+              ) : (
+                "Registration Closed"
+              )}
             </Link>
             <Link
               to="/partners"

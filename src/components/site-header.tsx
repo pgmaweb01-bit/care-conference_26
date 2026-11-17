@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { EVENT } from "@/data/conference";
+import { EVENT, REGISTRATION_OPEN } from "@/data/conference";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -25,16 +25,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <Link
-          to="/"
-          className="flex items-center gap-3"
-          onClick={scrollToTopIfSameRoute("/")}
-        >
-          <img
-            src="/Logo Header.webp"
-            alt="The Purple Global Mission"
-            className="h-12 w-auto"
-          />
+        <Link to="/" className="flex items-center gap-3" onClick={scrollToTopIfSameRoute("/")}>
+          <img src="/Logo Header.webp" alt="The Purple Global Mission" className="h-12 w-auto" />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
@@ -54,9 +46,13 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <Link
             to="/register"
-            className="rounded-md bg-primary px-4 py-2 font-display text-[12px] font-semibold uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:bg-primary/90"
+            className={
+              REGISTRATION_OPEN
+                ? "rounded-md bg-primary px-4 py-2 font-display text-[12px] font-semibold uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:bg-primary/90"
+                : "rounded-md border border-border px-4 py-2 font-display text-[12px] font-semibold uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-foreground"
+            }
           >
-            Register Now
+            {REGISTRATION_OPEN ? "Register Now" : "Registration Closed"}
           </Link>
           <button
             type="button"

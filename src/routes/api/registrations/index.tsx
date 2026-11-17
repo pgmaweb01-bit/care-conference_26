@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { addRegistration, getRegistrations, getRegistrationStats } from "@/lib/db";
 import { generateRegistrationId } from "@/components/registration-qr";
 import { sendRegistrationEmail } from "@/lib/email";
+import { REGISTRATION_OPEN } from "@/data/conference";
 
 export const Route = createFileRoute("/api/registrations/")({
   server: {
@@ -22,6 +23,12 @@ export const Route = createFileRoute("/api/registrations/")({
         }
       },
       POST: async ({ request }) => {
+        if (!REGISTRATION_OPEN) {
+          return new Response(JSON.stringify({ error: "Registration is currently closed." }), {
+            status: 403,
+            headers: { "Content-Type": "application/json" },
+          });
+        }
         try {
           const text = await request.text();
           if (text.length > 4_500_000) {

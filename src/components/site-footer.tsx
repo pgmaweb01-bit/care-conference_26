@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { EVENT } from "@/data/conference";
+import { EVENT, REGISTRATION_OPEN } from "@/data/conference";
 
 const QUICK_LINKS = [
   { to: "/about", label: "About" },
@@ -20,11 +20,7 @@ export function SiteFooter() {
     <footer className="bg-ink text-ink-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <img
-            src="/Logo Footer.webp"
-            alt="The Purple Global Mission"
-            className="h-16 w-auto"
-          />
+          <img src="/Logo Footer.webp" alt="The Purple Global Mission" className="h-16 w-auto" />
           <p className="mt-3 font-display text-2xl font-extrabold">The Care Conference 2026</p>
           <p className="mt-2 font-display text-sm font-semibold text-ink-foreground/70">
             {EVENT.theme}
@@ -73,9 +69,13 @@ export function SiteFooter() {
         <div className="lg:col-span-3">
           <Link
             to="/register"
-            className="inline-block rounded-md bg-accent px-5 py-3 font-display text-[12px] font-bold uppercase tracking-[0.12em] text-accent-foreground transition-opacity hover:opacity-90"
+            className={
+              REGISTRATION_OPEN
+                ? "inline-block rounded-md bg-accent px-5 py-3 font-display text-[12px] font-bold uppercase tracking-[0.12em] text-accent-foreground transition-opacity hover:opacity-90"
+                : "inline-block rounded-md border border-white/20 px-5 py-3 font-display text-[12px] font-bold uppercase tracking-[0.12em] text-ink-foreground/70 transition-colors hover:bg-white/10"
+            }
           >
-            Register for Care Conference 2026
+            {REGISTRATION_OPEN ? "Register for Care Conference 2026" : "Registration Closed"}
           </Link>
           <p className="eyebrow mt-6 text-ink-foreground/50">Organised by</p>
           <p className="mt-2 font-display text-sm font-semibold">{EVENT.organiser}</p>

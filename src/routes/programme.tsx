@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/section";
-import { EVENT, PROGRAMME, ROOMS } from "@/data/conference";
+import { EVENT, PROGRAMME, ROOMS, REGISTRATION_OPEN } from "@/data/conference";
 
 export const Route = createFileRoute("/programme")({
   head: () => ({
@@ -70,7 +70,9 @@ function ProgrammePage() {
                     <p className="font-display text-sm font-bold uppercase tracking-[0.12em] text-muted-foreground">
                       {item.time}
                     </p>
-                    {item.kicker ? <p className="eyebrow mt-3 text-primary">{item.kicker}</p> : null}
+                    {item.kicker ? (
+                      <p className="eyebrow mt-3 text-primary">{item.kicker}</p>
+                    ) : null}
                     <h2 className="mt-1 font-display text-2xl font-bold">{item.title}</h2>
                     <p className="mt-3 max-w-[62ch] leading-relaxed text-muted-foreground">
                       {item.body}
@@ -118,9 +120,19 @@ function ProgrammePage() {
           </div>
           <Link
             to="/register"
-            className="mt-10 inline-flex items-center gap-2 rounded-md bg-primary px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground"
+            className={
+              REGISTRATION_OPEN
+                ? "mt-10 inline-flex items-center gap-2 rounded-md bg-primary px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground"
+                : "mt-10 inline-flex w-fit items-center gap-2 rounded-md border border-input px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+            }
           >
-            Register Now <ArrowRight className="size-4" />
+            {REGISTRATION_OPEN ? (
+              <>
+                Register Now <ArrowRight className="size-4" />
+              </>
+            ) : (
+              "Registration Closed"
+            )}
           </Link>
         </div>
       </section>

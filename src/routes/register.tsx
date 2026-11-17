@@ -2,23 +2,35 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, CheckCircle, Download, Mic, Printer, User } from "lucide-react";
 import { PageHero } from "@/components/section";
-import { EVENT } from "@/data/conference";
+import { EVENT, REGISTRATION_OPEN } from "@/data/conference";
 import { RegistrationQR, generateRegistrationId } from "@/components/registration-qr";
 import { processSpeakerMedia } from "@/lib/media";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
     meta: [
-      { title: "Register — Care Conference 2026, Lagos" },
+      {
+        title: REGISTRATION_OPEN
+          ? "Register — Care Conference 2026, Lagos"
+          : "Registration Closed — Care Conference 2026, Lagos",
+      },
       {
         name: "description",
-        content:
-          "Register for the Care Conference 2026 on 19 November 2026 at IALA Hub, Lagos. Building a national position on home care for Nigeria.",
+        content: REGISTRATION_OPEN
+          ? "Register for the Care Conference 2026 on 19 November 2026 at IALA Hub, Lagos. Building a national position on home care for Nigeria."
+          : "Registration for the Care Conference 2026 on 19 November 2026 at IALA Hub, Lagos is now closed.",
       },
-      { property: "og:title", content: "Register — Care Conference 2026" },
+      {
+        property: "og:title",
+        content: REGISTRATION_OPEN
+          ? "Register — Care Conference 2026"
+          : "Registration Closed — Care Conference 2026",
+      },
       {
         property: "og:description",
-        content: "Register for Care Conference 2026: Care as Infrastructure.",
+        content: REGISTRATION_OPEN
+          ? "Register for Care Conference 2026: Care as Infrastructure."
+          : "Registration for Care Conference 2026 is now closed.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/register" },
@@ -30,6 +42,8 @@ export const Route = createFileRoute("/register")({
 
 function RegisterPage() {
   const [attendeeType, setAttendeeType] = useState<"attendee" | "speaker">("attendee");
+
+  if (!REGISTRATION_OPEN) return <RegistrationClosed />;
 
   return (
     <div className="min-h-screen bg-background">
@@ -73,6 +87,62 @@ function RegisterPage() {
       </div>
 
       {attendeeType === "attendee" ? <AttendeeForm /> : <SpeakerForm />}
+    </div>
+  );
+}
+
+function RegistrationClosed() {
+  return (
+    <div className="min-h-screen bg-background">
+      <div className="relative overflow-hidden border-b border-border">
+        <div className="pointer-events-none absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-primary/[0.06] blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-primary/[0.04] blur-3xl" />
+        <div className="relative mx-auto max-w-3xl px-6 pb-12 pt-20 sm:pb-16 sm:pt-24">
+          <p className="eyebrow text-primary">Registration</p>
+          <h1 className="mt-3 font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-foreground sm:text-5xl">
+            Registration is now closed
+          </h1>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
+            {EVENT.subtitle}.
+          </p>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-3xl px-6 py-14 sm:py-16">
+        <div className="rounded-xl border border-border bg-card p-7 shadow-sm sm:p-9">
+          <h2 className="font-display text-xl font-extrabold sm:text-2xl">
+            Thank you for your interest
+          </h2>
+          <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p>
+              Registration for {EVENT.name} on {EVENT.date} at {EVENT.venue} has now closed. We are
+              no longer accepting new registrations.
+            </p>
+            <p>
+              If you have already registered, your confirmation email contains your registration ID
+              and QR code. Please bring it with you for check-in on the day.
+            </p>
+            <p>
+              For enquiries, accessibility requests or any other questions, please contact our team
+              — we will be happy to help.
+            </p>
+          </div>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Contact Us <ArrowRight className="size-4" />
+            </Link>
+            <Link
+              to="/programme"
+              className="inline-flex items-center gap-2 rounded-md border border-input px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] transition-colors hover:bg-secondary"
+            >
+              View Programme
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
