@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as BrochureRouteImport } from './routes/brochure'
 import { Route as CaresoukRouteImport } from './routes/caresouk'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PartnersRouteImport } from './routes/partners'
@@ -52,6 +53,11 @@ const AboutRoute = AboutRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrochureRoute = BrochureRouteImport.update({
+  id: '/brochure',
+  path: '/brochure',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaresoukRoute = CaresoukRouteImport.update({
@@ -191,6 +197,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
+  '/brochure': typeof BrochureRoute
   '/caresouk': typeof CaresoukRoute
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
@@ -221,6 +228,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/brochure': typeof BrochureRoute
   '/caresouk': typeof CaresoukRoute
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
@@ -253,6 +261,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
+  '/brochure': typeof BrochureRoute
   '/caresouk': typeof CaresoukRoute
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
@@ -286,6 +295,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/brochure'
     | '/caresouk'
     | '/contact'
     | '/partners'
@@ -316,6 +326,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/brochure'
     | '/caresouk'
     | '/contact'
     | '/partners'
@@ -347,6 +358,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/brochure'
     | '/caresouk'
     | '/contact'
     | '/partners'
@@ -379,6 +391,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRouteWithChildren
+  BrochureRoute: typeof BrochureRoute
   CaresoukRoute: typeof CaresoukRoute
   ContactRoute: typeof ContactRoute
   PartnersRoute: typeof PartnersRoute
@@ -418,6 +431,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brochure': {
+      id: '/brochure'
+      path: '/brochure'
+      fullPath: '/brochure'
+      preLoaderRoute: typeof BrochureRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/caresouk': {
@@ -637,6 +657,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRouteWithChildren,
+  BrochureRoute: BrochureRoute,
   CaresoukRoute: CaresoukRoute,
   ContactRoute: ContactRoute,
   PartnersRoute: PartnersRoute,
