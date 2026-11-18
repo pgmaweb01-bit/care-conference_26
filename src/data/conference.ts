@@ -13,7 +13,7 @@ export const PAYMENT_LINK = "https://paystack.shop/pay/careconferene26";
 
 /** Set to false to close registrations: the form is replaced with a notice and
  *  the API rejects new submissions. Flip back to true to reopen. */
-export const REGISTRATION_OPEN = false;
+export const REGISTRATION_OPEN = true;
 
 export const POLICY_LAYERS = [
   {
