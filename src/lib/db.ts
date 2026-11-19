@@ -116,6 +116,16 @@ export async function deleteRegistration(registrationId: string): Promise<boolea
   return rows.length > 0;
 }
 
+export async function setRegistrationCheckIn(
+  registrationId: string,
+  checkedIn: boolean,
+): Promise<boolean> {
+  const rows = await sql`
+    UPDATE registrations SET checked_in = ${checkedIn} WHERE registration_id = ${registrationId} RETURNING id
+  `;
+  return rows.length > 0;
+}
+
 export interface PitchApplication {
   id: number;
   application_id: string;

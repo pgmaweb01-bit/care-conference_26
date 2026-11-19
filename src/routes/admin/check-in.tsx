@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   QrCode,
   Search,
@@ -9,18 +9,27 @@ import {
   UserCheck,
   Keyboard,
   Camera,
+  RefreshCw,
 } from "lucide-react";
+import { getAuthHeader } from "@/lib/auth";
 
 export const Route = createFileRoute("/admin/check-in")({
   component: AdminCheckIn,
 });
 
-const MOCK_REGISTRATIONS: Array<{
+type CheckInRegistration = {
   registrationId: string;
   name: string;
   type: string;
   checkedIn: boolean;
-}> = [];
+};
+
+type ApiRegistrationRow = {
+  registration_id: string;
+  full_name: string;
+  type: string;
+  checked_in: boolean;
+};
 
 type CheckResult = {
   success: boolean;
@@ -33,7 +42,8 @@ type CheckResult = {
 function AdminCheckIn() {
   const [mode, setMode] = useState<"camera" | "manual">("manual");
   const [manualId, setManualId] = useState("");
-  const [registrations, setRegistrations] = useState(MOCK_REGISTRATIONS);
+  const [registrations, setRegistrations] = useState<CheckInRegistration[]>([]);
+  const [loadState, setLoadState] = useState<"loading" | "ready" | "error">("loading");
   const [result, setResult] = useState<CheckResult | null>(null);
   const [scanHistory, setScanHistory] = useState<
     Array<{ id: string; time: string; success: boolean; name: string }>
@@ -43,6 +53,31 @@ function AdminCheckIn() {
 
   const totalCheckedIn = registrations.filter((r) => r.checkedIn).length;
   const totalRegistered = registrations.length;
+
+  const loadRegistrations = useCallback(async () => {
+    setLoadState("loading");
+    try {
+      const res = await fetch("/api/registrations");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const rows = (await res.json()) as ApiRegistrationRow[];
+      setRegistrations(
+        rows.map((r) => ({
+          registrationId: r.registration_id,
+          name: r.full_name,
+          type: r.type,
+          checkedIn: r.checked_in,
+        })),
+      );
+      setLoadState("ready");
+    } catch (err) {
+      console.error("Failed to load registrations:", err);
+      setLoadState("error");
+    }
+  }, []);
+
+  useEffect(() => {
+    loadRegistrations();
+  }, [loadRegistrations]);
 
   useEffect(() => {
     return () => {
@@ -115,7 +150,7 @@ function AdminCheckIn() {
     processCheckIn(scannedId);
   };
 
-  const processCheckIn = (id: string) => {
+  const processCheckIn = async (id: string) => {
     const normalizedInput = id.toUpperCase().replace(/\s/g, "");
     const reg = registrations.find(
       (r) => r.registrationId.toUpperCase().replace(/\s/g, "") === normalizedInput,
@@ -138,6 +173,34 @@ function AdminCheckIn() {
       const res: CheckResult = {
         success: false,
         message: `${reg.name} has already been checked in.`,
+        name: reg.name,
+        type: reg.type,
+        registrationId: reg.registrationId,
+      };
+      setResult(res);
+      setScanHistory((prev) => [
+        { id, time: new Date().toLocaleTimeString(), success: false, name: reg.name },
+        ...prev,
+      ]);
+      return;
+    }
+
+    // Persist the check-in before reporting success, so a refresh keeps it.
+    try {
+      const res = await fetch(
+        `/api/registrations/${encodeURIComponent(reg.registrationId)}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json", "x-admin-auth": getAuthHeader() },
+          body: JSON.stringify({ checkedIn: true }),
+        },
+      );
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    } catch (err) {
+      console.error("Failed to save check-in:", err);
+      const res: CheckResult = {
+        success: false,
+        message: `Couldn't save the check-in for ${reg.name}. Check the connection and try again.`,
         name: reg.name,
         type: reg.type,
         registrationId: reg.registrationId,
@@ -246,7 +309,8 @@ function AdminCheckIn() {
               <button
                 type="button"
                 onClick={startScanner}
-                className={`inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors ${
+                disabled={loadState !== "ready"}
+                className={`inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
                   mode === "camera"
                     ? "bg-primary text-primary-foreground"
                     : "border border-input text-muted-foreground hover:bg-secondary"
@@ -256,6 +320,26 @@ function AdminCheckIn() {
                 Camera Scan
               </button>
             </div>
+
+            {loadState === "loading" ? (
+              <p className="mt-6 rounded-md border border-border bg-muted/50 px-4 py-3 text-sm text-muted-foreground">
+                Loading registrations…
+              </p>
+            ) : loadState === "error" ? (
+              <div className="mt-6 rounded-md border border-red-200 bg-red-50 px-4 py-3">
+                <p className="text-sm font-medium text-red-700">
+                  Couldn't load registrations. Check the connection.
+                </p>
+                <button
+                  type="button"
+                  onClick={loadRegistrations}
+                  className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-red-700 underline-offset-2 hover:underline"
+                >
+                  <RefreshCw className="size-3.5" />
+                  Retry
+                </button>
+              </div>
+            ) : null}
 
             {mode === "manual" ? (
               <form onSubmit={handleManualSubmit} className="mt-6">
@@ -271,13 +355,14 @@ function AdminCheckIn() {
                     value={manualId}
                     onChange={(e) => setManualId(e.target.value)}
                     placeholder="CC26-XXXX-XXXX"
-                    className="flex-1 rounded-md border border-input bg-background px-4 py-3 font-mono text-sm uppercase tracking-wider outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                    disabled={loadState !== "ready"}
+                    className="flex-1 rounded-md border border-input bg-background px-4 py-3 font-mono text-sm uppercase tracking-wider outline-none focus:border-primary focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
                     autoFocus
                   />
                   <button
                     type="submit"
-                    disabled={!manualId.trim()}
-                    className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 font-display text-xs font-bold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+                    disabled={!manualId.trim() || loadState !== "ready"}
+                    className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 font-display text-xs font-bold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <Search className="size-3.5" />
                     Check In
@@ -382,7 +467,20 @@ function AdminCheckIn() {
             <h2 className="font-display text-lg font-bold">Registration IDs</h2>
             <p className="mt-1 text-xs text-muted-foreground">Quick reference for manual lookups</p>
             <div className="mt-4 max-h-64 space-y-1.5 overflow-y-auto">
-              {registrations.map((reg) => (
+              {loadState === "loading" ? (
+                <p className="py-4 text-center text-sm text-muted-foreground">
+                  Loading registrations…
+                </p>
+              ) : loadState === "error" ? (
+                <p className="py-4 text-center text-sm text-muted-foreground">
+                  Couldn't load. Use Retry above.
+                </p>
+              ) : registrations.length === 0 ? (
+                <p className="py-4 text-center text-sm text-muted-foreground">
+                  No registrations yet.
+                </p>
+              ) : (
+                registrations.map((reg) => (
                 <div
                   key={reg.registrationId}
                   className={`flex items-center justify-between rounded-md px-3 py-2 text-sm ${
@@ -405,7 +503,7 @@ function AdminCheckIn() {
                     </button>
                   )}
                 </div>
-              ))}
+              )))}
             </div>
           </div>
         </div>
