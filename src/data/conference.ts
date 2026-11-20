@@ -15,9 +15,8 @@ export const PAYMENT_LINK = "https://paystack.shop/pay/careconferene26";
  *  default). The live value lives in the site_settings table and can be
  *  flipped at runtime from the admin dashboard toggle — see
  *  src/lib/registration.ts. Keep this fallback in sync with the steady state
- *  the site is deployed in (open while accepting registrations, false once
- *  closed). */
-export const REGISTRATION_OPEN = true;
+ *  the site is deployed in (currently: closed — the conference has passed). */
+export const REGISTRATION_OPEN = false;
 
 export const POLICY_LAYERS = [
   {
