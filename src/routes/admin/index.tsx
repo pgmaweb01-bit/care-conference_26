@@ -1,15 +1,43 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Users, Mic2, Handshake, Mail, TrendingUp, Calendar, ArrowRight } from "lucide-react";
+import { saveRegistrationStatus, useRegistrationStatus } from "@/lib/registration";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
 });
 
 function AdminDashboard() {
-  const daysLeft = Math.max(0, Math.ceil((new Date("2026-11-19").getTime() - Date.now()) / 86400000));
+  const daysLeft = Math.max(
+    0,
+    Math.ceil((new Date("2026-11-19").getTime() - Date.now()) / 86400000),
+  );
   const [stats, setStats] = useState({ total: 0, confirmed: 0, checkedIn: 0, speakers: 0 });
-  const [recentRegs, setRecentRegs] = useState<Array<{ registration_id: string; full_name: string; organisation: string; created_at: string; type: string }>>([]);
+  const [recentRegs, setRecentRegs] = useState<
+    Array<{
+      registration_id: string;
+      full_name: string;
+      organisation: string;
+      created_at: string;
+      type: string;
+    }>
+  >([]);
+  const registrationStatus = useRegistrationStatus();
+  const [toggling, setToggling] = useState(false);
+  const [toggleError, setToggleError] = useState("");
+
+  async function handleToggleRegistration() {
+    if (!registrationStatus.loaded || toggling) return;
+    setToggling(true);
+    setToggleError("");
+    try {
+      await saveRegistrationStatus(!registrationStatus.open);
+    } catch {
+      setToggleError("Couldn't update registration status. Check the connection and try again.");
+    } finally {
+      setToggling(false);
+    }
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -45,8 +73,20 @@ function AdminDashboard() {
       icon: Mic2,
       color: "text-green-600",
     },
-    { label: "Partners", value: "0", change: "No partners yet", icon: Handshake, color: "text-accent" },
-    { label: "Checked In", value: String(stats.checkedIn), change: stats.checkedIn === 0 ? "None yet" : `${stats.checkedIn} checked in`, icon: Mail, color: "text-blue-600" },
+    {
+      label: "Partners",
+      value: "0",
+      change: "No partners yet",
+      icon: Handshake,
+      color: "text-accent",
+    },
+    {
+      label: "Checked In",
+      value: String(stats.checkedIn),
+      change: stats.checkedIn === 0 ? "None yet" : `${stats.checkedIn} checked in`,
+      icon: Mail,
+      color: "text-blue-600",
+    },
   ];
 
   return (
@@ -70,6 +110,53 @@ function AdminDashboard() {
             <p className="mt-1 text-xs text-muted-foreground">{stat.change}</p>
           </div>
         ))}
+      </div>
+
+      {/* Registration open/close toggle */}
+      <div className="rounded-lg border border-border bg-card p-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2.5">
+              <h2 className="font-display text-lg font-bold">Registration</h2>
+              <span
+                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                  registrationStatus.loaded && registrationStatus.open
+                    ? "bg-green-100 text-green-700"
+                    : "bg-muted text-muted-foreground"
+                }`}
+              >
+                <span
+                  className={`size-1.5 rounded-full ${
+                    registrationStatus.loaded && registrationStatus.open
+                      ? "bg-green-600"
+                      : "bg-muted-foreground/50"
+                  }`}
+                />
+                {!registrationStatus.loaded ? "…" : registrationStatus.open ? "Open" : "Closed"}
+              </span>
+            </div>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {!registrationStatus.loaded
+                ? "Checking current status…"
+                : registrationStatus.open
+                  ? "The registration form is live — new sign-ups are accepted."
+                  : "The registration form is closed — new sign-ups are blocked."}
+            </p>
+            {toggleError && <p className="mt-1 text-xs font-medium text-red-600">{toggleError}</p>}
+          </div>
+          <button
+            type="button"
+            onClick={handleToggleRegistration}
+            disabled={!registrationStatus.loaded || toggling}
+            className="inline-flex items-center gap-2 rounded-md border border-input px-4 py-2 font-display text-xs font-semibold uppercase tracking-wider transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {toggling
+              ? "Saving…"
+              : registrationStatus.open
+                ? "Close Registration"
+                : "Open Registration"}
+          </button>
+        </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-12">
@@ -120,7 +207,10 @@ function AdminDashboard() {
           ) : (
             <div className="mt-4 space-y-3">
               {recentRegs.map((reg) => (
-                <div key={reg.registration_id} className="flex items-center justify-between rounded-lg border border-border/50 px-4 py-3">
+                <div
+                  key={reg.registration_id}
+                  className="flex items-center justify-between rounded-lg border border-border/50 px-4 py-3"
+                >
                   <div>
                     <p className="font-display text-sm font-semibold">{reg.full_name}</p>
                     <p className="text-xs text-muted-foreground">{reg.organisation || "—"}</p>
@@ -129,7 +219,13 @@ function AdminDashboard() {
                     <span className="inline-block rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary capitalize">
                       {reg.type}
                     </span>
-                    <p className="mt-1 text-xs text-muted-foreground">{new Date(reg.created_at).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {new Date(reg.created_at).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -167,9 +263,14 @@ function AdminDashboard() {
                 <span>{stats.total} / 500 delegates</span>
               </div>
               <div className="mt-2 h-2 w-40 overflow-hidden rounded-full bg-secondary">
-                <div className="h-full rounded-full bg-primary" style={{ width: `${Math.min(100, (stats.total / 500) * 100)}%` }} />
+                <div
+                  className="h-full rounded-full bg-primary"
+                  style={{ width: `${Math.min(100, (stats.total / 500) * 100)}%` }}
+                />
               </div>
-              <p className="text-xs text-muted-foreground">{Math.round((stats.total / 500) * 100)}% capacity reached</p>
+              <p className="text-xs text-muted-foreground">
+                {Math.round((stats.total / 500) * 100)}% capacity reached
+              </p>
             </div>
           </div>
 

@@ -1,8 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { addRegistration, getRegistrations, getRegistrationStats } from "@/lib/db";
+import {
+  addRegistration,
+  getRegistrations,
+  getRegistrationOpen,
+  getRegistrationStats,
+} from "@/lib/db";
 import { generateRegistrationId } from "@/components/registration-qr";
 import { sendRegistrationEmail } from "@/lib/email";
-import { REGISTRATION_OPEN } from "@/data/conference";
 
 export const Route = createFileRoute("/api/registrations/")({
   server: {
@@ -23,7 +27,9 @@ export const Route = createFileRoute("/api/registrations/")({
         }
       },
       POST: async ({ request }) => {
-        if (!REGISTRATION_OPEN) {
+        // Live gate: the admin dashboard toggle writes this setting.
+        const registrationOpen = await getRegistrationOpen().catch(() => true);
+        if (!registrationOpen) {
           return new Response(JSON.stringify({ error: "Registration is currently closed." }), {
             status: 403,
             headers: { "Content-Type": "application/json" },

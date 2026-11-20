@@ -126,6 +126,25 @@ export async function setRegistrationCheckIn(
   return rows.length > 0;
 }
 
+const REGISTRATION_OPEN_KEY = "registration_open";
+
+export async function getRegistrationOpen(): Promise<boolean> {
+  const rows = await sql`
+    SELECT setting_value FROM site_settings WHERE setting_key = ${REGISTRATION_OPEN_KEY}
+  `;
+  const row = rows[0] as { setting_value: string } | undefined;
+  if (!row) return true;
+  return row.setting_value === "true";
+}
+
+export async function setRegistrationOpen(open: boolean): Promise<void> {
+  await sql`
+    INSERT INTO site_settings (setting_key, setting_value, updated_at)
+    VALUES (${REGISTRATION_OPEN_KEY}, ${String(open)}, NOW())
+    ON CONFLICT (setting_key) DO UPDATE SET setting_value = EXCLUDED.setting_value, updated_at = NOW()
+  `;
+}
+
 export interface PitchApplication {
   id: number;
   application_id: string;

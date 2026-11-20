@@ -31,6 +31,7 @@ import { Route as AdminRegistrationsRouteImport } from './routes/admin/registrat
 import { Route as AdminSendEmailRouteImport } from './routes/admin/send-email'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminSpeakersRouteImport } from './routes/admin/speakers'
+import { Route as ApiSettingsRouteImport } from './routes/api/settings'
 import { Route as ApiPitchApplicationsIndexRouteImport } from './routes/api/pitch-applications/index'
 import { Route as ApiQrRegistrationIdRouteImport } from './routes/api/qr/$registrationId'
 import { Route as ApiRegistrationsIndexRouteImport } from './routes/api/registrations/index'
@@ -150,6 +151,11 @@ const AdminSpeakersRoute = AdminSpeakersRouteImport.update({
   path: '/speakers',
   getParentRoute: () => AdminRoute,
 } as any)
+const ApiSettingsRoute = ApiSettingsRouteImport.update({
+  id: '/api/settings',
+  path: '/api/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPitchApplicationsIndexRoute =
   ApiPitchApplicationsIndexRouteImport.update({
     id: '/api/pitch-applications/',
@@ -215,6 +221,7 @@ export interface FileRoutesByFullPath {
   '/admin/send-email': typeof AdminSendEmailRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
+  '/api/settings': typeof ApiSettingsRoute
   '/admin/': typeof AdminIndexRoute
   '/api/qr/$registrationId': typeof ApiQrRegistrationIdRoute
   '/api/registrations/$registrationId': typeof ApiRegistrationsRegistrationIdRoute
@@ -246,6 +253,7 @@ export interface FileRoutesByTo {
   '/admin/send-email': typeof AdminSendEmailRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
+  '/api/settings': typeof ApiSettingsRoute
   '/admin': typeof AdminIndexRoute
   '/api/qr/$registrationId': typeof ApiQrRegistrationIdRoute
   '/api/registrations/$registrationId': typeof ApiRegistrationsRegistrationIdRoute
@@ -279,6 +287,7 @@ export interface FileRoutesById {
   '/admin/send-email': typeof AdminSendEmailRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
+  '/api/settings': typeof ApiSettingsRoute
   '/admin/': typeof AdminIndexRoute
   '/api/qr/$registrationId': typeof ApiQrRegistrationIdRoute
   '/api/registrations/$registrationId': typeof ApiRegistrationsRegistrationIdRoute
@@ -313,6 +322,7 @@ export interface FileRouteTypes {
     | '/admin/send-email'
     | '/admin/settings'
     | '/admin/speakers'
+    | '/api/settings'
     | '/admin/'
     | '/api/qr/$registrationId'
     | '/api/registrations/$registrationId'
@@ -344,6 +354,7 @@ export interface FileRouteTypes {
     | '/admin/send-email'
     | '/admin/settings'
     | '/admin/speakers'
+    | '/api/settings'
     | '/admin'
     | '/api/qr/$registrationId'
     | '/api/registrations/$registrationId'
@@ -376,6 +387,7 @@ export interface FileRouteTypes {
     | '/admin/send-email'
     | '/admin/settings'
     | '/admin/speakers'
+    | '/api/settings'
     | '/admin/'
     | '/api/qr/$registrationId'
     | '/api/registrations/$registrationId'
@@ -400,6 +412,7 @@ export interface RootRouteChildren {
   ProgrammeRoute: typeof ProgrammeRoute
   RegisterRoute: typeof RegisterRoute
   SpeakersRoute: typeof SpeakersRoute
+  ApiSettingsRoute: typeof ApiSettingsRoute
   ApiQrRegistrationIdRoute: typeof ApiQrRegistrationIdRoute
   ApiRegistrationsRegistrationIdRoute: typeof ApiRegistrationsRegistrationIdRoute
   ApiRegistrationsResendRoute: typeof ApiRegistrationsResendRoute
@@ -566,6 +579,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSpeakersRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/api/settings': {
+      id: '/api/settings'
+      path: '/api/settings'
+      fullPath: '/api/settings'
+      preLoaderRoute: typeof ApiSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/pitch-applications/': {
       id: '/api/pitch-applications/'
       path: '/api/pitch-applications'
@@ -666,6 +686,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProgrammeRoute: ProgrammeRoute,
   RegisterRoute: RegisterRoute,
   SpeakersRoute: SpeakersRoute,
+  ApiSettingsRoute: ApiSettingsRoute,
   ApiQrRegistrationIdRoute: ApiQrRegistrationIdRoute,
   ApiRegistrationsRegistrationIdRoute: ApiRegistrationsRegistrationIdRoute,
   ApiRegistrationsResendRoute: ApiRegistrationsResendRoute,

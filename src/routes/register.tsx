@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, CheckCircle, Download, Mic, Printer, User } from "lucide-react";
 import { PageHero } from "@/components/section";
 import { EVENT, REGISTRATION_OPEN } from "@/data/conference";
 import { RegistrationQR, generateRegistrationId } from "@/components/registration-qr";
 import { processSpeakerMedia } from "@/lib/media";
+import { useRegistrationOpen } from "@/lib/registration";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
@@ -42,8 +43,17 @@ export const Route = createFileRoute("/register")({
 
 function RegisterPage() {
   const [attendeeType, setAttendeeType] = useState<"attendee" | "speaker">("attendee");
+  const registrationOpen = useRegistrationOpen();
 
-  if (!REGISTRATION_OPEN) return <RegistrationClosed />;
+  // head() meta uses the build-time fallback; keep the tab title in sync with
+  // the live setting (which admins can flip from the dashboard).
+  useEffect(() => {
+    document.title = registrationOpen
+      ? "Register — Care Conference 2026, Lagos"
+      : "Registration Closed — Care Conference 2026, Lagos";
+  }, [registrationOpen]);
+
+  if (!registrationOpen) return <RegistrationClosed />;
 
   return (
     <div className="min-h-screen bg-background">

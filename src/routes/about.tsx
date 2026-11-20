@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { PageHero, SectionHeading } from "@/components/section";
-import { POLICY_LAYERS, RECOGNITIONS, REGISTRATION_OPEN } from "@/data/conference";
+import { POLICY_LAYERS, RECOGNITIONS } from "@/data/conference";
+import { useRegistrationOpen } from "@/lib/registration";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -27,6 +28,7 @@ export const Route = createFileRoute("/about")({
 });
 
 function AboutPage() {
+  const registrationOpen = useRegistrationOpen();
   return (
     <>
       {/* ABOUT HERO */}
@@ -148,12 +150,12 @@ function AboutPage() {
           <Link
             to="/register"
             className={
-              REGISTRATION_OPEN
+              registrationOpen
                 ? "mt-10 inline-flex items-center gap-2 rounded-md bg-primary px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground"
                 : "mt-10 inline-flex w-fit items-center gap-2 rounded-md border border-input px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
             }
           >
-            {REGISTRATION_OPEN ? (
+            {registrationOpen ? (
               <>
                 Register Now <ArrowRight className="size-4" />
               </>

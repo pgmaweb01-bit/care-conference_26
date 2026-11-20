@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { EVENT, REGISTRATION_OPEN } from "@/data/conference";
+import { EVENT } from "@/data/conference";
+import { useRegistrationOpen } from "@/lib/registration";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -15,6 +16,7 @@ const NAV = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const registrationOpen = useRegistrationOpen();
 
   const scrollToTopIfSameRoute = (to: string) => () => {
     if (window.location.pathname === to) {
@@ -48,12 +50,12 @@ export function SiteHeader() {
           <Link
             to="/register"
             className={
-              REGISTRATION_OPEN
+              registrationOpen
                 ? "rounded-md bg-primary px-4 py-2 font-display text-[12px] font-semibold uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:bg-primary/90"
                 : "rounded-md border border-border px-4 py-2 font-display text-[12px] font-semibold uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-foreground"
             }
           >
-            {REGISTRATION_OPEN ? "Register Now" : "Registration Closed"}
+            {registrationOpen ? "Register Now" : "Registration Closed"}
           </Link>
           <button
             type="button"

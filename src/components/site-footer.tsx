@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { EVENT, REGISTRATION_OPEN } from "@/data/conference";
+import { EVENT } from "@/data/conference";
+import { useRegistrationOpen } from "@/lib/registration";
 
 const QUICK_LINKS = [
   { to: "/about", label: "About" },
@@ -17,6 +18,7 @@ const SECOND_LINKS = [
 ] as const;
 
 export function SiteFooter() {
+  const registrationOpen = useRegistrationOpen();
   return (
     <footer className="bg-ink text-ink-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-12">
@@ -71,12 +73,12 @@ export function SiteFooter() {
           <Link
             to="/register"
             className={
-              REGISTRATION_OPEN
+              registrationOpen
                 ? "inline-block rounded-md bg-accent px-5 py-3 font-display text-[12px] font-bold uppercase tracking-[0.12em] text-accent-foreground transition-opacity hover:opacity-90"
                 : "inline-block rounded-md border border-white/20 px-5 py-3 font-display text-[12px] font-bold uppercase tracking-[0.12em] text-ink-foreground/70 transition-colors hover:bg-white/10"
             }
           >
-            {REGISTRATION_OPEN ? "Register for Care Conference 2026" : "Registration Closed"}
+            {registrationOpen ? "Register for Care Conference 2026" : "Registration Closed"}
           </Link>
           <p className="eyebrow mt-6 text-ink-foreground/50">Organised by</p>
           <p className="mt-2 font-display text-sm font-semibold">{EVENT.organiser}</p>

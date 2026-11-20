@@ -11,8 +11,12 @@ export const EVENT = {
 
 export const PAYMENT_LINK = "https://paystack.shop/pay/careconferene26";
 
-/** Set to false to close registrations: the form is replaced with a notice and
- *  the API rejects new submissions. Flip back to true to reopen. */
+/** Fallback registration status used before /api/settings loads (SSR/SEO
+ *  default). The live value lives in the site_settings table and can be
+ *  flipped at runtime from the admin dashboard toggle — see
+ *  src/lib/registration.ts. Keep this fallback in sync with the steady state
+ *  the site is deployed in (open while accepting registrations, false once
+ *  closed). */
 export const REGISTRATION_OPEN = true;
 
 export const POLICY_LAYERS = [

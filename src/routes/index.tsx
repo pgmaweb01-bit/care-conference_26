@@ -11,11 +11,11 @@ import {
   EVENT,
   POLICY_LAYERS,
   RECOGNITIONS,
-  REGISTRATION_OPEN,
   SPEAKERS,
   TAKEAWAYS,
 } from "@/data/conference";
 import { speakerInitials } from "@/lib/utils";
+import { useRegistrationOpen } from "@/lib/registration";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -201,6 +201,7 @@ function ScrollingGallery({
 }
 
 function HomePage() {
+  const registrationOpen = useRegistrationOpen();
   return (
     <>
       {/* HERO */}
@@ -238,12 +239,12 @@ function HomePage() {
               <Link
                 to="/register"
                 className={
-                  REGISTRATION_OPEN
+                  registrationOpen
                     ? "group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.03]"
                     : "inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-ink-foreground/70 transition-colors hover:bg-white/10 hover:text-ink-foreground"
                 }
               >
-                {REGISTRATION_OPEN ? (
+                {registrationOpen ? (
                   <>
                     Register Now
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
@@ -284,12 +285,12 @@ function HomePage() {
                 <Link
                   to="/register"
                   className={
-                    REGISTRATION_OPEN
+                    registrationOpen
                       ? "inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
                       : "inline-flex items-center gap-2 rounded-md border border-input px-6 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                   }
                 >
-                  {REGISTRATION_OPEN ? (
+                  {registrationOpen ? (
                     <>
                       Register for the Conference <ArrowRight className="size-4" />
                     </>
@@ -839,12 +840,12 @@ function HomePage() {
             <Link
               to="/register"
               className={
-                REGISTRATION_OPEN
+                registrationOpen
                   ? "inline-flex items-center gap-2 rounded-md bg-primary px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90"
                   : "inline-flex items-center gap-2 rounded-md border border-input px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               }
             >
-              {REGISTRATION_OPEN ? (
+              {registrationOpen ? (
                 <>
                   Register Now <ArrowRight className="size-4" />
                 </>

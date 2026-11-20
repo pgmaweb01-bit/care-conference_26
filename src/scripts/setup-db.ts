@@ -30,6 +30,20 @@ async function setup() {
     );
   `;
   console.log("Table 'registrations' created successfully.");
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS site_settings (
+      setting_key TEXT PRIMARY KEY,
+      setting_value TEXT NOT NULL,
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `;
+  await sql`
+    INSERT INTO site_settings (setting_key, setting_value)
+    VALUES ('registration_open', 'true')
+    ON CONFLICT (setting_key) DO NOTHING;
+  `;
+  console.log("Table 'site_settings' created successfully.");
 }
 
 setup().catch(console.error);
