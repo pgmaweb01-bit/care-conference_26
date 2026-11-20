@@ -84,47 +84,6 @@ export function registrationEmailHTML(data: {
             </td>
           </tr>
 
-          <!-- Event Details -->
-          <tr>
-            <td style="padding: 0 30px 40px;">
-              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f0f4ff; border-radius: 12px; padding: 24px;">
-                <tr>
-                  <td style="padding: 24px;">
-                    <h3 style="margin: 0 0 16px; color: #1a0a2e; font-size: 18px; font-weight: 700;">
-                      Event Details
-                    </h3>
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td style="padding: 8px 0; color: #4a5568; font-size: 14px; width: 120px;">
-                          <strong>Date:</strong>
-                        </td>
-                        <td style="padding: 8px 0; color: #1a0a2e; font-size: 14px;">
-                          19 November 2026
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 8px 0; color: #4a5568; font-size: 14px;">
-                          <strong>Time:</strong>
-                        </td>
-                        <td style="padding: 8px 0; color: #1a0a2e; font-size: 14px;">
-                          08:00 - 17:45 WAT
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 8px 0; color: #4a5568; font-size: 14px;">
-                          <strong>Venue:</strong>
-                        </td>
-                        <td style="padding: 8px 0; color: #1a0a2e; font-size: 14px;">
-                          IALA Hub, The Chair Centre, Lagos
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
           <!-- Footer -->
           <tr>
             <td style="background-color: #1a0a2e; padding: 30px; text-align: center;">
@@ -207,47 +166,6 @@ export function broadcastEmailHTML(data: {
                 Dear <strong>${fullName}</strong>,
               </p>
               ${data.bodyHtml}
-            </td>
-          </tr>
-
-          <!-- Event Details -->
-          <tr>
-            <td style="padding: 0 30px 40px;">
-              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f0f4ff; border-radius: 12px; padding: 24px;">
-                <tr>
-                  <td style="padding: 24px;">
-                    <h3 style="margin: 0 0 16px; color: #1a0a2e; font-size: 18px; font-weight: 700;">
-                      Event Details
-                    </h3>
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td style="padding: 8px 0; color: #4a5568; font-size: 14px; width: 120px;">
-                          <strong>Date:</strong>
-                        </td>
-                        <td style="padding: 8px 0; color: #1a0a2e; font-size: 14px;">
-                          19 November 2026
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 8px 0; color: #4a5568; font-size: 14px;">
-                          <strong>Time:</strong>
-                        </td>
-                        <td style="padding: 8px 0; color: #1a0a2e; font-size: 14px;">
-                          08:00 - 17:45 WAT
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 8px 0; color: #4a5568; font-size: 14px;">
-                          <strong>Venue:</strong>
-                        </td>
-                        <td style="padding: 8px 0; color: #1a0a2e; font-size: 14px;">
-                          IALA Hub, The Chair Centre, Lagos
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
             </td>
           </tr>
 
