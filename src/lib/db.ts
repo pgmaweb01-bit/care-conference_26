@@ -145,6 +145,32 @@ export async function setRegistrationOpen(open: boolean): Promise<void> {
   `;
 }
 
+export interface PhotoAccess {
+  email: string;
+  access_count: number;
+  first_accessed_at: string;
+  last_accessed_at: string;
+}
+
+/** Records a /photos gallery unlock. Repeat emails bump the counter instead
+ *  of creating duplicates. */
+export async function recordPhotoAccess(email: string): Promise<void> {
+  await sql`
+    INSERT INTO photo_access (email, access_count, first_accessed_at, last_accessed_at)
+    VALUES (${email}, 1, NOW(), NOW())
+    ON CONFLICT (email) DO UPDATE
+    SET access_count = photo_access.access_count + 1, last_accessed_at = NOW()
+  `;
+}
+
+export async function getPhotoAccess(): Promise<PhotoAccess[]> {
+  const rows = await sql`
+    SELECT email, access_count, first_accessed_at, last_accessed_at
+    FROM photo_access ORDER BY last_accessed_at DESC
+  `;
+  return rows as PhotoAccess[];
+}
+
 export interface PitchApplication {
   id: number;
   application_id: string;

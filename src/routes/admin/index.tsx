@@ -1,7 +1,25 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { Users, Mic2, Handshake, Mail, TrendingUp, Calendar, ArrowRight } from "lucide-react";
+import {
+  Users,
+  Mic2,
+  Handshake,
+  Mail,
+  TrendingUp,
+  Calendar,
+  ArrowRight,
+  Images,
+  Download,
+} from "lucide-react";
 import { saveRegistrationStatus, useRegistrationStatus } from "@/lib/registration";
+import { getAuthHeader } from "@/lib/auth";
+
+type PhotoAccessRow = {
+  email: string;
+  access_count: number;
+  first_accessed_at: string;
+  last_accessed_at: string;
+};
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
@@ -25,6 +43,7 @@ function AdminDashboard() {
   const registrationStatus = useRegistrationStatus();
   const [toggling, setToggling] = useState(false);
   const [toggleError, setToggleError] = useState("");
+  const [photoAccess, setPhotoAccess] = useState<PhotoAccessRow[]>([]);
 
   async function handleToggleRegistration() {
     if (!registrationStatus.loaded || toggling) return;
@@ -54,9 +73,38 @@ function AdminDashboard() {
       } catch (err) {
         console.error("Failed to fetch dashboard data:", err);
       }
+      try {
+        const accessRes = await fetch("/api/photo-access", {
+          headers: { "x-admin-auth": getAuthHeader() },
+        });
+        if (accessRes.ok) setPhotoAccess(await accessRes.json());
+      } catch (err) {
+        console.error("Failed to fetch photo access:", err);
+      }
     }
     fetchData();
   }, []);
+
+  function exportPhotoAccessCsv() {
+    const escape = (v: string | number) => `"${String(v).replace(/"/g, '""')}"`;
+    const header = ["Email", "Opens", "First Access", "Last Access"].join(",");
+    const lines = photoAccess.map((row) =>
+      [
+        escape(row.email),
+        escape(row.access_count),
+        escape(new Date(row.first_accessed_at).toLocaleString("en-GB")),
+        escape(new Date(row.last_accessed_at).toLocaleString("en-GB")),
+      ].join(","),
+    );
+    const csv = [header, ...lines].join("\r\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `photo-access-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
 
   const STATS = [
     {
@@ -157,6 +205,73 @@ function AdminDashboard() {
                 : "Open Registration"}
           </button>
         </div>
+      </div>
+
+      {/* Photo gallery access log */}
+      <div className="rounded-lg border border-border bg-card p-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5">
+            <Images className="size-5 text-primary" />
+            <div>
+              <h2 className="font-display text-lg font-bold">Photo Gallery Access</h2>
+              <p className="mt-0.5 text-sm text-muted-foreground">
+                Emails that unlocked the <code className="text-xs">/photos</code> gallery —{" "}
+                {photoAccess.length} {photoAccess.length === 1 ? "email" : "emails"}
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={exportPhotoAccessCsv}
+            disabled={photoAccess.length === 0}
+            className="inline-flex items-center gap-2 rounded-md border border-input px-4 py-2 font-display text-xs font-semibold uppercase tracking-wider transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <Download className="size-3.5" />
+            Export CSV
+          </button>
+        </div>
+        {photoAccess.length === 0 ? (
+          <div className="mt-4 flex items-center justify-center rounded-lg border border-dashed border-border py-6 text-sm text-muted-foreground">
+            No gallery accesses yet
+          </div>
+        ) : (
+          <div className="mt-4 space-y-2">
+            {photoAccess.map((row) => (
+              <div
+                key={row.email}
+                className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border/50 px-4 py-3"
+              >
+                <div className="min-w-0">
+                  <p className="truncate font-display text-sm font-semibold">{row.email}</p>
+                  <p className="text-xs text-muted-foreground">
+                    First:{" "}
+                    {new Date(row.first_accessed_at).toLocaleString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
+                    {row.access_count} {row.access_count === 1 ? "open" : "opens"}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    Last:{" "}
+                    {new Date(row.last_accessed_at).toLocaleString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="grid gap-6 lg:grid-cols-12">

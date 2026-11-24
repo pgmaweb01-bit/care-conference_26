@@ -56,6 +56,15 @@ function PhotosPage() {
     } catch {
       // storage unavailable — access still works for this visit
     }
+    // Record the unlock for the admin dashboard (fire-and-forget: never
+    // blocks or fails the visitor's access if logging is unavailable).
+    void fetch("/api/photo-access", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: value }),
+    }).catch(() => {
+      // ignore — access already granted
+    });
     setUnlocked(true);
   }
 

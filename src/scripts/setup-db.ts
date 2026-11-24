@@ -44,6 +44,17 @@ async function setup() {
     ON CONFLICT (setting_key) DO NOTHING;
   `;
   console.log("Table 'site_settings' created successfully.");
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS photo_access (
+      id SERIAL PRIMARY KEY,
+      email TEXT UNIQUE NOT NULL,
+      access_count INT NOT NULL DEFAULT 1,
+      first_accessed_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      last_accessed_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `;
+  console.log("Table 'photo_access' created successfully.");
 }
 
 setup().catch(console.error);
