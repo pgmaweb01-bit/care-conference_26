@@ -31,17 +31,16 @@ export const Route = createFileRoute("/photos")({
 function PhotosPage() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  // SSR + first client render always show the form (matches server HTML);
+  // returning visitors flip to unlocked after mount via the effect below.
   const [unlocked, setUnlocked] = useState(false);
-  const [ready, setReady] = useState(false);
 
-  // Returning visitors skip the form if they've already unlocked access.
   useEffect(() => {
     try {
       if (localStorage.getItem(ACCESS_KEY)) setUnlocked(true);
     } catch {
       // storage unavailable — just show the form
     }
-    setReady(true);
   }, []);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -81,11 +80,7 @@ function PhotosPage() {
 
       <section className="section-pad">
         <div className="mx-auto max-w-2xl px-5 sm:px-8">
-          {!ready ? (
-            <div className="rounded-xl border border-border bg-card p-8 text-center text-sm text-muted-foreground">
-              Loading…
-            </div>
-          ) : unlocked ? (
+          {unlocked ? (
             <div className="rounded-xl border border-border bg-card p-8 text-center shadow-sm">
               <span className="inline-flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <Images className="size-6" />
