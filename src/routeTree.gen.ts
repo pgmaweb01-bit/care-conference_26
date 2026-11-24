@@ -16,6 +16,7 @@ import { Route as BrochureRouteImport } from './routes/brochure'
 import { Route as CaresoukRouteImport } from './routes/caresouk'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as PhotosRouteImport } from './routes/photos'
 import { Route as PitchAndDemoRouteImport } from './routes/pitch-and-demo'
 import { Route as PolicySessionsRouteImport } from './routes/policy-sessions'
 import { Route as ProgrammeRouteImport } from './routes/programme'
@@ -74,6 +75,11 @@ const ContactRoute = ContactRouteImport.update({
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PhotosRoute = PhotosRouteImport.update({
+  id: '/photos',
+  path: '/photos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PitchAndDemoRoute = PitchAndDemoRouteImport.update({
@@ -207,6 +213,7 @@ export interface FileRoutesByFullPath {
   '/caresouk': typeof CaresoukRoute
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
+  '/photos': typeof PhotosRoute
   '/pitch-and-demo': typeof PitchAndDemoRoute
   '/policy-sessions': typeof PolicySessionsRoute
   '/programme': typeof ProgrammeRoute
@@ -239,6 +246,7 @@ export interface FileRoutesByTo {
   '/caresouk': typeof CaresoukRoute
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
+  '/photos': typeof PhotosRoute
   '/pitch-and-demo': typeof PitchAndDemoRoute
   '/policy-sessions': typeof PolicySessionsRoute
   '/programme': typeof ProgrammeRoute
@@ -273,6 +281,7 @@ export interface FileRoutesById {
   '/caresouk': typeof CaresoukRoute
   '/contact': typeof ContactRoute
   '/partners': typeof PartnersRoute
+  '/photos': typeof PhotosRoute
   '/pitch-and-demo': typeof PitchAndDemoRoute
   '/policy-sessions': typeof PolicySessionsRoute
   '/programme': typeof ProgrammeRoute
@@ -308,6 +317,7 @@ export interface FileRouteTypes {
     | '/caresouk'
     | '/contact'
     | '/partners'
+    | '/photos'
     | '/pitch-and-demo'
     | '/policy-sessions'
     | '/programme'
@@ -340,6 +350,7 @@ export interface FileRouteTypes {
     | '/caresouk'
     | '/contact'
     | '/partners'
+    | '/photos'
     | '/pitch-and-demo'
     | '/policy-sessions'
     | '/programme'
@@ -373,6 +384,7 @@ export interface FileRouteTypes {
     | '/caresouk'
     | '/contact'
     | '/partners'
+    | '/photos'
     | '/pitch-and-demo'
     | '/policy-sessions'
     | '/programme'
@@ -407,6 +419,7 @@ export interface RootRouteChildren {
   CaresoukRoute: typeof CaresoukRoute
   ContactRoute: typeof ContactRoute
   PartnersRoute: typeof PartnersRoute
+  PhotosRoute: typeof PhotosRoute
   PitchAndDemoRoute: typeof PitchAndDemoRoute
   PolicySessionsRoute: typeof PolicySessionsRoute
   ProgrammeRoute: typeof ProgrammeRoute
@@ -472,6 +485,13 @@ declare module '@tanstack/react-router' {
       path: '/partners'
       fullPath: '/partners'
       preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/photos': {
+      id: '/photos'
+      path: '/photos'
+      fullPath: '/photos'
+      preLoaderRoute: typeof PhotosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pitch-and-demo': {
@@ -681,6 +701,7 @@ const rootRouteChildren: RootRouteChildren = {
   CaresoukRoute: CaresoukRoute,
   ContactRoute: ContactRoute,
   PartnersRoute: PartnersRoute,
+  PhotosRoute: PhotosRoute,
   PitchAndDemoRoute: PitchAndDemoRoute,
   PolicySessionsRoute: PolicySessionsRoute,
   ProgrammeRoute: ProgrammeRoute,

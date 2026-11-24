@@ -11,6 +11,10 @@ export const EVENT = {
 
 export const PAYMENT_LINK = "https://paystack.shop/pay/careconferene26";
 
+/** Conference photo gallery (Google Drive folder), unlocked on /photos. */
+export const PHOTOS_LINK =
+  "https://drive.google.com/drive/folders/1a1xJHXtKwjIY2am5dutYG207YzLUULH5";
+
 /** Fallback registration status used before /api/settings loads (SSR/SEO
  *  default). The live value lives in the site_settings table and can be
  *  flipped at runtime from the admin dashboard toggle — see

@@ -7,6 +7,7 @@ const QUICK_LINKS = [
   { to: "/speakers", label: "Speakers" },
   { to: "/policy-sessions", label: "Policy Sessions" },
   { to: "/brochure", label: "E-Brochure" },
+  { to: "/photos", label: "Photos" },
 ] as const;
 
 const SECOND_LINKS = [

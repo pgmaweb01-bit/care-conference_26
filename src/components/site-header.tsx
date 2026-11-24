@@ -12,6 +12,7 @@ const NAV = [
   { to: "/pitch-and-demo", label: "Pitch & Demo" },
   { to: "/partners", label: "Partners" },
   { to: "/brochure", label: "Brochure" },
+  { to: "/photos", label: "Photos" },
 ] as const;
 
 export function SiteHeader() {
