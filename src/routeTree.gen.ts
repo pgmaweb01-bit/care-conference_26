@@ -32,6 +32,7 @@ import { Route as AdminRegistrationsRouteImport } from './routes/admin/registrat
 import { Route as AdminSendEmailRouteImport } from './routes/admin/send-email'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminSpeakersRouteImport } from './routes/admin/speakers'
+import { Route as ApiCertificatesRouteImport } from './routes/api/certificates'
 import { Route as ApiPhotoAccessRouteImport } from './routes/api/photo-access'
 import { Route as ApiSettingsRouteImport } from './routes/api/settings'
 import { Route as ApiPitchApplicationsIndexRouteImport } from './routes/api/pitch-applications/index'
@@ -158,6 +159,11 @@ const AdminSpeakersRoute = AdminSpeakersRouteImport.update({
   path: '/speakers',
   getParentRoute: () => AdminRoute,
 } as any)
+const ApiCertificatesRoute = ApiCertificatesRouteImport.update({
+  id: '/api/certificates',
+  path: '/api/certificates',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPhotoAccessRoute = ApiPhotoAccessRouteImport.update({
   id: '/api/photo-access',
   path: '/api/photo-access',
@@ -234,6 +240,7 @@ export interface FileRoutesByFullPath {
   '/admin/send-email': typeof AdminSendEmailRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
+  '/api/certificates': typeof ApiCertificatesRoute
   '/api/photo-access': typeof ApiPhotoAccessRoute
   '/api/settings': typeof ApiSettingsRoute
   '/admin/': typeof AdminIndexRoute
@@ -268,6 +275,7 @@ export interface FileRoutesByTo {
   '/admin/send-email': typeof AdminSendEmailRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
+  '/api/certificates': typeof ApiCertificatesRoute
   '/api/photo-access': typeof ApiPhotoAccessRoute
   '/api/settings': typeof ApiSettingsRoute
   '/admin': typeof AdminIndexRoute
@@ -304,6 +312,7 @@ export interface FileRoutesById {
   '/admin/send-email': typeof AdminSendEmailRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/speakers': typeof AdminSpeakersRoute
+  '/api/certificates': typeof ApiCertificatesRoute
   '/api/photo-access': typeof ApiPhotoAccessRoute
   '/api/settings': typeof ApiSettingsRoute
   '/admin/': typeof AdminIndexRoute
@@ -341,6 +350,7 @@ export interface FileRouteTypes {
     | '/admin/send-email'
     | '/admin/settings'
     | '/admin/speakers'
+    | '/api/certificates'
     | '/api/photo-access'
     | '/api/settings'
     | '/admin/'
@@ -375,6 +385,7 @@ export interface FileRouteTypes {
     | '/admin/send-email'
     | '/admin/settings'
     | '/admin/speakers'
+    | '/api/certificates'
     | '/api/photo-access'
     | '/api/settings'
     | '/admin'
@@ -410,6 +421,7 @@ export interface FileRouteTypes {
     | '/admin/send-email'
     | '/admin/settings'
     | '/admin/speakers'
+    | '/api/certificates'
     | '/api/photo-access'
     | '/api/settings'
     | '/admin/'
@@ -437,6 +449,7 @@ export interface RootRouteChildren {
   ProgrammeRoute: typeof ProgrammeRoute
   RegisterRoute: typeof RegisterRoute
   SpeakersRoute: typeof SpeakersRoute
+  ApiCertificatesRoute: typeof ApiCertificatesRoute
   ApiPhotoAccessRoute: typeof ApiPhotoAccessRoute
   ApiSettingsRoute: typeof ApiSettingsRoute
   ApiQrRegistrationIdRoute: typeof ApiQrRegistrationIdRoute
@@ -612,6 +625,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSpeakersRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/api/certificates': {
+      id: '/api/certificates'
+      path: '/api/certificates'
+      fullPath: '/api/certificates'
+      preLoaderRoute: typeof ApiCertificatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/photo-access': {
       id: '/api/photo-access'
       path: '/api/photo-access'
@@ -727,6 +747,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProgrammeRoute: ProgrammeRoute,
   RegisterRoute: RegisterRoute,
   SpeakersRoute: SpeakersRoute,
+  ApiCertificatesRoute: ApiCertificatesRoute,
   ApiPhotoAccessRoute: ApiPhotoAccessRoute,
   ApiSettingsRoute: ApiSettingsRoute,
   ApiQrRegistrationIdRoute: ApiQrRegistrationIdRoute,

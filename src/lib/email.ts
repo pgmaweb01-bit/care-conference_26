@@ -178,3 +178,66 @@ export async function sendBulkEmail(data: {
     ...(failed > 0 && firstError ? { error: firstError } : {}),
   };
 }
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/** Sends one personalized certificate PDF as an attachment. Resend's batch
+ *  API does not support attachments, so certificates are sent individually. */
+export async function sendCertificateEmail(data: {
+  email: string;
+  fullName: string;
+  pdf: Uint8Array;
+}): Promise<{ success: boolean; error?: string; id?: string }> {
+  try {
+    if (!process.env["RESEND_API_KEY"]) {
+      return { success: false, error: "RESEND_API_KEY not configured" };
+    }
+
+    const name = data.fullName.trim();
+    const firstName = escapeHtml(name.split(/\s+/)[0] || "there");
+    const slug = name
+      .replace(/[^a-z0-9]+/gi, "-")
+      .replace(/^-|-$/g, "")
+      .toLowerCase();
+
+    const html = [
+      `<p>Dear ${firstName},</p>`,
+      `<p>Congratulations on participating in The Care Conference 2026, held on 19 November 2026 at The Chair Centre, Lekki, Lagos.</p>`,
+      `<p>Your personalized certificate of participation is attached to this email.</p>`,
+      `<p>Warm regards,<br/>The Care Conference 2026 Team</p>`,
+    ].join("");
+
+    const { data: sent, error } = await resend.emails.send({
+      from: FROM_ADDRESS,
+      to: data.email,
+      subject: "Your Certificate of Participation - The Care Conference 2026",
+      html,
+      attachments: [
+        {
+          filename: `Care-Conference-2026-Certificate-${slug || "attendee"}.pdf`,
+          content: Buffer.from(data.pdf).toString("base64"),
+          contentType: "application/pdf",
+        },
+      ],
+    });
+
+    if (error) {
+      console.error("Resend certificate email rejected:", error);
+      return { success: false, error: describeResendError(error) };
+    }
+    return { success: true, id: sent?.id };
+  } catch (error) {
+    console.error("Failed to send certificate email:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to send email",
+    };
+  }
+}

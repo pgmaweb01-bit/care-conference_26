@@ -10,6 +10,7 @@ import {
   ArrowRight,
   Images,
   Download,
+  Award,
 } from "lucide-react";
 import { saveRegistrationStatus, useRegistrationStatus } from "@/lib/registration";
 import { getAuthHeader } from "@/lib/auth";
@@ -44,6 +45,9 @@ function AdminDashboard() {
   const [toggling, setToggling] = useState(false);
   const [toggleError, setToggleError] = useState("");
   const [photoAccess, setPhotoAccess] = useState<PhotoAccessRow[]>([]);
+  const [certStats, setCertStats] = useState({ total: 0, sent: 0, remaining: 0 });
+  const [certBusy, setCertBusy] = useState(false);
+  const [certMessage, setCertMessage] = useState("");
 
   async function handleToggleRegistration() {
     if (!registrationStatus.loaded || toggling) return;
@@ -81,9 +85,48 @@ function AdminDashboard() {
       } catch (err) {
         console.error("Failed to fetch photo access:", err);
       }
+      try {
+        const certRes = await fetch("/api/certificates", {
+          headers: { "x-admin-auth": getAuthHeader() },
+        });
+        if (certRes.ok) {
+          const cert = await certRes.json();
+          setCertStats(cert.stats);
+        }
+      } catch (err) {
+        console.error("Failed to fetch certificate status:", err);
+      }
     }
     fetchData();
   }, []);
+
+  async function runCertificates(confirm: boolean, limit: number) {
+    if (certBusy) return;
+    setCertBusy(true);
+    setCertMessage("");
+    try {
+      const res = await fetch("/api/certificates", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-auth": getAuthHeader(),
+        },
+        body: JSON.stringify({ confirm, limit }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Request failed");
+      setCertStats(data.stats);
+      setCertMessage(
+        confirm
+          ? `${data.sent} of ${data.attempted} certificates sent successfully.`
+          : `Previewed ${data.attempted} certificates — no emails were sent.`,
+      );
+    } catch (err) {
+      setCertMessage(err instanceof Error ? err.message : "Request failed");
+    } finally {
+      setCertBusy(false);
+    }
+  }
 
   function exportPhotoAccessCsv() {
     const escape = (v: string | number) => `"${String(v).replace(/"/g, '""')}"`;
@@ -272,6 +315,53 @@ function AdminDashboard() {
             ))}
           </div>
         )}
+      </div>
+
+      {/* Certificate delivery */}
+      <div className="rounded-lg border border-border bg-card p-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5">
+            <Award className="size-5 text-primary" />
+            <div>
+              <h2 className="font-display text-lg font-bold">Certificates</h2>
+              <p className="mt-0.5 text-sm text-muted-foreground">
+                Personalized PDFs for the confirmed participant list
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 text-sm">
+            <span className="rounded-full bg-secondary px-3 py-1 font-semibold">
+              {certStats.total} recipients
+            </span>
+            <span className="rounded-full bg-primary/10 px-3 py-1 font-semibold text-primary">
+              {certStats.sent} sent
+            </span>
+            <span className="text-muted-foreground">{certStats.remaining} pending</span>
+          </div>
+        </div>
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={() => void runCertificates(false, 2)}
+            disabled={certBusy}
+            className="rounded-md border border-input px-4 py-2 font-display text-xs font-semibold uppercase tracking-wider transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Preview 2 (no email)
+          </button>
+          <button
+            type="button"
+            onClick={() => void runCertificates(true, 25)}
+            disabled={certBusy || certStats.remaining === 0}
+            className="rounded-md bg-primary px-4 py-2 font-display text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {certBusy ? "Sending…" : "Send next 25"}
+          </button>
+          {certMessage && (
+            <span className="text-xs text-muted-foreground" role="status">
+              {certMessage}
+            </span>
+          )}
+        </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-12">

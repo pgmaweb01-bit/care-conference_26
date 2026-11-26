@@ -55,6 +55,24 @@ async function setup() {
     );
   `;
   console.log("Table 'photo_access' created successfully.");
+
+  // Certificate delivery: the vetted attendee list plus a resumable send log.
+  await sql`
+    CREATE TABLE IF NOT EXISTS certificate_recipients (
+      email TEXT PRIMARY KEY,
+      full_name TEXT NOT NULL,
+      source_line INT
+    );
+  `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS certificate_sent (
+      email TEXT PRIMARY KEY,
+      full_name TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'sent',
+      sent_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `;
+  console.log("Certificate tables created successfully.");
 }
 
 setup().catch(console.error);

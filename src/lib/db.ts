@@ -171,6 +171,48 @@ export async function getPhotoAccess(): Promise<PhotoAccess[]> {
   return rows as PhotoAccess[];
 }
 
+export interface CertificateRecipient {
+  email: string;
+  full_name: string;
+  source_line: number | null;
+  sent_at: string | null;
+}
+
+export async function getCertificateRecipients(): Promise<CertificateRecipient[]> {
+  const rows = await sql`
+    SELECT r.email, r.full_name, r.source_line, s.sent_at
+    FROM certificate_recipients r
+    LEFT JOIN certificate_sent s ON s.email = r.email
+    ORDER BY r.source_line NULLS LAST, r.full_name
+  `;
+  return rows as CertificateRecipient[];
+}
+
+export async function getCertificateStats(): Promise<{
+  total: number;
+  sent: number;
+  remaining: number;
+}> {
+  const rows = await sql`
+    SELECT
+      COUNT(*)::int AS total,
+      COUNT(s.email)::int AS sent
+    FROM certificate_recipients r
+    LEFT JOIN certificate_sent s ON s.email = r.email
+  `;
+  const { total, sent } = rows[0] as { total: number; sent: number };
+  return { total, sent, remaining: total - sent };
+}
+
+/** Records a successful send. ON CONFLICT keeps the job resumable/idempotent. */
+export async function markCertificateSent(email: string, fullName: string): Promise<void> {
+  await sql`
+    INSERT INTO certificate_sent (email, full_name, status)
+    VALUES (${email}, ${fullName}, 'sent')
+    ON CONFLICT (email) DO NOTHING
+  `;
+}
+
 export interface PitchApplication {
   id: number;
   application_id: string;
