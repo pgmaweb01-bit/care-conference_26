@@ -20,6 +20,18 @@ type CertificateResult = {
   id?: string;
 };
 
+// RFC 5322 dot-atom local part + layered domain. Blocks entries such as
+// "name@utopian/consulting.com" that a loose regex would accept.
+const EMAIL_LOCAL_RE = /^[A-Za-z0-9!#$%&'*+/=?^_`{|}~.-]+$/;
+const EMAIL_DOMAIN_RE = /^[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+$/;
+
+function isDeliverableEmail(email: string): boolean {
+  const at = email.lastIndexOf("@");
+  return (
+    at > 0 && EMAIL_LOCAL_RE.test(email.slice(0, at)) && EMAIL_DOMAIN_RE.test(email.slice(at + 1))
+  );
+}
+
 export const Route = createFileRoute("/api/certificates")({
   server: {
     handlers: {
@@ -60,7 +72,7 @@ export const Route = createFileRoute("/api/certificates")({
           const limit = Math.min(100, Math.max(1, Number.isFinite(requested) ? requested : 10));
 
           const recipients = await getCertificateRecipients();
-          let targets = recipients.filter((r) => !r.sent_at);
+          let targets = recipients.filter((r) => !r.sent_at && isDeliverableEmail(r.email));
           if (testOnly) targets = targets.filter((r) => r.email.endsWith(".invalid"));
           else if (confirm) targets = targets.filter((r) => !r.email.endsWith(".invalid"));
           targets = targets.slice(0, limit);
